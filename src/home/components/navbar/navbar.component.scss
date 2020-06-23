@@ -1,0 +1,72 @@
+@import "../../../assets/theme.scss";
+
+.imart-navbar {
+  border-bottom: 2px solid #e5e5e5;
+  background: #fff;
+}
+
+.logo {
+  padding: 15px;
+  height: 120px;
+}
+
+.cart-value {
+  color: $web-color;
+  font-size: 12px;
+  position: absolute;
+  right: 5px;
+  top: -5px;
+}
+
+.nav-icons .fa {
+  color: $primary-color;
+}
+
+.search {
+  margin: 15px 0;
+  border-color: $primary-color;
+  border-width: 2px;
+  border-style: solid;
+  position: relative;
+  border-radius: 4px;
+}
+
+@media (max-width: 767px) {
+  .logo {
+    padding: 3px;
+    height: 80px;
+  }
+  .search {
+    margin: 5px -5px;
+  }
+  .navbar{
+    padding: 0;
+  }
+  .dropbtn{
+    padding: 0;
+  }
+  .navbar-nav .nav-link, .nav-item .dropdown{
+    float: right;
+  }
+  .nav-item .dropdown .dropdown-content{
+    right: 2px;
+  }
+}
+
+.nav-form.form-row {
+  margin: 0;
+}
+.nav-form .form-group {
+  margin-bottom: 0;
+  padding: 0;
+}
+.nav-form .form-control {
+  border: none;
+  border-radius: 0;
+}
+.nav-form .search-button {
+  color: $primary-color-text;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  border-radius: 0;
+}
