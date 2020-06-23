@@ -11,6 +11,7 @@ import { RegisterComponent } from './containers/register/register.component';
 import { HomeComponent } from './home.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { TopbannerComponent } from './components/topbanner/topbanner.component';
+import { NewArrivalsComponent } from './components/new-arrivals/new-arrivals.component';
 
 export const ROUTES: Routes = [
   {
@@ -38,6 +39,7 @@ export const ROUTES: Routes = [
     RegisterComponent,
     CarouselComponent,
     TopbannerComponent,
+    NewArrivalsComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(ROUTES)],
 })
