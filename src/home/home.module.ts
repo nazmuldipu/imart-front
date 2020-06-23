@@ -9,6 +9,7 @@ import { IndexComponent } from './containers/index/index.component';
 import { LoginComponent } from './containers/login/login.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { HomeComponent } from './home.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 export const ROUTES: Routes = [
   {
@@ -34,6 +35,7 @@ export const ROUTES: Routes = [
     FotterComponent,
     LoginComponent,
     RegisterComponent,
+    CarouselComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(ROUTES)],
 })

@@ -3,6 +3,19 @@
     Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 ```
 
+#Deploy
+
+    Install packages
+```
+    ng add angular-cli-ghpages
+``` 
+    Deploy
+```
+    ng deploy 
+or
+    ng deploy your-angular-project
+```
+
 # ImartFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.

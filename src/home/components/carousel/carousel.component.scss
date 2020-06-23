@@ -1,0 +1,39 @@
+.right_banner {
+  margin-left: 27px;
+}
+.item-adv {
+  overflow: hidden;
+  position: relative;
+}
+.adv-thumb {
+  position: relative;
+}
+.adv-thumb > a {
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.adv-thumb img {
+  width: 100%;
+  transition: all 0.5s ease-out 0s;
+  -webkit-transition: all 0.5s ease-out 0s;
+}
+img {
+  vertical-align: middle;
+}
+.item-adv .adv-info {
+  left: 30px;
+  top: 30%;
+  position: absolute;
+}
+.item-adv .adv-info > h2 {
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0;
+  text-transform: uppercase;
+}
+.adv-thumb:hover img {
+  transform: scale(1.15) rotate(5deg);
+  -webkit-transform: scale(1.15) rotate(5deg);
+}
