@@ -1,8 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+import { ServicesModule } from '../services/services.module';
 import { AppComponent } from './app.component';
-import { ServicesModule } from '../services/services.module'
 
 export const ROUTES: Routes = [
   {
@@ -18,7 +19,12 @@ export const ROUTES: Routes = [
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, ServicesModule, RouterModule.forRoot(ROUTES)],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ServicesModule,
+    RouterModule.forRoot(ROUTES),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

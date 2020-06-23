@@ -7,7 +7,20 @@
   width: 100%;
 }
 
-/* DROP DOWN button*/ 
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+  text-decoration-line: none;
+  text-decoration-style: initial;
+  text-decoration-color: initial;
+  outline: none;
+}
+
+/* DROP DOWN button*/
 .dropbtn {
   background-color: transparent;
   padding: 8px;
@@ -20,7 +33,8 @@
   display: inline-block;
 }
 
-.dropdown img, .dropdown span {
+.dropdown img,
+.dropdown span {
   margin-right: 6px;
 }
 
@@ -34,7 +48,7 @@
   z-index: 999;
 }
 
-.dropdown-content.right-s{
+.dropdown-content.right-s {
   right: 0;
 }
 
@@ -55,5 +69,3 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
- 

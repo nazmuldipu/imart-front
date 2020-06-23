@@ -1,31 +1,18 @@
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-9 col-12">Left</div>
-        <div class="col-md-3 col-12">
-            <div class="right_banner">
-                <div class="row">
-                    <div class="col-md-12 col-sm-6 col-xs-6">
-                        <div class="item-adv">
-                            <div class="adv-thumb">
-                                <a href="#"><img src="assets/dummy/photos/home4/ad-01.jpg" alt=""></a>
-                            </div>
-                            <div class="adv-info">
-                                <h2>men’s <br>Style</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-6 col-xs-6">
-                        <div class="item-adv">
-                            <div class="adv-thumb">
-                                <a href="#"><img src="assets/dummy/photos/home4/ad-02.jpg" alt=""></a>
-                            </div>
-                            <div class="adv-info">
-                                <h2>hear every <br>note</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="carousel">
+    <ng-container *ngFor="let slide of slides; let i = index">
+        <img *ngIf="i === currentSlide" [src]="slide.src" class="slide" @slideAnimation />
+        <div *ngIf="i === currentSlide" class="carousel-text" @scaleAnimation>
+            <div class="title">{{slide.title}}</div>
+            <div class="subtitle">{{slide.subtitle}}</div>
+            <div class="text">{{slide.text}}</div>
         </div>
-    </div>
+    </ng-container>
+
+    <!-- controls -->
+    <button class="control prev" (click)="onPreviousClick()">
+        <span class="arrow left"></span>
+    </button>
+    <button class="control next" (click)="onNextClick()">
+        <span class="arrow right"></span>
+    </button>
 </div>
