@@ -12,16 +12,17 @@ import { HomeComponent } from './home.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { TopbannerComponent } from './components/topbanner/topbanner.component';
 import { NewArrivalsComponent } from './components/new-arrivals/new-arrivals.component';
+import { DetailsComponent } from './containers/details/details.component';
+import { CategoryComponent } from './containers/category/category.component';
 
 export const ROUTES: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
-      {
-        path: '',
-        component: IndexComponent,
-      },
+      { path: 'category/:category', component: CategoryComponent },
+      { path: 'details/:id', component: DetailsComponent },
+      { path: '', component: IndexComponent },
     ],
   },
   { path: 'login', component: LoginComponent },
@@ -40,6 +41,8 @@ export const ROUTES: Routes = [
     CarouselComponent,
     TopbannerComponent,
     NewArrivalsComponent,
+    DetailsComponent,
+    CategoryComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(ROUTES)],
 })
