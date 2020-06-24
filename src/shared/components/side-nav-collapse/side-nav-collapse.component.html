@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 widget">
+            <div class="widget-title" [class.active]="titleCollapse" (click)="widgetTitleCollapse()">
+                {{data.title}}
+            </div>
+            <div class="widget-content" [class.opened]="titleCollapse">
+                <!-- Categories -->
+                <ul>
+                    <li *ngFor="let cat of data.categories">
+                        <a class="widget-content-category"
+                            [class.has-sub-cat]="cat.subCagegories && cat.subCagegories.length > 0"
+                            [class.opened]="subcategory === cat.name"
+                            (click)="categoryClicked(cat.name)">{{cat.name}}</a>
+
+                        <!-- Sub categories -->
+                        <ul *ngIf="cat.subCagegories && cat.subCagegories.length > 0"
+                            class="widget-content-sub-category" [class.opened]="category === cat.name">
+                            <li *ngFor="let subc of cat.subCagegories">
+                                <a class="widget-content-sub-category-list" (click)="onSubCategoryCliked(subc.name)">{{subc.name}}</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
