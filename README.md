@@ -15,6 +15,8 @@
 or
     ng deploy your-angular-project
 ```
+Git link
+https://github.com/nazmuldipu/imart-front/settings
 
 # ImartFront
 
