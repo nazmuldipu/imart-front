@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 widget">
+            <div class="widget-title" [class.active]="titleCollapse" (click)="widgetTitleCollapse()">
+                Price
+            </div>
+            <div class="widget-content" [class.opened]="titleCollapse">
+                <div class="widget-range-filter">
+                    <div class="amount">
+                        <input type="number" class="number" name="minvalue" [(value)]="minValue">
+                        <span class="separate"> - </span>
+                        <input type="number" class="number" name="maxvalue" [(value)]="maxValue">
+                    </div>
+                    <button class="btn-filter">Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

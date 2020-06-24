@@ -10,7 +10,7 @@
                     <li *ngFor="let cat of data.categories">
                         <a class="widget-content-category"
                             [class.has-sub-cat]="cat.subCagegories && cat.subCagegories.length > 0"
-                            [class.opened]="subcategory === cat.name"
+                            [class.opened]="category === cat.name"
                             (click)="categoryClicked(cat.name)">{{cat.name}}</a>
 
                         <!-- Sub categories -->

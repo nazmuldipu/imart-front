@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="banner-shop">
+    <!-- <div class="banner-shop">
         <div class="banner-shop-thumb">
             <a href="#"><img src="assets/dummy/shop/bn-list.jpg" alt=""></a>
         </div>
@@ -14,12 +14,16 @@
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Library</li>
         </ol>
-    </nav>
+    </nav> -->
 
     <div class="row">
+        
         <div class="col-md-3 col-12">
             <side-nav-collapse [data]="sideNavData" (resp)="onSideNavClick($event)"></side-nav-collapse>
+
+            <price-filter></price-filter>
         </div>
+
         <div class="col-md-9 col-12">
             For 50-year-old Md Mostafa and his wife, last weekend was nothing short of a nightmare. He shuttled from one
             hospital to another in the capital with his ailing wife Sathi Khanam, a kidney patient, only to be turned

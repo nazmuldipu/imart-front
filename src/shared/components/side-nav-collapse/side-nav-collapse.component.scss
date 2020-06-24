@@ -8,6 +8,8 @@
   &-title {
     cursor: pointer;
     position: relative;
+    font-weight: 700;
+    text-transform: uppercase;
     padding: 17px 20px;
     background: #fafafa none repeat scroll 0 0;
     &::after {

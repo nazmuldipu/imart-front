@@ -9,11 +9,12 @@ import { SideNavWidget } from 'src/shared/json/dummy';
 })
 export class CategoryComponent implements OnInit {
   category;
-
+  
   sideNavData = SideNavWidget;
 
   constructor(private activeRoute: ActivatedRoute) {
     this.category = activeRoute.snapshot.params['category'];
+    this.sideNavData.title = this.category;
   }
 
   ngOnInit(): void {}

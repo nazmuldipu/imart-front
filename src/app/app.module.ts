@@ -4,8 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { ServicesModule } from '../services/services.module';
 import { AppComponent } from './app.component';
+import { TestComponent } from './test/test.component';
+import { FormsModule } from '@angular/forms';
 
 export const ROUTES: Routes = [
+  { path: 'test', component: TestComponent },
   {
     path: 'dashboard',
     loadChildren: () =>
@@ -18,12 +21,13 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TestComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     ServicesModule,
-    RouterModule.forRoot(ROUTES),
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent],
