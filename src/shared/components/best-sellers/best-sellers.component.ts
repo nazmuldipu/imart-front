@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BestSellers } from 'src/shared/json/dummy';
 
 @Component({
   selector: 'best-sellers',
@@ -7,33 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BestSellersComponent implements OnInit {
   titleCollapse = true;
-
-  bestSellers = [
-    {
-      title: 'Flux',
-      price: 360,
-      old_price: 400,
-      image_url: 'assets/dummy/photos/homeware/3.jpg',
-      link: '/details/3',
-      rating: 79
-    },
-    {
-      title: 'Cup',
-      price: 355,
-      old_price: 420,
-      image_url: 'assets/dummy/photos/homeware/4.jpg',
-      link: '/details/4',
-      rating: 63
-    },
-    {
-      title: 'Double Flux',
-      price: 130,
-      old_price: 150,
-      image_url: 'assets/dummy/photos/homeware/1.jpg',
-      link: '/details/1',
-      rating: 75
-    }
-  ];
+  bestSellers = BestSellers
 
   constructor() {}
 

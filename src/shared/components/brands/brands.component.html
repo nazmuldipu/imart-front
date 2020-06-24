@@ -1,1 +1,24 @@
-<p>brands works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-12 widget">
+            <div class="widget-title" [class.active]="titleCollapse" (click)="widgetTitleCollapse()">
+                Brands
+            </div>
+            <div class="widget-content" [class.opened]="titleCollapse">
+                <div class="brand" *ngFor="let brand of brands">
+                    <div class="brand-side">
+                        <div class="brand-side-thumb">
+                            <a routerLink="{{brand.link}}">
+                                <img class="brand-side-thumb-img" [src]="brand.image_url" alt="">
+                            </a>
+                        </div>
+                        <div class="brand-side-info">
+                            <p>{{brand.offer}}</p>
+                            <span class="brand-side-info-name">{{brand.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

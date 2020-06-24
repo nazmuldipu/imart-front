@@ -1,0 +1,100 @@
+.widget {
+  padding: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background: #fff none repeat scroll 0 0;
+  &-title {
+    cursor: pointer;
+    position: relative;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 17px 20px;
+    background: #fafafa none repeat scroll 0 0;
+    &::after {
+      content: "\f0d8";
+      display: block;
+      position: absolute;
+      height: 24px;
+      right: 20px;
+      top: 13px;
+      width: 24px;
+      line-height: 22px;
+      text-align: center;
+      font-family: fontawesome;
+      background: none 0px 0px repeat scroll rgb(255, 255, 255);
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(229, 229, 229);
+      border-image: initial;
+      border-radius: 4px;
+      transition: all 0.5s ease-out 0s;
+    }
+    &.active::after {
+      content: "\f0d7";
+    }
+  }
+  &-content {
+    border-top: 1px solid #e5e5e5;
+    max-height: 0px;
+    overflow-y: hidden;
+    transition: ease-in-out 500ms max-height;
+    &.opened {
+      max-height: 100vh;
+      transition: ease-in-out 1000ms max-height;
+    }
+  }
+}
+.brand {
+  padding: 15px;
+  &-side {
+    border-bottom: 1px solid #e5e5e5;
+    display: table;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    &-thumb {
+      display: table-cell;
+      width: 110px;
+      text-align: center;
+      & a {
+        display: inline-block;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        &:hover {
+          -webkit-animation-name: wobble-vertical;
+          animation-name: wobble-vertical;
+          -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+          -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+        }
+      }
+    }
+    &-info {
+      display: table-cell;
+      padding-left: 20px;
+      font-size: 14px;
+      vertical-align: top;
+      & p {
+        color: #444;
+        line-height: 20px;
+        margin: -5px 0 2px;
+      }
+      & span{
+        color: #1a79c7;
+        &::before {
+            content: "-";
+            display: iline-block;
+            color: #333;
+            margin-right: 5px;
+        }
+      }
+    }
+  }
+}
