@@ -4,14 +4,15 @@
             <div class="widget-title" [class.active]="titleCollapse" (click)="widgetTitleCollapse()">
                 Price
             </div>
+
             <div class="widget-content" [class.opened]="titleCollapse">
                 <div class="widget-range-filter">
                     <div class="amount">
-                        <input type="number" class="number" name="minvalue" [(value)]="minValue">
+                        <input type="number" class="number" [(ngModel)]="minValue">
                         <span class="separate"> - </span>
-                        <input type="number" class="number" name="maxvalue" [(value)]="maxValue">
+                        <input type="number" class="number" [(ngModel)]="maxValue">
                     </div>
-                    <button class="btn-filter">Filter</button>
+                    <button class="btn-filter" (click)="onFilter()">Filter</button>
                 </div>
             </div>
         </div>

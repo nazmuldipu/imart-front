@@ -9,7 +9,7 @@ import { SideNavWidget } from 'src/shared/json/dummy';
 })
 export class CategoryComponent implements OnInit {
   category;
-  
+
   sideNavData = SideNavWidget;
 
   constructor(private activeRoute: ActivatedRoute) {
@@ -19,7 +19,10 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSideNavClick(data){
+  onSideNavClick(data) {
     console.log(data);
+  }
+  onPriceFilter(data) {
+    console.log('Price filter', data);
   }
 }

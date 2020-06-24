@@ -21,7 +21,11 @@
         <div class="col-md-3 col-12">
             <side-nav-collapse [data]="sideNavData" (resp)="onSideNavClick($event)"></side-nav-collapse>
 
-            <price-filter></price-filter>
+            <price-filter (resp)="onPriceFilter($event)"></price-filter>
+
+            <best-sellers></best-sellers>
+
+            <brands></brands>
         </div>
 
         <div class="col-md-9 col-12">

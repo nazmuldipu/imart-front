@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'price-filter',
   templateUrl: './price-filter.component.html',
-  styleUrls: ['./price-filter.component.scss']
+  styleUrls: ['./price-filter.component.scss'],
 })
 export class PriceFilterComponent implements OnInit {
-  titleCollapse = true;
-  minValue=0;
-  maxValue=1000;
-  constructor() { }
+  @Output() resp = new EventEmitter<any>();
 
-  ngOnInit(): void {
+  titleCollapse = true;
+  minValue: number = 50;
+  maxValue: number = 200;
+  
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  widgetTitleCollapse() {
+    this.titleCollapse = !this.titleCollapse;
   }
 
-  widgetTitleCollapse(){
-    this.titleCollapse = !this.titleCollapse
+  onFilter() {
+    this.resp.emit({ min: this.minValue, max: this.maxValue });
   }
 }

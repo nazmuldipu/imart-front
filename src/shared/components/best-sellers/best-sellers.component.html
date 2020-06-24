@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 widget">
+            <div class="widget-title" [class.active]="titleCollapse" (click)="widgetTitleCollapse()">
+                Best Sellers
+            </div>
+            <div class="widget-content" [class.opened]="titleCollapse">
+                <div class="sellers">
+                    <div class="sellers-product" *ngFor="let product of bestSellers">
+                        <div class="sellers-product-thumb">
+                            <a routerLink="{{product.link}}" class="sellers-product-thumb-link">
+                                <img [src]="product.image_url" alt="">
+                            </a>
+                        </div>
+                        <div class="sellers-product-info">
+                            <h3 class="sellers-product-title"><a [routerLink]="product.link">{{product.title}}</a></h3>
+                            <div class="sellers-product-price">
+                                <ins><span>৳ {{product.price}}</span></ins>
+                                <del><span>৳ {{product.old_price}}</span></del>
+                            </div>
+                            <div class="sellers-product-rate">
+                                <div [style.width.%]="product.rating" class="sellers-product-rating"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
