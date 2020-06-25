@@ -1,0 +1,29 @@
+<div class="item-pro-color">
+    <div class="product-thumb">
+        <div class="product-label">
+            <span *ngIf="product.isNew" class="new-label">new</span>
+            <span *ngIf="product.isSale" class="sale-label">sale</span>
+        </div>
+        <a routerLink="/details/{{product.id}}" class="product-thumb-link">
+            <img *ngFor="let img of product.image_urls; index as i" [class.active]="i==imageIndex" [src]="img" alt="">
+        </a>
+        <a routerLink="/details/{{product.id}}" class="quickview-link plus fancybox.iframe"><span>quick view</span></a>
+    </div>
+    <div class="product-info">
+        <div class="list-color">
+            <a *ngFor="let img of product.image_urls; index as i" (click)="onSlideImage(i)"
+                [ngStyle]="{'background-color':i==imageIndex ? '#868fff' : '#404040' }"></a>
+        </div>
+        <h3 class="product-title"><a href="detail.html">{{product.name}}</a></h3>
+        <div class="product-price">
+            <ins><span>৳{{product.price}}</span></ins>
+            <del><span>৳{{product.old_price}}</span></del>
+        </div>
+        <div class="product-extra-link">
+            <a href="#" class="addcart-link"><i class="fa fa-shopping-basket" aria-hidden="true"></i><span>Add to
+                    Cart</span></a>
+            <a href="#" class="wishlist-link"><i class="fa fa-heart" aria-hidden="true"></i><span>Wishlist</span></a>
+            <a href="#" class="compare-link"><i class="fa fa-refresh" aria-hidden="true"></i><span>Compare</span></a>
+        </div>
+    </div>
+</div>

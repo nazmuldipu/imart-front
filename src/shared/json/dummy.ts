@@ -1,3 +1,230 @@
+export const Products = [
+  {
+    id: 1,
+    name: 'Shoes',
+    image_urls: [
+      'assets/dummy/photos/fashion/1.jpg',
+      'assets/dummy/photos/fashion/2.jpg',
+      'assets/dummy/photos/fashion/3.jpg',
+      'assets/dummy/photos/fashion/4.jpg',
+    ],
+    price: 232,
+    old_price: 240,
+    isNew: true,
+    isSale: true,
+  },
+  {
+    id: 2,
+    name: 'Shoes',
+    image_urls: [
+      'assets/dummy/photos/fashion/2.jpg',
+      'assets/dummy/photos/fashion/3.jpg',
+      'assets/dummy/photos/fashion/4.jpg',
+      'assets/dummy/photos/fashion/5.jpg',
+    ],
+    price: 320,
+    old_price: 350,
+    isNew: false,
+    isSale: true,
+  },
+  {
+    id: 3,
+    name: 'T-Shirt',
+    image_urls: [
+      'assets/dummy/photos/fashion/3.jpg',
+      'assets/dummy/photos/fashion/4.jpg',
+      'assets/dummy/photos/fashion/5.jpg',
+      'assets/dummy/photos/fashion/6.jpg',
+    ],
+    price: 178,
+    old_price: 200,
+    isNew: true,
+    isSale: false,
+  },
+  {
+    id: 4,
+    name: 'T-Shirt',
+    image_urls: [
+      'assets/dummy/photos/fashion/4.jpg',
+      'assets/dummy/photos/fashion/5.jpg',
+      'assets/dummy/photos/fashion/6.jpg',
+      'assets/dummy/photos/fashion/7.jpg',
+    ],
+    price: 120,
+    old_price: 130,
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 5,
+    name:'Pants',
+    image_urls: [
+      'assets/dummy/photos/fashion/5.jpg',
+      'assets/dummy/photos/fashion/6.jpg',
+      'assets/dummy/photos/fashion/7.jpg',
+      'assets/dummy/photos/fashion/8.jpg',
+    ],
+    price: 450,
+    old_price: 470,
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 6,
+    name:'Pants',
+    image_urls: [
+      'assets/dummy/photos/fashion/6.jpg',
+      'assets/dummy/photos/fashion/7.jpg',
+      'assets/dummy/photos/fashion/8.jpg',
+      'assets/dummy/photos/fashion/9.jpg',
+    ],
+    price: 230,
+    old_price: 240,
+
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 7,
+    name:'Pons',
+    image_urls: [
+      'assets/dummy/photos/fashion/7.jpg',
+      'assets/dummy/photos/fashion/8.jpg',
+      'assets/dummy/photos/fashion/9.jpg',
+      'assets/dummy/photos/fashion/10.jpg',
+    ],
+    price: 170,
+    old_price: 180,
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 8,
+    name:'Hills',
+    image_urls: [
+      'assets/dummy/photos/fashion/8.jpg',
+      'assets/dummy/photos/fashion/9.jpg',
+      'assets/dummy/photos/fashion/10.jpg',
+      'assets/dummy/photos/fashion/11.jpg',
+    ],
+    price: 450,
+    old_price: 470,
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 9,
+    name:'Glasses',
+    image_urls: [
+      'assets/dummy/photos/fashion/9.jpg',
+      'assets/dummy/photos/fashion/10.jpg',
+      'assets/dummy/photos/fashion/11.jpg',
+      'assets/dummy/photos/fashion/12.jpg',
+    ],
+    price: 450,
+    old_price: 470,
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 10,
+    name:'Shoes',
+    image_urls: [
+      'assets/dummy/photos/fashion/10.jpg',
+      'assets/dummy/photos/fashion/11.jpg',
+      'assets/dummy/photos/fashion/12.jpg',
+      'assets/dummy/photos/fashion/13.jpg',
+    ],
+    price: 450,
+    old_price: 470,
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 11,
+    name:'Fancy Dress',
+    image_urls: [
+      'assets/dummy/photos/fashion/11.jpg',
+      'assets/dummy/photos/fashion/12.jpg',
+      'assets/dummy/photos/fashion/13.jpg',
+      'assets/dummy/photos/fashion/14.jpg',
+    ],
+    price: 450,
+    old_price: 470,
+    isNew: false,
+    isSale: false,
+  },
+  {
+    id: 12,
+    name:'Pink Dress',
+    image_urls: [
+      'assets/dummy/photos/fashion/12.jpg',
+      'assets/dummy/photos/fashion/13.jpg',
+      'assets/dummy/photos/fashion/14.jpg',
+      'assets/dummy/photos/fashion/15.jpg',
+    ],
+    price: 450,
+    old_price: 470,
+    isNew: false,
+    isSale: true,
+  },
+  {
+    id: 13,
+    name:'Yu Yu dress',
+    image_urls: [
+      'assets/dummy/photos/fashion/13.jpg',
+      'assets/dummy/photos/fashion/14.jpg',
+      'assets/dummy/photos/fashion/15.jpg',
+      'assets/dummy/photos/fashion/16.jpg',
+    ],
+    price: 350,
+    old_price: 470,
+    isNew: true,
+    isSale: false,
+  },
+  {
+    id: 14,
+    name:'Hand bags',
+    image_urls: [
+      'assets/dummy/photos/fashion/14.jpg',
+      'assets/dummy/photos/fashion/15.jpg',
+      'assets/dummy/photos/fashion/16.jpg',
+      'assets/dummy/photos/fashion/1.jpg',
+    ],
+    price: 330,
+    old_price: 370,
+    isNew: true,
+    isSale: true,
+  },
+  {
+    id: 15,
+    name:'Casuan Dress',
+    image_urls: [
+      'assets/dummy/photos/fashion/15.jpg',
+      'assets/dummy/photos/fashion/16.jpg',
+      'assets/dummy/photos/fashion/1.jpg',
+      'assets/dummy/photos/fashion/2.jpg',
+    ],
+    price: 330,
+    old_price: 370,
+    isNew: true,
+    isSale: true,
+  },
+  {
+    id: 16,
+    name:'Yellow Dress',
+    image_urls: [
+      'assets/dummy/photos/fashion/16.jpg',
+      'assets/dummy/photos/fashion/1.jpg',
+      'assets/dummy/photos/fashion/2.jpg',
+      'assets/dummy/photos/fashion/3.jpg',
+    ],
+    price: 330,
+    old_price: 370,
+    isNew: true,
+    isSale: true,
+  },
+];
 export const BestSellers = [
   {
     title: 'Flux',
@@ -5,7 +232,7 @@ export const BestSellers = [
     old_price: 400,
     image_url: 'assets/dummy/photos/homeware/3.jpg',
     link: '/details/3',
-    rating: 79
+    rating: 79,
   },
   {
     title: 'Cup',
@@ -13,7 +240,7 @@ export const BestSellers = [
     old_price: 420,
     image_url: 'assets/dummy/photos/homeware/4.jpg',
     link: '/details/4',
-    rating: 63
+    rating: 63,
   },
   {
     title: 'Double Flux',
@@ -21,34 +248,33 @@ export const BestSellers = [
     old_price: 150,
     image_url: 'assets/dummy/photos/homeware/1.jpg',
     link: '/details/1',
-    rating: 75
-  }
+    rating: 75,
+  },
 ];
 export const SideNavWidget = {
-    title: 'Fashion',
-    categories: [
-      {
-        name: 'Women',
-        subCagegories: [
-          { name: 'Shirt' },
-          { name: 'Summer Dresses' },
-          { name: 'Pants' },
-          { name: 'Blouses & Shirts' },
-        ],
-      },
-      {
-        name: 'Men',
-        subCagegories: [
-          { name: 'Blazer' },
-          { name: 'Winter Dress' },
-          { name: 'Shoes' },
-          { name: 'Glasses' },
-        ],
-      },
-      {
-        name: 'Accessories',
-        subCagegories: [
-        ],
-      },
-    ],
-  };
+  title: 'Fashion',
+  categories: [
+    {
+      name: 'Women',
+      subCagegories: [
+        { name: 'Shirt' },
+        { name: 'Summer Dresses' },
+        { name: 'Pants' },
+        { name: 'Blouses & Shirts' },
+      ],
+    },
+    {
+      name: 'Men',
+      subCagegories: [
+        { name: 'Blazer' },
+        { name: 'Winter Dress' },
+        { name: 'Shoes' },
+        { name: 'Glasses' },
+      ],
+    },
+    {
+      name: 'Accessories',
+      subCagegories: [],
+    },
+  ],
+};

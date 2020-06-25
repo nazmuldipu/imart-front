@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pt-4">
     <!-- <div class="banner-shop">
         <div class="banner-shop-thumb">
             <a href="#"><img src="assets/dummy/shop/bn-list.jpg" alt=""></a>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="col-md-9 col-12">
-            <div class="products">
+            <div class="products pb-3 mb-3">
                 <div class="products-bar clearfix">
                     <div class="sort-paginav pull-right">
                         <div class="select-box sort-bar">
@@ -53,6 +53,18 @@
                             <a href="#" class="next-page"><i class="fa fa-caret-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
+                </div>
+
+                <div class="row clearfix m-0 mb-2">
+                    <div class="col-md-3 col-6" *ngFor="let product of products">
+                        <product1 [product]="product"></product1>
+                    </div>
+                </div>
+
+                <div class="pagi-bar bottom">
+                    <a class="current-page" href="#">1</a>
+                    <a href="#">2</a>
+                    <a class="next-page" href="#"><i aria-hidden="true" class="fa fa-caret-right"></i></a>
                 </div>
             </div>
         </div>

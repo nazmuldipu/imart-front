@@ -236,7 +236,7 @@
     display: inline-block;
     height: 30px;
     line-height: 29px;
-    margin: 0 -1px;
+    margin: 0 1px;
     text-align: center;
     vertical-align: top;
     width: 30px;
@@ -255,4 +255,9 @@
     background-color: #f40;
     border-color: #f40;
   }
+}
+
+.pagi-bar.bottom {
+  display: block;
+  text-align: center;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SideNavWidget } from 'src/shared/json/dummy';
+import { SideNavWidget, Products } from 'src/shared/json/dummy';
 
 @Component({
   selector: 'app-category',
@@ -9,6 +9,8 @@ import { SideNavWidget } from 'src/shared/json/dummy';
 })
 export class CategoryComponent implements OnInit {
   category;
+
+  products = Products;
 
   sideNavData = SideNavWidget;
 
