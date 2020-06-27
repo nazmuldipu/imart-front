@@ -7,6 +7,7 @@ import { BrandsComponent } from './components/brands/brands.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Product1Component } from './components/product1/product1.component';
+import { ProductRelatedComponent } from './components/product-related/product-related.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { Product1Component } from './components/product1/product1.component';
     BestSellersComponent,
     BrandsComponent,
     Product1Component,
+    ProductRelatedComponent,
   ],
   imports: [CommonModule, FormsModule, RouterModule],
   exports: [
@@ -25,6 +27,7 @@ import { Product1Component } from './components/product1/product1.component';
     BestSellersComponent,
     BrandsComponent,
     Product1Component,
+    ProductRelatedComponent
   ],
 })
 export class SharedModule {}
