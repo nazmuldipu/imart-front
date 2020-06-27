@@ -1,35 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  scaleIn,
-  scaleOut,
-  slideIn,
-  slideOut,
-} from '../../components/carousel/carousel.animations';
-import { trigger, transition, useAnimation } from '@angular/animations';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Products } from 'src/shared/json/dummy';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
-  animations: [
-    trigger('slideAnimation', [
-      transition('void => *', [
-        useAnimation(slideIn, { params: { time: '500ms' } }),
-      ]),
-      transition('* => void', [
-        useAnimation(slideOut, { params: { time: '500ms' } }),
-      ]),
-    ]),
-    trigger('scaleAnimation', [
-      transition('void => *', [
-        useAnimation(scaleIn, { params: { time: '500ms' } }),
-      ]),
-      transition('* => void', [
-        useAnimation(scaleOut, { params: { time: '500ms' } }),
-      ]),
-    ]),
-  ],
 })
 export class DetailsComponent implements OnInit {
   id;

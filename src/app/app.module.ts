@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from 'src/shared/shared.module';
+
 import { ServicesModule } from '../services/services.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
-import { NgImageSliderModule } from 'ng-image-slider';
 
 export const ROUTES: Routes = [
   { path: 'test', component: TestComponent },
@@ -27,9 +28,9 @@ export const ROUTES: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    SharedModule,
     ServicesModule,
-    RouterModule.forRoot(ROUTES),
-    NgImageSliderModule
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent],

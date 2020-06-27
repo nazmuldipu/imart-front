@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Product1Component } from './components/product1/product1.component';
 import { ProductRelatedComponent } from './components/product-related/product-related.component';
+import { ProductStyle1Component } from './components/product-style1/product-style1.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,9 @@ import { ProductRelatedComponent } from './components/product-related/product-re
     BrandsComponent,
     Product1Component,
     ProductRelatedComponent,
+    ProductStyle1Component,
   ],
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, CarouselModule],
   exports: [
     FormsModule,
     RouterModule,
@@ -27,7 +30,8 @@ import { ProductRelatedComponent } from './components/product-related/product-re
     BestSellersComponent,
     BrandsComponent,
     Product1Component,
-    ProductRelatedComponent
+    ProductRelatedComponent,
+    ProductStyle1Component,
   ],
 })
 export class SharedModule {}

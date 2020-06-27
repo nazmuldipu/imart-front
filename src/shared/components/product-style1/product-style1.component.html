@@ -1,0 +1,25 @@
+<div class="item-pro-color">
+    <div class="product-thumb">
+        <div class="product-label">
+            <span *ngIf="product.isNew" class="new-label">new</span>
+            <span *ngIf="product.isSale" class="sale-label">sale</span>
+        </div>
+        <a routerLink='/details/{{product.id}}' class="product-thumb-link">
+            <img *ngFor="let url of product.image_urls; index as i" [class.active]="currentIndex == i" [src]="url"
+                alt="">
+        </a>
+        <a routerLink='/details/{{product.id}}' class="quickview-link plus"><span>quick
+                view</span></a>
+    </div>
+    <div class="product-info">
+        <div class="list-color">
+            <a *ngFor="let url of product.image_url; index as i"
+                [style.background-color]="currentIndex==i?'#868fff':'#ff8ff8'" (click)="currentIndex = i"></a>
+        </div>
+        <h3 class="product-title"><a routerLink='/details/{{product.id}}'>{{product.name}}</a></h3>
+        <div class="product-price">
+            <ins><span>৳ {{product.price}}</span></ins>
+            <del><span>৳ {{product.old_price}}</span></del>
+        </div>
+    </div>
+</div>

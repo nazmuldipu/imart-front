@@ -24,6 +24,7 @@
     "font-awesome": "^4.7.0",
     "ng-image-slider": "^2.5.0",
     "ngx-image-zoom": "^0.6.0",
+    "ngx-owl-carousel-o": "^3.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

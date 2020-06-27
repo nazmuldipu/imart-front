@@ -2,10 +2,17 @@
   padding: 20px;
   background: #fff;
   border-radius: 4px;
-  &-title{
+  &-title {
     font-size: 18px;
     font-weight: 700;
-    margin: 0;
+    margin-bottom: 17px;
     text-transform: uppercase;
   }
+}
+
+.owl-nav {
+  position: absolute;
+  right: 8px;
+  top: -29px;
+  width: 61px;
 }
