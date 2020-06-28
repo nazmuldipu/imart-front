@@ -13,11 +13,11 @@ export class LoginComponent implements OnInit {
   loading = false;
   showPassword = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit(): void {
     this.createForm();
   }
-
-  ngOnInit(): void {}
 
   createForm() {
     this.form = this.fb.group({
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       this.errorMessage = '';
       this.loading = true;
       console.log(this.form.value);
-      
+
       setTimeout(() => {
         this.loading = false;
         this.form.reset();

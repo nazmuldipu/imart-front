@@ -25,10 +25,10 @@ export const ROUTES: Routes = [
       { path: 'category/:category', component: CategoryComponent },
       { path: 'details/:id', component: DetailsComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
       { path: '', component: IndexComponent },
     ],
   },
-  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
