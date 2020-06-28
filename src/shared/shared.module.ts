@@ -10,6 +10,7 @@ import { Product1Component } from './components/product1/product1.component';
 import { ProductRelatedComponent } from './components/product-related/product-related.component';
 import { ProductStyle1Component } from './components/product-style1/product-style1.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { SideAdvComponent } from './components/side-adv/side-adv.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     Product1Component,
     ProductRelatedComponent,
     ProductStyle1Component,
+    SideAdvComponent,
   ],
   imports: [CommonModule, FormsModule, RouterModule, CarouselModule],
   exports: [
@@ -32,6 +34,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     Product1Component,
     ProductRelatedComponent,
     ProductStyle1Component,
+    SideAdvComponent
   ],
 })
 export class SharedModule {}

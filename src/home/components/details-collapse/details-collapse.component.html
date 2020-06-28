@@ -1,0 +1,17 @@
+<div class="item-toggle-tab" [class.active]="show">
+    <h2 class="item-toggle-tab-title border" (click)="show=!show">
+        {{item?.title}}</h2>
+    <div class="item-toggle-tab-content">
+        <div class="item-toggle-tab-content-detail">
+            <div class="item-toggle-tab-content-detail-thumb" *ngIf="item.image">
+                <img [src]="item.image" alt="">
+            </div>
+            <div class="item-toggle-tab-content-detail-info">
+                <p class="desc">{{item?.text}}</p>
+                <ul *ngIf="item?.points?.length > 0">
+                    <li *ngFor="let point of item.points">{{point}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

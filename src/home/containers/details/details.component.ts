@@ -10,6 +10,17 @@ import { Products } from 'src/shared/json/dummy';
 })
 export class DetailsComponent implements OnInit {
   id;
+  item = {
+    title: 'Description',
+    image: 'assets/dummy/shop/tab-img.png',
+    text:
+      'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit a tion ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident est laborum.',
+    points: [
+      'Any Product types that You want - Simple, Configurable, Bundled and Grouped Products',
+      'Downloadable/Digital Products, Virtual Products',
+      'Inventory Management with Backordered items',
+    ],
+  };
   product = {
     id: this.id,
     companyId: 12,
@@ -18,9 +29,61 @@ export class DetailsComponent implements OnInit {
     details:
       'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla paria tur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     overview: '',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit a tion ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident est laborum.',
-    tags: ['Water pot', 'Flux', 'Water', 'Journey'],
+    description: {
+      title: 'Description',
+      image: 'assets/dummy/shop/tab-img.png',
+      text:
+        'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit a tion ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident est laborum.',
+      points: [
+        'Any Product types that You want - Simple, Configurable, Bundled and Grouped Products',
+        'Downloadable/Digital Products, Virtual Products',
+        'Inventory Management with Backordered items',
+      ],
+    },
+    tags: {
+      title: 'Tags',
+      image: 'assets/dummy/shop/tab-img.png',
+      text:
+        'Tags Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit a tion ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident est laborum.',
+      points: [
+        'Any Product types that You want - Simple, Configurable, Bundled and Grouped Products',
+        'Downloadable/Digital Products, Virtual Products',
+        'Inventory Management with Backordered items',
+      ],
+    },
+    reviews: {
+      title: 'Reviews',
+      image: 'assets/dummy/shop/tab-img.png',
+      text:
+        'Reviews Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit a tion ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident est laborum.',
+      points: [
+        'Any Product types that You want - Simple, Configurable, Bundled and Grouped Products',
+        'Downloadable/Digital Products, Virtual Products',
+        'Inventory Management with Backordered items',
+      ],
+    },
+    sizing_guide: {
+      title: 'Sizing Guide',
+      image: 'assets/dummy/shop/tab-img.png',
+      text:
+        'Sizing Guide Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit a tion ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident est laborum.',
+      points: [
+        'Any Product types that You want - Simple, Configurable, Bundled and Grouped Products',
+        'Downloadable/Digital Products, Virtual Products',
+        'Inventory Management with Backordered items',
+      ],
+    },
+    custom_tab: {
+      title: 'CUSTOM TAB',
+      image: 'assets/dummy/shop/tab-img.png',
+      text:
+        'CUSTOM TAB Guide Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid unt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit a tion ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident est laborum.',
+      points: [
+        'Any Product types that You want - Simple, Configurable, Bundled and Grouped Products',
+        'Downloadable/Digital Products, Virtual Products',
+        'Inventory Management with Backordered items',
+      ],
+    },
     price: 250,
     listPrice: 270,
     image_urls: [
@@ -60,7 +123,8 @@ export class DetailsComponent implements OnInit {
     rank: '',
     createdOn: '',
     updatedOn: '',
-    rating: 9,
+    rating: 75,
+    inStock: true,
     stock: [
       {
         size: 'S',
@@ -113,20 +177,22 @@ export class DetailsComponent implements OnInit {
       {
         size: '2XL',
         color_stock: [
-          { color: 'Red', quantity: 7 },
-          { color: 'Yellow', quantity: 6 },
-          { color: 'White', quantity: 1 },
-          { color: 'Orange', quantity: 3 },
-          { color: 'Cyan', quantity: 1 },
+          { color: 'Red', quantity: 0 },
+          { color: 'Yellow', quantity: 0 },
+          { color: 'White', quantity: 0 },
+          { color: 'Orange', quantity: 0 },
+          { color: 'Cyan', quantity: 0 },
           { color: 'Green', quantity: 0 },
           { color: 'Purple', quantity: 0 },
         ],
       },
     ],
-    reviews: [{}],
   };
 
   imageObject = [];
+  productSize;
+  productColor;
+  quantity = 1;
   current = 0;
   show = {
     description: false,
@@ -141,14 +207,44 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.imageObject = [];
-    this.product.image_urls.forEach((url) => {
-      this.imageObject.push({ thumbImage: url });
-    });
-    console.log(this.imageObject);
+    this.productSize = this.product.stock[0];
+    this.productColor = this.productSize.color_stock[0];
+
+    // this.imageObject = [];
+    // this.product.image_urls.forEach((url) => {
+    //   this.imageObject.push({ thumbImage: url });
+    // });
   }
 
   onThumbImageClick(event) {
     this.current = event;
+  }
+
+  setSize(size) {
+    this.productSize = size;
+    this.productColor = null;
+    for (let pcolor of this.productSize.color_stock) {
+      if (pcolor.quantity > 0) {
+        this.productColor = pcolor;
+        break;
+      }
+    }
+  }
+  setColor(color) {
+    this.productColor = color;
+  }
+  setQuantity(num) {
+    this.quantity += num;
+    if (this.quantity < 1) this.quantity = 1;
+    if (this.quantity > 10) this.quantity = 10;
+  }
+  addToCart() {
+    console.log('Add to cart');
+  }
+  addToFavourite() {
+    console.log('addToFavourite');
+  }
+  onRefresh() {
+    console.log('onRefresh');
   }
 }

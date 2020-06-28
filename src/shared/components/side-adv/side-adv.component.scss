@@ -1,0 +1,21 @@
+.list-detail-adv {
+  margin-bottom: 30px;
+  .detail-adv {
+    margin-bottom: 10px;
+    a {
+      color: #333;
+      transition: all 0.5s ease-out 0s;
+      -webkit-transition: all 0.5s ease-out 0s;
+      text-decoration: none;
+      img {
+        width: 100%;
+        border-radius: 4px;
+        display: inline-block;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      }
+    }
+  }
+}

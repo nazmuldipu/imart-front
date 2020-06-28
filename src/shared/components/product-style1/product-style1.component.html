@@ -13,7 +13,7 @@
     </div>
     <div class="product-info">
         <div class="list-color">
-            <a *ngFor="let url of product.image_url; index as i"
+            <a *ngFor="let url of product.image_urls; index as i"
                 [style.background-color]="currentIndex==i?'#868fff':'#ff8ff8'" (click)="currentIndex = i"></a>
         </div>
         <h3 class="product-title"><a routerLink='/details/{{product.id}}'>{{product.name}}</a></h3>

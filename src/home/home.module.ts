@@ -15,7 +15,7 @@ import { IndexComponent } from './containers/index/index.component';
 import { LoginComponent } from './containers/login/login.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { HomeComponent } from './home.component';
-
+import { DetailsCollapseComponent } from './components/details-collapse/details-collapse.component';
 
 export const ROUTES: Routes = [
   {
@@ -45,7 +45,13 @@ export const ROUTES: Routes = [
     NewArrivalsComponent,
     DetailsComponent,
     CategoryComponent,
+    DetailsCollapseComponent,
   ],
-  imports: [CommonModule, SharedModule, NgImageSliderModule, RouterModule.forChild(ROUTES)],
+  imports: [
+    CommonModule,
+    SharedModule,
+    NgImageSliderModule,
+    RouterModule.forChild(ROUTES),
+  ],
 })
 export class HomeModule {}
