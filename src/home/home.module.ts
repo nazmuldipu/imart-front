@@ -24,10 +24,10 @@ export const ROUTES: Routes = [
     children: [
       { path: 'category/:category', component: CategoryComponent },
       { path: 'details/:id', component: DetailsComponent },
+      { path: 'login', component: LoginComponent },
       { path: '', component: IndexComponent },
     ],
   },
-  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];
 

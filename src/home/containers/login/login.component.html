@@ -1,1 +1,74 @@
-<p>login works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 my-3 d-none d-sm-block">
+            <img class="img-fluid" src="assets/dummy/home4/slide3.jpg" alt="">
+        </div>
+        <div class="col-md-4 col-12 my-3">
+            <div class="login-form">
+                <h2 class="login-form-title">Login</h2>
+
+                <div class="alert alert-danger" role="alert" *ngIf="errorMessage.length > 0">
+                    {{errorMessage}}
+                </div>
+
+                <loading *ngIf="loading"></loading>
+
+                <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()" class="p-3 border rounded">
+
+                    <div class="form-group">
+                        <!-- <label for="username">Username or Phone number</label> -->
+                        <input type="text" class="form-control" id="username" formControlName="username"
+                            autocomplete="no" placeholder="Username or Phone number" maxlength="11">
+                        <small class="text-danger"
+                            *ngIf=" form.controls.username.errors && form.controls.username.touched ">
+                            <div [hidden]="!form.controls['username'].errors.required"> Phone number required </div>
+                            <div [hidden]="!form.controls['username'].errors.pattern"> Phone number format 01934953023
+                            </div>
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- <label for="password">Password</label> -->
+                        <div class="input-group mb-1 mb-sm-0">
+                            <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control"
+                                placeholder="Password" formControlName="password">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    (click)="showPassword = !showPassword">
+                                    <i class="fa fa-eye" [ngClass]="showPassword?'fa-eye-slash':'fa-eye'"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <small class="text-danger"
+                            *ngIf="form.controls.password.errors && form.controls.password.touched">
+                            <div [hidden]="!form.controls['password'].errors.required">
+                                Password required
+                            </div>
+                            <div [hidden]="!form.controls['password'].errors.minlength">
+                                Minimum passwor length required 6
+                            </div>
+                        </small>
+                        <small>
+                            <a routerLink="/password-reset">Lost your password?</a>
+                        </small>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="remember" formControlName="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary" [class.disabled]="form.invalid">Log in</button>
+                    </div>
+
+                    <div>
+                        <small>
+                            <a routerLink="/register">Don't have any account? Create</a>
+                        </small>    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
