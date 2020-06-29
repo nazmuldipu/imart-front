@@ -41,15 +41,16 @@ export class RegisterComponent implements OnInit {
       this.loading = true;
       this.userService.userRegistration(this.form.value).subscribe(
         (data) => {
-          this.loading = false;            
           if (data) {
+            this.loading = false;            
             this.regSuccess = true;
             this.form.reset();
           }
         },
-        (error) => {
-          if (error) {
-            this.errorMessage = 'Error : ' + error.status + ': ' + error.error;
+        (err) => {
+          if (err) {
+            this.loading = false;            
+            this.errorMessage = 'Error : ' + err.status + ': ' + err.error;
           }
         }
       );

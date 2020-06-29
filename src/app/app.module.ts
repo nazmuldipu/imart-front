@@ -9,13 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServicesModule } from '../services/services.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
+import { AuthGuardService } from 'src/services/auth-guard.service';
 
 export const ROUTES: Routes = [
   { path: 'test', component: TestComponent },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
+      import('../dashboard/dashboard.module').then((m) => m.DashboardModule), canActivate: [AuthGuardService]
   },
   {
     path: '',

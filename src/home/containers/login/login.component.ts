@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,12 @@ export class LoginComponent implements OnInit {
   loading = false;
   showPassword = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -21,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      username: [
+      phone: [
         '',
         [
           Validators.required,
@@ -37,12 +43,29 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.errorMessage = '';
       this.loading = true;
-      console.log(this.form.value);
+      const value = this.form.value;
+      this.authService.authenticate(value.phone, value.password).subscribe(
+        (data) => {
+          if (data) {
+            this.loading = false;
+            this.form.reset();
 
-      setTimeout(() => {
-        this.loading = false;
-        this.form.reset();
-      }, 2000);
+            localStorage.setItem('token', data.token);
+            let returnUrl =
+              this.activeRoute.snapshot.queryParamMap.get('returnUrl') ||
+              '/';
+            localStorage.setItem('returnUrl', returnUrl);
+            // let returnUrl = localStorage.getItem('returnUrl') || '/dashboard';
+            this.router.navigateByUrl(returnUrl);
+          }
+        },
+        (err) => {
+          if (err) {
+            this.loading = false;
+            this.errorMessage = err;
+          }
+        }
+      );
     } else {
       this.errorMessage = 'Form data missing';
     }

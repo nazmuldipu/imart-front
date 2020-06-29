@@ -4,8 +4,9 @@
             <div class="col-md-6 col-12">
                 <div class="account-login">
                     <a routerLink="/dashboard">My Account</a>
-                    <a routerLink="/login">Login</a>
-                    <a routerLink="/register">Register</a>
+                    <a *ngIf="!auth.isAuthenticated()" routerLink="/login">Login</a>
+                    <a *ngIf="!auth.isAuthenticated()" routerLink="/register">Register</a>
+                    <a *ngIf="auth.isAuthenticated()" (click)="onLogout()">Logout</a>
                 </div>
             </div>
             <div class="col-md-6 col-12 flex-right d-none d-sm-block">
