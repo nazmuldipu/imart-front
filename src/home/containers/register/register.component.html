@@ -11,6 +11,11 @@
                     {{errorMessage}}
                 </div>
 
+                <div class="alert alert-primary" role="alert" *ngIf="regSuccess">
+                    <i class="fa fa-thumbs-o-up"></i> Registration success. Now you can login using your credentials. <a routerLink="/login"
+                        class="btn btn-sm btn-primary">Login</a>
+                </div>
+
                 <loading *ngIf="loading"></loading>
 
                 <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="submit()" class="p-3 border rounded">
@@ -34,13 +39,12 @@
                     </div>
 
                     <div class="form-group">
-                        <!-- <label for="username">Username or Phone number</label> -->
-                        <input type="text" class="form-control" id="username" formControlName="username"
-                            autocomplete="no" placeholder="Phone number" maxlength="11">
-                        <small class="text-danger"
-                            *ngIf=" form.controls.username.errors && form.controls.username.touched ">
-                            <div [hidden]="!form.controls['username'].errors.required"> Phone number required </div>
-                            <div [hidden]="!form.controls['username'].errors.pattern"> Phone number format 01934953023
+                        <!-- <label for="phone">Phone number</label> -->
+                        <input type="text" class="form-control" id="phone" formControlName="phone" autocomplete="no"
+                            placeholder="Phone number" maxlength="11">
+                        <small class="text-danger" *ngIf=" form.controls.phone.errors && form.controls.phone.touched ">
+                            <div [hidden]="!form.controls['phone'].errors.required"> Phone number required </div>
+                            <div [hidden]="!form.controls['phone'].errors.pattern"> Phone number format 01934953023
                             </div>
                         </small>
                     </div>

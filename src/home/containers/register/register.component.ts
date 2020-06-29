@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -9,10 +10,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   errorMessage: string = '';
+  regSuccess = false;
   loading = false;
   showPassword = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -22,7 +24,7 @@ export class RegisterComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      username: [
+      phone: [
         '',
         [
           Validators.required,
@@ -37,12 +39,20 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       this.errorMessage = '';
       this.loading = true;
-      console.log(this.form.value);
-
-      setTimeout(() => {
-        this.loading = false;
-        this.form.reset();
-      }, 2000);
+      this.userService.userRegistration(this.form.value).subscribe(
+        (data) => {
+          this.loading = false;            
+          if (data) {
+            this.regSuccess = true;
+            this.form.reset();
+          }
+        },
+        (error) => {
+          if (error) {
+            this.errorMessage = 'Error : ' + error.status + ': ' + error.error;
+          }
+        }
+      );
     } else {
       this.errorMessage = 'Form data missing';
     }

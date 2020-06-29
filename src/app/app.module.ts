@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ServicesModule } from '../services/services.module';
 import { AppComponent } from './app.component';
@@ -26,11 +27,12 @@ export const ROUTES: Routes = [
   declarations: [AppComponent, TestComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
     SharedModule,
     ServicesModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
   ],
   providers: [],
   bootstrap: [AppComponent],
