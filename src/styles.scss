@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.min.css";
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
 
 @font-face {
-  font-family: 'Montserrat';
-  src: url('assets/fonts/Montserrat-Regular.ttf');
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Regular.ttf");
 }
 
 .container {
@@ -24,6 +24,11 @@
   }
 }
 
+// Set table cell padding
+.table th,
+.table td {
+  padding: 2px;
+}
 
 a {
   cursor: pointer;

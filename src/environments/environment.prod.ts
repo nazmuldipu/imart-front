@@ -2,5 +2,6 @@ export const environment = {
   production: true,
   PROTOCOL: 'https',
   PORT: '',
-  SERVER: 'api.imartltd.com',
+  SERVER: 'imartltd.herokuapp.com',
+  // SERVER: 'api.imartltd.com',
 };

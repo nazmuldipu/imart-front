@@ -29,7 +29,15 @@ export class AddComponent implements OnInit {
     }
   }
 
-  async getCategory(id) {}
+  async getCategory(id) {
+    this.loading = true;
+    try {
+      this.category = await this.categoryService.get(id).toPromise();
+    } catch (err) {
+      this.errorMessage = err;
+    }
+    this.loading = false;
+  }
 
   async onCreate(category: Category) {
     this.loading = true;
@@ -41,10 +49,22 @@ export class AddComponent implements OnInit {
     } catch (error) {
       this.errorMessage = error;
     }
-    this.loading = false;    
+    this.loading = false;
   }
 
-  onUpdate(category: Category) {
-    console.log('On Update', category);
+  async onUpdate(category: Category) {
+    this.loading = true;
+    this.errorMessage = '';
+    this.message = '';
+    try {
+      await this.categoryService
+        .update(this.category._id, category)
+        .toPromise();
+      this.message = 'Success! Category updated';
+      this.category = null;
+    } catch (err) {
+      this.errorMessage = err;
+    }
+    this.loading = false;
   }
 }

@@ -1,4 +1,4 @@
-<h4 class="text-center">Create Category</h4>
+<h4 class="text-center">{{exists?'Update':'Create'}} Category</h4>
 
 
 
@@ -17,6 +17,11 @@
 
 
     <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary" [class.disabled]="form.invalid">Create</button>
+        <button type="submit" class="btn btn-primary" 
+        [ngClass]="{
+            disabled: form.invalid,
+            'btn-warning': exists,
+            'btn-success': !exists
+          }">{{exists?'Update':'Create'}}</button>
     </div>
 </form>

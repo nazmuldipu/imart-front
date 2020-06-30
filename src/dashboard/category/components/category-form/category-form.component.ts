@@ -39,9 +39,7 @@ export class CategoryFormComponent implements OnChanges {
   submit() {
     if (this.form.valid) {
       if (this.exists) {
-        const value ={...this.category, ...this.form.value};
-        console.log(value);
-        this.update.emit(value);
+        this.update.emit(this.form.value);
       } else {
         this.create.emit(this.form.value);
       }
