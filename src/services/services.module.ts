@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { UserService } from './user.service';
-import { AuthService } from './auth.service';
+
 import { AuthGuardService } from './auth-guard.service';
+import { AuthService } from './auth.service';
+import { CategoryService } from './category.service';
+import { UserService } from './user.service';
 
 
 
@@ -9,6 +11,7 @@ import { AuthGuardService } from './auth-guard.service';
   providers:[
     AuthGuardService,
     AuthService,
+    CategoryService,
     UserService, 
   ]
 })

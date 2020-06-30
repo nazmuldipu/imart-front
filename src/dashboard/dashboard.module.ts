@@ -16,12 +16,22 @@ export const ROUTES: Routes = [
         path: '',
         component: IndexComponent,
       },
+      {
+        path: 'categories',
+        loadChildren: () =>
+          import('./category/category.module').then((m) => m.CategoryModule),
+      },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, IndexComponent, DashNavbarComponent, DashSideNavbarComponent],
+  declarations: [
+    DashboardComponent,
+    IndexComponent,
+    DashNavbarComponent,
+    DashSideNavbarComponent,
+  ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(ROUTES)],
 })
 export class DashboardModule {}

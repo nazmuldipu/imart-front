@@ -61,7 +61,8 @@ export class RestDataService {
       return this.http.request(req).pipe(
         map((event) => {
           return event['body'];
-        })
+        }),
+        catchError(this.handleError)
       );
     }
     //if auth required
@@ -70,17 +71,17 @@ export class RestDataService {
         'x-auth-token',
         localStorage.getItem('token')
       );
-      
+
       const req = new HttpRequest(method, this.baseUrl + url, body, {
         headers: headers,
         responseType: 'json',
         params,
       });
-
       return this.http.request(req).pipe(
         map((event) => {
           return event['body'];
-        })
+        }),
+        catchError(this.handleError)
       );
     }
   }

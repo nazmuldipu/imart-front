@@ -25,7 +25,6 @@ export class UserService {
       .pipe(take(2))
       .subscribe(
         (data) => {
-          console.log('User service');
           this._userSource.next(data);
         },
         (error) => {

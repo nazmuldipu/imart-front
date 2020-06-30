@@ -27,6 +27,7 @@ import { LoadingComponent } from './components/loading/loading.component';
   ],
   imports: [CommonModule, FormsModule,ReactiveFormsModule, RouterModule, CarouselModule],
   exports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
