@@ -16,14 +16,16 @@
                 <a class="nav-link px-4 py-1" routerLink="/dashboard"><i class="fa fa-home fa-2x"></i></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link p-1" href="#"><img src="assets/images/profile.png" alt="" style="height: 32px;"> Hello Mr. Abir</a>
+                <a class="nav-link p-1" href="#"><img src="assets/images/profile.png" alt=""
+                        style="height: 32px;">Hello, {{(user$ | async)?.name}}</a>
             </li>
             <li class="nav-item active px-4 py-1">
                 <div class="dropdown">
-                    <button class="dropbtn" style="color: rgba(0, 0, 0, 0.5); padding: 0;"> <i class="fa fa-cog fa-2x"></i></button>
-                    <div class="dropdown-content right-s" style="width: 140px;">
-                        <a href="#">Action</a>
-                        <a href="#">Another action</a>
+                    <button class="dropbtn" style="color: rgba(0, 0, 0, 0.5); padding: 0;"> <i
+                            class="fa fa-cog fa-2x"></i></button>
+                    <div class="dropdown-content right-s" style="width: 170px;">
+                        <a (click)='onLogout()'><i class="fa fa-sign-out"></i> Logout</a>
+                        <a routerLink="/change-password"><i class="fa fa-unlock-alt"></i> Change Password</a>
                     </div>
                 </div>
             </li>

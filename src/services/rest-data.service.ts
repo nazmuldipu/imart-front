@@ -3,6 +3,7 @@ import {
   HttpParams,
   HttpRequest,
   HttpErrorResponse,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -55,6 +56,25 @@ export class RestDataService {
       const req = new HttpRequest(method, this.baseUrl + url, body, {
         params,
         responseType: 'json',
+      });
+
+      return this.http.request(req).pipe(
+        map((event) => {
+          return event['body'];
+        })
+      );
+    }
+    //if auth required
+    else {
+      const headers = new HttpHeaders().set(
+        'x-auth-token',
+        localStorage.getItem('token')
+      );
+      
+      const req = new HttpRequest(method, this.baseUrl + url, body, {
+        headers: headers,
+        responseType: 'json',
+        params,
       });
 
       return this.http.request(req).pipe(

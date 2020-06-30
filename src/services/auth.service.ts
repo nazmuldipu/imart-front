@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/shared/models/user.model';
 import { RestDataService } from './rest-data.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   public user: User;
 
-  constructor(private datasource: RestDataService) {}
+  constructor(private datasource: RestDataService, private router: Router) {}
 
   authenticate(phone: string, password: string): Observable<any> {
     return this.datasource.obtainToken(phone, password);
@@ -20,7 +21,8 @@ export class AuthService {
     return !!token;
   }
 
-  logout(){
+  logout() {
     localStorage.clear();
+    this.router.navigateByUrl('/');
   }
 }
