@@ -21,13 +21,15 @@
                         <li *ngFor="let subn of item.subnav" (click)="onSubNav(subn.name)">
                             <a class="widget-content-sub-category-list" [routerLink]="subn.link"
                                 [style.font-weight]="subNav==subn.name?'700':'100'">
-                                <i *ngIf="!!subn.icon" class="fa" [ngClass]="subn.icon"></i> &nbsp;{{subn.name}}
+                                <i *ngIf="!!subn.icon" class="fa" [ngClass]="subn.icon"
+                                    style="font-weight: inherit;"></i>
+                                <span class="sub-category-text"> &nbsp; {{subn.name}}</span>
                             </a>
                         </li>
 
                     </ul>
                 </div>
-            </li>            
+            </li>
         </ul>
     </div>
 </div>

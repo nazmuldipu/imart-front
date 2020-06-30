@@ -140,8 +140,15 @@
     font-size: 0;
   }
   .widget-content-sub-category.opened {
-    height: 0;
-    overflow: hidden;
+    ul {
+      padding: 10px;
+      float: right;
+      .sub-category-text {
+        font-size: 0;
+      }
+    }
+    // height: 0;
+    // overflow: hidden;
   }
   .widget-content-category {
     padding-right: 0;
