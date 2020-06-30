@@ -18,6 +18,15 @@ or
 Git link
 https://github.com/nazmuldipu/imart-front/settings
 
+
+# Colors
+Dashboard
+    side nav background #313947
+             brand      #535048
+            icon back   #fbc247
+            text        #a6b2c1
+            text(slected)        #edb948
+
 # ImartFront
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.

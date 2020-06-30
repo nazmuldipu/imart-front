@@ -1,0 +1,33 @@
+<div class="sidebar" [ngClass]="expand?'wide':'narrow'">
+    <div class="brand">
+        <a routerLink="/">
+            <span class="brand-name">I-Mart</span> <span class="brand-text"> Superstore </span>
+        </a>
+    </div>
+    <div class="widget-content">
+        <!-- Categories -->
+        <ul>
+            <li *ngFor="let item of sidenav; let i as index">
+                <a class="widget-content-category" [class.has-sub-cat]="item.subnav && item.subnav.length > 0"
+                    [class.opened]="navlink===item.name" (click)="onNavLink(item.name)"> <i class="fa"
+                        [ngClass]="item.icon"></i>
+                    <span class="category-text"> {{item.name}}</span>
+                </a>
+
+                <!-- Sub categories -->
+                <div class="widget-content-sub-category" [class.opened]="navlink===item.name"
+                    *ngIf="item.subnav && item.subnav.length > 0">
+                    <ul>
+                        <li *ngFor="let subn of item.subnav" (click)="onSubNav(subn.name)">
+                            <a class="widget-content-sub-category-list" [routerLink]="subn.link"
+                                [style.font-weight]="subNav==subn.name?'700':'100'">
+                                <i *ngIf="!!subn.icon" class="fa" [ngClass]="subn.icon"></i> &nbsp;{{subn.name}}
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>            
+        </ul>
+    </div>
+</div>

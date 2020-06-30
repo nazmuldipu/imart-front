@@ -2,16 +2,21 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
-  template: `    
-    <router-outlet></router-outlet>    
-  `,
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './dashboard.component.html',
+  // template: `
+  //   <dash-side-navbar></dash-side-navbar>
+  //   <router-outlet></router-outlet>
+  // `,
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  sideNavExpand = true;
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onSidenavExpand(event) {
+    this.sideNavExpand = event;
   }
-
 }

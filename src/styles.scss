@@ -4,12 +4,18 @@
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/fonts/Montserrat-Regular.ttf');
+}
+
 .container {
   max-width: 1230px;
   width: 100%;
 }
 
 a {
+  cursor: pointer;
   text-decoration: none;
 }
 
