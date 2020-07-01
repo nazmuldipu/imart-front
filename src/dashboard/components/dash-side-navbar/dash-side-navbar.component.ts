@@ -23,14 +23,14 @@ export class DashSideNavbarComponent implements OnInit {
     },
     {
       name: 'Category',
+      link: '/dashboard/categories',
       icon: 'fa-cubes',
-      subnav: [
-        { name: 'Add', icon: 'fa-plus', link: '/dashboard/categories/add' },
-        { name: 'List', icon: 'fa-list', link: '/dashboard/categories' },
+      subnav: [        
       ],
     },
     {
       name: 'Accessories',
+      link: '/dashboard/categories/add',
       icon: 'fa-sign-language ',
       subCagegories: [],
     },

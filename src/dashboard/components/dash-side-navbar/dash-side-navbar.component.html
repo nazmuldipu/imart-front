@@ -8,7 +8,8 @@
         <!-- Categories -->
         <ul>
             <li *ngFor="let item of sidenav">
-                <a class="widget-content-category" [class.has-sub-cat]="item.subnav && item.subnav.length > 0"
+                <a class="widget-content-category" [routerLink]="item.link ? item.link : null"
+                    [class.has-sub-cat]="item.subnav && item.subnav.length > 0"
                     [class.opened]="navlink===item.name" (click)="onNavLink(item.name)"> <i class="fa"
                         [ngClass]="item.icon"></i>
                     <span class="category-text"> {{item.name}}</span>

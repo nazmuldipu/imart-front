@@ -9,6 +9,7 @@ import { Category } from 'src/shared/models/category.model';
 })
 export class ListComponent implements OnInit {
   categories: Category[] = [];
+  category: Category;
   loading = true;
   message = '';
   errorMessage = '';
@@ -29,18 +30,65 @@ export class ListComponent implements OnInit {
     this.loading = false;
   }
 
+  onEdit(id) {
+    const value = this.categories.find((c) => c._id == id);
+    this.category = Object.assign({}, value);
+  }
+
+  async onCreate(category: Category) {
+    this.loading = true;
+    this.errorMessage = '';
+    this.message = '';
+    try {
+      const resp = await this.categoryService.create(category).toPromise();
+      this.message = 'Category created';
+      this.categories.push(resp);
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
+  }
+
+  async onUpdate(category: Category) {
+    this.loading = true;
+    this.errorMessage = '';
+    this.message = '';
+    const cid = this.category._id;
+    try {
+      const resp = await this.categoryService.update(cid, category).toPromise();
+      this.message = 'Category updated';
+      this.categories.splice(
+        this.categories.findIndex((c) => c._id == cid),
+        1,
+        resp
+      );
+      this.category = null;
+      // this.getAllCategory();
+    } catch (err) {
+      this.errorMessage = err;
+    }
+    this.loading = false;
+  }
+
   async onDelete(id) {
     if (confirm('Are you sure to delete')) {
       console.log('onDelete ', id);
       try {
         const res = await this.categoryService.delete(id).toPromise();
-        console.log(res);
         this.message = 'Category deleted';
-        const index = this.categories.findIndex(cat => cat._id == id);
+        const index = this.categories.findIndex((cat) => cat._id == id);
         this.categories.splice(index, 1);
+        this.getAllCategory();
       } catch (err) {
         this.errorMessage = err;
       }
     }
+  }
+
+  onClose() {
+    this.category = null;
+    this.loading = false;
+    this.message = '';
+    this.errorMessage = '';
   }
 }
