@@ -6,8 +6,13 @@
 }
 
 .logo {
+  display: block;
   padding: 15px;
-  height: 120px;
+  padding-bottom: 2px;
+  height: 100px;
+  &-dialog {
+    color: #f40;
+  }
 }
 
 .cart-value {
@@ -23,14 +28,19 @@
 }
 
 .search {
-  margin: 15px 0;
+  margin: 15px 35px;
   border-color: $primary-color;
   border-width: 2px;
   border-style: solid;
   position: relative;
   border-radius: 4px;
 }
-
+.social {
+  .fa {
+    font-size: 22px;
+    color: #666;
+  }
+}
 @media (max-width: 767px) {
   .logo {
     padding: 3px;
@@ -39,16 +49,17 @@
   .search {
     margin: 5px -5px;
   }
-  .navbar{
+  .navbar {
     padding: 0;
   }
-  .dropbtn{
+  .dropbtn {
     padding: 0;
   }
-  .navbar-nav .nav-link, .nav-item .dropdown{
+  .navbar-nav .nav-link,
+  .nav-item .dropdown {
     float: right;
   }
-  .nav-item .dropdown .dropdown-content{
+  .nav-item .dropdown .dropdown-content {
     right: 2px;
   }
 }
@@ -69,4 +80,8 @@
   background-color: $primary-color;
   border-color: $primary-color;
   border-radius: 0;
+}
+
+.navbar.navbar-expand-lg {
+  margin: 0 29px;
 }

@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
   message = '';
   errorMessage = '';
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.getAllCategory();
@@ -40,6 +40,7 @@ export class ListComponent implements OnInit {
     this.errorMessage = '';
     this.message = '';
     try {
+      console.log(category);
       const resp = await this.categoryService.create(category).toPromise();
       this.message = 'Category created';
       this.categories.push(resp);
@@ -76,9 +77,7 @@ export class ListComponent implements OnInit {
       try {
         const res = await this.categoryService.delete(id).toPromise();
         this.message = 'Category deleted';
-        const index = this.categories.findIndex((cat) => cat._id == id);
-        this.categories.splice(index, 1);
-        this.getAllCategory();
+        this.categories.splice(this.categories.findIndex((c) => c._id == id), 1);
       } catch (err) {
         this.errorMessage = err;
       }

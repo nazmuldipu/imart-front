@@ -2,7 +2,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-auto col-auto px-0 px-md-2 pt-md-0">
+                
                 <img class="logo" src="assets/images/logo.png" alt="">
+                <span class="logo-dialog"> All in one store</span>
             </div>
             <div class="col-md col ">
                 <div class="search">
@@ -54,9 +56,18 @@
                     <div class="collapse navbar-collapse" id="imartnavbar" [class.show]="show">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Home</a>
+                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Offers</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Points</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Product Request</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Recipes</a>
+                            </li>
+                            <!-- <li class="nav-item">
                                 <a class="nav-link" href="#" (click)="toggleCollapse()" >Link</a>
                             </li>
                             <li class="nav-item">
@@ -67,21 +78,21 @@
                                         <a href="#" (click)="toggleCollapse()" >Another action</a>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </nav>
             </div>
             <div class="col-md-auto col-auto px-0 px-md-2 pt-2 pt-md-0 d-none d-sm-block">
                 <div class="row nav-icons py-3">
-                    <div class="col-auto pl-0">
+                    <div class="col-auto px-3">
                         <a href=""><i class="fa fa-shopping-cart fa-2x"></i>
                             <span class="cart-value">23</span></a>
                     </div>
-                    <div class="col-auto pl-0">
+                    <div class="col-auto px-3">
                         <a href=""><i class="fa fa-heart-o fa-2x"></i></a>
                     </div>
-                    <div class="col-auto pl-0">
+                    <div class="col-auto pl-3 pr-0">
                         <div class="dropdown">
                             <button class="dropbtn p-0"><span><i class="fa fa-user fa-2x"></i></span></button>
                             <div class="dropdown-content right-s " style="width: 190px;">
@@ -94,12 +105,15 @@
                     </div>
                 </div>
                 <div class="row ">
-                    <div class="col-auto"></div>
-                    <div class="col-auto pr-1">
-                        <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+                    <div class="col "></div>
+                    <div class="col-auto social px-2 pt-3">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
                     </div>
-                    <div class="col-auto pr-1">
-                        <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
+                    <div class="col-auto social px-2 pt-3">
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </div>
+                    <div class="col-auto social px-2 pt-3">
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
                     </div>
                 </div>
 

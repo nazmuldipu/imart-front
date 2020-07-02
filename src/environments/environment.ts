@@ -4,12 +4,12 @@
 
 export const environment = {
   production: false,
-  PROTOCOL: 'https',
-  PORT: '',
-  SERVER: 'imartltd.herokuapp.com',
-  // PROTOCOL: 'http',
-  // PORT: ':3000',
-  // SERVER: 'localhost',
+  // PROTOCOL: 'https',
+  // PORT: '',
+  // SERVER: 'imartltd.herokuapp.com',
+  PROTOCOL: 'http',
+  PORT: ':3000',
+  SERVER: 'localhost',
 };
 
 /* https://imartltd.herokuapp.com/ */ 

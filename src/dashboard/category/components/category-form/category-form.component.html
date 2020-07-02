@@ -1,25 +1,46 @@
-<h4 class="text-center">{{exists?'Update':'Create'}} Category</h4>
+<h4 class="text-center">{{ exists ? "Update" : "Create" }} Category</h4>
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="p-3 bg-light">
-
-    <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-10">
-            <input type="name" class="form-control" id="name" formControlName="name" placeholder="Category name">
-            <small class="text-danger" *ngIf=" form.controls.name.errors && form.controls.name.touched">
-                <div [hidden]="!form.controls['name'].errors.required"> Name required </div>
-                <div [hidden]="!form.controls['name'].errors.minlength"> Minimum Length should be 3</div>
-            </small>
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-10">
+      <input
+        type="name"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        placeholder="Category name"
+      />
+      <small
+        class="text-danger"
+        *ngIf="form.controls.name.errors && form.controls.name.touched"
+      >
+        <div [hidden]="!form.controls['name'].errors.required">
+          Name required
         </div>
+        <div [hidden]="!form.controls['name'].errors.minlength">
+          Minimum Length should be 3
+        </div>
+      </small>
     </div>
+  </div>
 
+  <p>
+    <label>Image (Optionnel)</label><br /><br />
+    <input type="file" (change)="fileChange($event)" name="image" />
+  </p>
 
-    <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary" 
-        [ngClass]="{
-            disabled: form.invalid,
-            'btn-warning': exists,
-            'btn-success': !exists
-          }">{{exists?'Update':'Create'}}</button>
-    </div>
+  <div class="d-flex justify-content-end">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [ngClass]="{
+        disabled: form.invalid,
+        'btn-warning': exists,
+        'btn-success': !exists
+      }"
+    >
+      {{ exists ? "Update" : "Create" }}
+    </button>
+  </div>
 </form>

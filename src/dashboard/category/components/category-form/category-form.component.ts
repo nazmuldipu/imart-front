@@ -16,6 +16,7 @@ export class CategoryFormComponent implements OnChanges {
   form: FormGroup;
   
   exists = false;
+  file:File;
   
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -36,11 +37,22 @@ export class CategoryFormComponent implements OnChanges {
     });
   }
 
+  fileChange($event) {
+    let reader = new FileReader();
+    if($event.target.files && $event.target.files.length > 0) {
+      let file = $event.target.files[0];
+      this.file = file
+    }
+  }
+
   submit() {
     if (this.form.valid) {
       if (this.exists) {
         this.update.emit(this.form.value);
       } else {
+        const obj = this.form.value;
+        obj.image = this.file;
+        console.log(obj);
         this.create.emit(this.form.value);
       }
       this.exists = false;

@@ -12,23 +12,57 @@ export class CategoryService {
   constructor(private dataSource: RestDataService) {}
 
   create(category: Category): Observable<Category> {
-    return this.dataSource.sendRequest( 'POST', this.categoryUrl, category, true, null );
+    console.log(category);
+    let form = new FormData();
+    form.append('name', category['Name']);
+    form.append('image', category['image']);
+    console.log(form);
+    return this.dataSource.sendRequest(
+      'POST',
+      this.categoryUrl,
+      form,
+      true,
+      null
+    );
   }
 
-  update(id, category): Observable<Category>{
-    return this.dataSource.sendRequest('PUT', this.categoryUrl+`/${id}`, category, true, null);
+  update(id, category): Observable<Category> {
+    return this.dataSource.sendRequest(
+      'PUT',
+      this.categoryUrl + `/${id}`,
+      category,
+      true,
+      null
+    );
   }
 
-  getAll(): Observable<Category[]>{
-    return this.dataSource.sendRequest('GET', this.categoryUrl, null, false, null);
+  getAll(): Observable<Category[]> {
+    return this.dataSource.sendRequest(
+      'GET',
+      this.categoryUrl,
+      null,
+      false,
+      null
+    );
   }
 
-  get(id):Observable<Category>{
-    return this.dataSource.sendRequest('GET',this.categoryUrl+`/${id}`, null, false, null);
+  get(id): Observable<Category> {
+    return this.dataSource.sendRequest(
+      'GET',
+      this.categoryUrl + `/${id}`,
+      null,
+      false,
+      null
+    );
   }
 
-  delete(id):Observable<any>{
-    return this.dataSource.sendRequest('DELETE', this.categoryUrl+`/${id}`, null, true, null);
+  delete(id): Observable<any> {
+    return this.dataSource.sendRequest(
+      'DELETE',
+      this.categoryUrl + `/${id}`,
+      null,
+      true,
+      null
+    );
   }
-
 }
