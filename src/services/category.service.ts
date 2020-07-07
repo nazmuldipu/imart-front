@@ -8,29 +8,56 @@ import { Observable } from 'rxjs';
 })
 export class CategoryService {
   categoryUrl = 'api/categories';
+  catLink: string;
 
-  constructor(private dataSource: RestDataService) {}
+  constructor(private dataSource: RestDataService) {
+    this.catLink = this.dataSource.baseUrl + this.categoryUrl;
+  }
 
   create(category: Category): Observable<Category> {
-    console.log(category);
-    let form = new FormData();
-    form.append('name', category['Name']);
-    form.append('image', category['image']);
-    console.log(form);
+    var formData = new FormData();
+    Object.keys(category).forEach((key) => {
+      formData.append(key, category[key]);
+    });
+
     return this.dataSource.sendRequest(
       'POST',
       this.categoryUrl,
-      form,
+      formData,
       true,
       null
     );
   }
 
   update(id, category): Observable<Category> {
+    var formData = new FormData();
+    Object.keys(category).forEach((key) => {
+      if (category[key] != null) {
+        formData.append(key, category[key]);
+      }
+    });
+
     return this.dataSource.sendRequest(
       'PUT',
       this.categoryUrl + `/${id}`,
-      category,
+      formData,
+      true,
+      null
+    );
+  }
+
+  postThumb(id, thumb):Observable<any>{
+    var formData = new FormData();
+    Object.keys(thumb).forEach((key) => {
+      if (thumb[key] != null) {
+        formData.append(key, thumb[key]);
+      }
+    });
+
+    return this.dataSource.sendRequest(
+      'POST',
+      this.categoryUrl + `/thumb/${id}`,
+      formData,
       true,
       null
     );

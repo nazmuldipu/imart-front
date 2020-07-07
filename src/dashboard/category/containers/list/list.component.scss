@@ -1,6 +1,6 @@
 :host {
   font-size: 14px;
-  font-family: Montserrat,sans-serif;
+  font-family: Montserrat, sans-serif;
   display: block;
   position: relative;
   min-height: calc(100% - 57px);
@@ -8,4 +8,12 @@
 }
 .btn-sm {
   padding: 1px 5px;
+}
+.category {
+  padding: 2px;
+  margin-bottom: 3px;
+  border: 1px solid gainsboro;
+  &-image {
+    height: 50px;    
+  }
 }

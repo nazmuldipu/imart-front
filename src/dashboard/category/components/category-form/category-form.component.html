@@ -4,17 +4,8 @@
   <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">Name</label>
     <div class="col-sm-10">
-      <input
-        type="name"
-        class="form-control"
-        id="name"
-        formControlName="name"
-        placeholder="Category name"
-      />
-      <small
-        class="text-danger"
-        *ngIf="form.controls.name.errors && form.controls.name.touched"
-      >
+      <input type="name" class="form-control" id="name" formControlName="name" placeholder="Category name" />
+      <small class="text-danger" *ngIf="form.controls.name.errors && form.controls.name.touched">
         <div [hidden]="!form.controls['name'].errors.required">
           Name required
         </div>
@@ -25,21 +16,39 @@
     </div>
   </div>
 
-  <p>
+  <div class="form-group row">
+    <label for="priority" class="col-sm-2 col-form-label">Priority</label>
+    <div class="col-sm-10">
+      <input type="priority" class="form-control" id="priority" formControlName="priority" placeholder="Priority" />
+      <small class="text-danger" *ngIf="form.controls.priority.errors && form.controls.priority.touched">
+        <div [hidden]="!form.controls['priority'].errors.required">
+          Priority required
+        </div>
+        <div [hidden]="!form.controls['priority'].errors.min">
+          Minimum value should be 0
+        </div>
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="image" class="col-sm-2 col-form-label">Image</label>
+    <div class="col-sm-10">
+      <input type="file" class="form-control" id="image" (change)="uploadFile($event)">
+    </div>
+  </div>
+
+  <!-- <p>
     <label>Image (Optionnel)</label><br /><br />
     <input type="file" (change)="fileChange($event)" name="image" />
-  </p>
+  </p> -->
 
   <div class="d-flex justify-content-end">
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [ngClass]="{
+    <button type="submit" class="btn btn-primary" [ngClass]="{
         disabled: form.invalid,
         'btn-warning': exists,
         'btn-success': !exists
-      }"
-    >
+      }">
       {{ exists ? "Update" : "Create" }}
     </button>
   </div>

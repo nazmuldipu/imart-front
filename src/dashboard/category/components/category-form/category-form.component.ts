@@ -14,10 +14,10 @@ export class CategoryFormComponent implements OnChanges {
   @Output() update = new EventEmitter<Category>();
 
   form: FormGroup;
-  
+
   exists = false;
-  file:File;
-  
+  file: File;
+
   constructor(private fb: FormBuilder) {
     this.createForm();
   }
@@ -34,29 +34,35 @@ export class CategoryFormComponent implements OnChanges {
   createForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
+      priority: [0, [Validators.required, Validators.min(0)]],
+      image: [null]
     });
   }
 
-  fileChange($event) {
-    let reader = new FileReader();
-    if($event.target.files && $event.target.files.length > 0) {
-      let file = $event.target.files[0];
-      this.file = file
-    }
+  // fileChange($event) {
+  //   let reader = new FileReader();
+  //   if($event.target.files && $event.target.files.length > 0) {
+  //     let file = $event.target.files[0];
+  //     this.file = file
+  //   }
+  // }
+  uploadFile(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({
+      image: file
+    });
+    this.form.get('image').updateValueAndValidity()
   }
 
   submit() {
     if (this.form.valid) {
       if (this.exists) {
         this.update.emit(this.form.value);
-      } else {
-        const obj = this.form.value;
-        obj.image = this.file;
-        console.log(obj);
+      } else {    
         this.create.emit(this.form.value);
       }
       this.exists = false;
       this.form.reset();
-    } 
+    }
   }
 }
