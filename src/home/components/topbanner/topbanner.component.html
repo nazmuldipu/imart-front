@@ -6,7 +6,9 @@
             <div class="cat-icon4">
                 <div class="wrap-cat-icon">
                     <ul class="list-cat-icon">
-                        <li class="has-cat-mega">
+                        <li *ngFor="let cat of categories"><a [routerLink]="'/category/'+cat._id"><img class="category-image" [src]="thumbUrl + cat._id" /><span>{{ cat.name }}</span></a></li>
+                        
+                        <!-- <li class="has-cat-mega">
                             <a href="#"><img src="assets/images/cat-icon/cat1.png" alt=""><span>Mobiles &amp;
                                     Tablets</span></a>
                             <div class="cat-mega-menu cat-mega-style1">
@@ -138,8 +140,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li><a routerLink="/category/Electronics"><img src="assets/images/cat-icon/cat3.png" alt=""><span>Electronics</span></a></li>
+                        </li> -->
+                        <!-- <li><a routerLink="/category/Electronics"><img src="assets/images/cat-icon/cat3.png" alt=""><span>Electronics</span></a></li>
                         <li><a routerLink="/category/Fashion"><img src="assets/images/cat-icon/cat4.png" alt=""><span>Fashion</span></a></li>
                         <li><a routerLink="/category/Footwear"><img src="assets/images/cat-icon/cat5.png" alt=""><span>Footwear</span></a></li>
                         <li><a routerLink="/category/Jewelry"><img src="assets/images/cat-icon/cat6.png" alt=""><span>Jewelry &amp;
@@ -148,7 +150,7 @@
                         </li>
                         <li><a href="#"><img src="assets/images/cat-icon/cat8.png" alt=""><span>Home Appliances</span></a></li>
                         <li><a href="#"><img src="assets/images/cat-icon/cat9.png" alt=""><span>Beauty &amp;
-                                    Perfumes</span></a></li>
+                                    Perfumes</span></a></li> -->
                     </ul>
                 </div>
             </div>
