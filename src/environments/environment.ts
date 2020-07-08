@@ -9,7 +9,7 @@ export const environment = {
   // SERVER: 'imartltd.herokuapp.com',
   PROTOCOL: 'http',
   PORT: ':3000',
-  SERVER: 'localhost',
+  SERVER: '192.168.0.12',
 };
 
 /* https://imartltd.herokuapp.com/ */ 

@@ -31,6 +31,6 @@ Dashboard
 
 # TODOS
 
-[] Category send form data instead of json to the serve on POST operation
-[] Add Image upload feature in categories
-[] Add Thumb upload feature in Categories
+[X] Category send form data instead of json to the serve on POST operation
+[X] Add Image upload feature in categories
+[X] Add Thumb upload feature in Categories

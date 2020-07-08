@@ -21,6 +21,11 @@ export const ROUTES: Routes = [
         loadChildren: () =>
           import('./category/category.module').then((m) => m.CategoryModule),
       },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./products/products.module').then((m) => m.ProductsModule),
+      },
     ],
   },
 ];

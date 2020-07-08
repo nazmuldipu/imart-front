@@ -1,17 +1,18 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Brand } from 'src/shared/models/brand.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Category } from 'src/shared/models/category.model';
 
 @Component({
-  selector: 'category-form',
-  templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.scss'],
+  selector: 'brand-form',
+  templateUrl: './brand-form.component.html',
+  styleUrls: ['./brand-form.component.scss']
 })
-export class CategoryFormComponent implements OnChanges {
-  @Input() category: Category;
+export class BrandFormComponent implements OnChanges {
+  @Input() brand: Brand;
 
-  @Output() create = new EventEmitter<Category>();
-  @Output() update = new EventEmitter<Category>();
+  @Output() create = new EventEmitter<Brand>();
+  @Output() update = new EventEmitter<Brand>();
+  @Output() cancel = new EventEmitter<Boolean>();
 
   form: FormGroup;
 
@@ -22,10 +23,10 @@ export class CategoryFormComponent implements OnChanges {
     this.createForm();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.category && this.category._id) {
+    if (this.brand && this.brand._id) {
       this.exists = true;
       const value = {
-        ...this.category
+        ...this.brand
       };
       this.form.patchValue(value);
     }
@@ -57,5 +58,9 @@ export class CategoryFormComponent implements OnChanges {
       this.exists = false;
       this.form.reset();
     }
+  }
+
+  onCancel(){
+    this.cancel.emit(true);
   }
 }

@@ -25,7 +25,13 @@ export class DashSideNavbarComponent implements OnInit {
       name: 'Category',
       link: '/dashboard/categories',
       icon: 'fa-cubes',
-      subnav: [        
+      subnav: [],
+    },
+    {
+      name: 'Product',
+      icon: 'fa-archive',
+      subnav: [
+        { name: 'Brands', icon: 'fa-tags', link: '/dashboard/products/brands' },
       ],
     },
     {
