@@ -32,6 +32,7 @@ export class DashSideNavbarComponent implements OnInit {
       icon: 'fa-archive',
       subnav: [
         { name: 'Brands', icon: 'fa-tags', link: '/dashboard/products/brands' },
+        { name: 'Shops', icon: 'fa-shopping-bag', link: '/dashboard/products/shops' },
       ],
     },
     {
