@@ -19,6 +19,30 @@ export class UserService {
     return this.dataSource.sendRequest('POST', this.userUrl, user, false, null);
   }
 
+  update(id, user): Observable<User> {
+    return this.dataSource.sendRequest(
+      'PUT',
+      this.userUrl + `/${id}`,
+      user,
+      true,
+      null
+    );
+  }
+
+  getAll(): Observable<User[]> {
+    return this.dataSource.sendRequest('GET', this.userUrl, null, true, null);
+  }
+
+  get(id): Observable<User> {
+    return this.dataSource.sendRequest(
+      'GET',
+      this.userUrl + `/${id}`,
+      null,
+      true,
+      null
+    );
+  }
+
   getUserProfile() {
     this.dataSource
       .sendRequest('GET', this.userUrl + '/me', null, true, null)
@@ -32,5 +56,16 @@ export class UserService {
           console.log(error);
         }
       );
+  }
+
+  resetPassword(id, password: string): Observable<any> {
+    const value = { password };
+    return this.dataSource.sendRequest(
+      'PATCH',
+      this.userUrl + `/change-password/${id}`,
+      value,
+      true,
+      null
+    );
   }
 }

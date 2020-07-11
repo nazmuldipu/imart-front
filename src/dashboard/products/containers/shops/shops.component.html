@@ -32,7 +32,7 @@
           <button
             type="button"
             class="btn btn-success btn-sm"
-            (click)="onShowBrandForm()"
+            (click)="onShowShopForm()"
           >
             + ADD SHOP
           </button>
@@ -84,10 +84,10 @@
   
       <div class="col-12" *ngIf="showShopForm">
         <shop-form
-          [brand]="brand"
+          [shop]="shop"
           (create)="onCreate($event)"
           (update)="onUpdate($event)"
-          (cancel)="onBrandFormCancel()"
+          (cancel)="onShopFormCancel()"
         ></shop-form>
       </div>
     </div>

@@ -32,7 +32,23 @@ export class DashSideNavbarComponent implements OnInit {
       icon: 'fa-archive',
       subnav: [
         { name: 'Brands', icon: 'fa-tags', link: '/dashboard/products/brands' },
-        { name: 'Shops', icon: 'fa-shopping-bag', link: '/dashboard/products/shops' },
+        {
+          name: 'Shops',
+          icon: 'fa-shopping-bag',
+          link: '/dashboard/products/shops',
+        },
+      ],
+    },
+    {
+      name: 'Users',
+      icon: 'fa-users',
+      subnav: [
+        { name: 'List', icon: 'fa-list', link: '/dashboard/users' },
+        {
+          name: 'Reset password',
+          icon: 'fa-key',
+          link: '/dashboard/users/reset-password',
+        },
       ],
     },
     {

@@ -19,4 +19,11 @@ export class ShopsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onCreate(event) {}
+
+  onUpdate(event) {}
+  onShowShopForm(){}
+  onShopFormCancel() {}
+  onClose(){}
 }
