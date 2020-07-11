@@ -6,6 +6,7 @@ import { IndexComponent } from './containers/index/index.component';
 import { DashboardComponent } from './dashboard.component';
 import { DashNavbarComponent } from './components/dash-navbar/dash-navbar.component';
 import { DashSideNavbarComponent } from './components/dash-side-navbar/dash-side-navbar.component';
+import { ChangePasswordComponent } from './containers/change-password/change-password.component';
 
 export const ROUTES: Routes = [
   {
@@ -15,6 +16,10 @@ export const ROUTES: Routes = [
       {
         path: '',
         component: IndexComponent,
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent,
       },
       {
         path: 'categories',
@@ -41,6 +46,7 @@ export const ROUTES: Routes = [
     IndexComponent,
     DashNavbarComponent,
     DashSideNavbarComponent,
+    ChangePasswordComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(ROUTES)],
 })
