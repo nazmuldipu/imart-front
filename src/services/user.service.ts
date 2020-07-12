@@ -68,4 +68,8 @@ export class UserService {
       null
     );
   }
+
+  changePassword(value):Observable<any>{
+    return this.dataSource.sendRequest('PATCH', this.userUrl+`/changePassword`, value, true, null);
+  }
 }
