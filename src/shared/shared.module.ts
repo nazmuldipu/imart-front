@@ -12,6 +12,8 @@ import { ProductStyle1Component } from './components/product-style1/product-styl
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SideAdvComponent } from './components/side-adv/side-adv.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ToastComponent } from './components/toast/toast.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,22 +26,26 @@ import { LoadingComponent } from './components/loading/loading.component';
     ProductStyle1Component,
     SideAdvComponent,
     LoadingComponent,
+    ToastComponent,
   ],
-  imports: [CommonModule, FormsModule,ReactiveFormsModule, RouterModule, CarouselModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule,
+    RouterModule, CarouselModule],
   exports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    SideNavCollapseComponent,
-    PriceFilterComponent,
     BestSellersComponent,
     BrandsComponent,
+    CommonModule,
+    FormsModule,
+    PriceFilterComponent,
     Product1Component,
     ProductRelatedComponent,
     ProductStyle1Component,
+    ReactiveFormsModule,
+    RouterModule,
+    SideNavCollapseComponent,
     SideAdvComponent,
-    LoadingComponent
+    ToastComponent,
+    LoadingComponent,
+    NgbModule
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

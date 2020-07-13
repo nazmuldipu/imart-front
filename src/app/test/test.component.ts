@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ToastService } from 'src/services/toast.service';
 
 @Component({
   selector: 'app-test',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test.component.scss'],
 })
 export class TestComponent implements OnInit {
-  
-  constructor() {}
+  constructor(public toastService: ToastService) { }
 
-  ngOnInit(): void {}
+  isTemplate(toast) { return toast.textOrTpl instanceof TemplateRef; }
+
+  ngOnInit(): void { }
 }

@@ -6,6 +6,8 @@ import { CategoryService } from './category.service';
 import { UserService } from './user.service';
 import { UtilService } from './util.service';
 import { BrandService } from './brand.service';
+import { ShopService } from './shop.service';
+import { ToastService } from './toast.service';
 
 @NgModule({
   providers:[
@@ -13,6 +15,8 @@ import { BrandService } from './brand.service';
     AuthService,
     BrandService,
     CategoryService,
+    ShopService,
+    ToastService,
     UserService, 
     UtilService
   ]

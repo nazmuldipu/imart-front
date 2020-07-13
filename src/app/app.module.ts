@@ -1,15 +1,14 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from 'src/services/auth-guard.service';
 import { SharedModule } from 'src/shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
-
 import { ServicesModule } from '../services/services.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
-import { AuthGuardService } from 'src/services/auth-guard.service';
 
 export const ROUTES: Routes = [
   { path: 'test', component: TestComponent },

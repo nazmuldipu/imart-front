@@ -34,3 +34,5 @@ Dashboard
 [X] Category send form data instead of json to the serve on POST operation
 [X] Add Image upload feature in categories
 [X] Add Thumb upload feature in Categories
+[X] Add and implement component for Shop approval
+[] Shop details components

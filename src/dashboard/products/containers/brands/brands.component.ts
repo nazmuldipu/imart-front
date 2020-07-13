@@ -79,7 +79,6 @@ export class BrandsComponent implements OnInit {
       this.message = 'Brand updated';
       this.brand = null;
       this.showBrandForm = false;
-      this.brand = null;
       this.getAllBrand();
     } catch (err) {
       this.errorMessage = err;
@@ -89,7 +88,6 @@ export class BrandsComponent implements OnInit {
 
   async onDelete(id) {
     if (confirm('Are you sure to delete')) {
-      console.log('onDelete ', id);
       try {
         const res = await this.brandService.delete(id).toPromise();
         this.message = 'Brand deleted';
