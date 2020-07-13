@@ -35,4 +35,5 @@ Dashboard
 [X] Add Image upload feature in categories
 [X] Add Thumb upload feature in Categories
 [X] Add and implement component for Shop approval
-[] Shop details components
+[X] Shop details components
+[X] Dashboard side nav show options according to role
