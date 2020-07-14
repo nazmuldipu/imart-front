@@ -1,0 +1,80 @@
+<nav class="navbar navbar-light bg-light border border-bottom-0">
+    <a class="navbar-brand">{{ exists ? "Update" : "Add" }} Product</a>
+</nav>
+
+<div class="list-group" *ngIf="!category">
+    <li class="list-group-item"><strong>Please select a Category first</strong></li>
+    <a class="list-group-item list-group-item-action list-group-item-light py-1 text-dark"
+        *ngFor="let cat of categories" (click)="onCategory(cat._id)">{{cat.name}}</a>
+</div>
+
+<div class="list-group" *ngIf="category && !brand">
+    <li class="list-group-item"><strong>Please select a Brand</strong></li>
+    <a class="list-group-item list-group-item-action list-group-item-light py-1 text-dark" *ngFor="let br of brands"
+        (click)="onBrand(br._id)">{{br.name}}</a>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="p-3 border" *ngIf="category && brand">
+    <div class="form-group row">
+        <label for="category" class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-10">
+            <label class="form-control" id="category">{{category.name}}</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="brand" class="col-sm-2 col-form-label">Brand</label>
+        <div class="col-sm-10">
+            <label class="form-control" id="brand">{{brand.name}}</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input type="name" class="form-control" id="name" formControlName="name" placeholder="Product name" />
+            <small class="text-danger" *ngIf="form.controls.name.errors && form.controls.name.touched">
+                <div [hidden]="!form.controls['name'].errors.required">
+                    Name required
+                </div>
+                <div [hidden]="!form.controls['name'].errors.minlength">
+                    Minimum Length should be 3
+                </div>
+            </small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="priority" class="col-sm-2 col-form-label">Priority</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="priority" formControlName="priority" placeholder="Priority" />
+            <small class="text-danger" *ngIf="form.controls.priority.errors && form.controls.priority.touched">
+                <div [hidden]="!form.controls['priority'].errors.required">
+                    Priority required
+                </div>
+                <div [hidden]="!form.controls['priority'].errors.min">
+                    Minimum value should be 0
+                </div>
+            </small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="image" class="col-sm-2 col-form-label">Image</label>
+        <div class="col-sm-10">
+            <input type="file" class="form-control" id="image" (change)="uploadFile($event)">
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-danger btn-sm mx-1" (click)="onClose()">Close</button>
+        <button class="btn btn-warning btn-sm mx-1" (click)="onClear()">Clear</button>
+        <button type="submit" class="btn btn-primary  mx-1  " [ngClass]="{
+            disabled: form.invalid,
+            'btn-warning': exists,
+            'btn-success': !exists
+          }">
+            {{ exists ? "Update" : "Create" }}
+        </button>
+    </div>
+</form>
+{{form.value | json}}
+<p>product-form works!</p>

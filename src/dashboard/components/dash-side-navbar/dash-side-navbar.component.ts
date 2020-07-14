@@ -34,13 +34,17 @@ export class DashSideNavbarComponent implements OnInit {
     {
       name: 'Product',
       icon: 'fa-archive',
-      roles: ['ADMIN'],
+      roles: ['ADMIN', 'SHOP'],
       subnav: [
         { name: 'Brands', icon: 'fa-tags', 
         roles: ['ADMIN'], link: '/dashboard/products/brands' },
         {
           name: 'Shops', icon: 'fa-shopping-bag',
           roles: ['ADMIN'], link: '/dashboard/products/shops',
+        },
+        {
+          name: 'Products', icon: 'fa-shopping-bag',
+          roles: ['SHOP'], link: '/dashboard/products/',
         },
       ],
     },

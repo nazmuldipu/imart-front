@@ -19,7 +19,7 @@
   <div class="form-group row">
     <label for="priority" class="col-sm-2 col-form-label">Priority</label>
     <div class="col-sm-10">
-      <input type="priority" class="form-control" id="priority" formControlName="priority" placeholder="Priority" />
+      <input type="number" class="form-control" id="priority" formControlName="priority" placeholder="Priority" />
       <small class="text-danger" *ngIf="form.controls.priority.errors && form.controls.priority.touched">
         <div [hidden]="!form.controls['priority'].errors.required">
           Priority required

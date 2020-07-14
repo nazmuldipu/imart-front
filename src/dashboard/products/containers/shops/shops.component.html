@@ -20,7 +20,7 @@
   </div>
 
   <div class="row" *ngIf="!loading">
-    <div [ngClass]="shop?'col-md-6':''" class="col-12" *ngIf="!showShopForm">
+    <div [ngClass]="showShopForm?'':'col-md-6'" class="col-12">
       <nav class="navbar navbar-light bg-light border">
         <a class="navbar-brand">Shop List</a>
         <button type="button" class="btn btn-success btn-sm" (click)="onShowShopForm()">
@@ -105,7 +105,7 @@
         <button class="btn btn-danger" (click)="onClose()">Close</button>      
       </div>
     </div>
-    <div class="col-12" *ngIf="showShopForm">
+    <div class="col-md-6 col-12" *ngIf="showShopForm">
       <shop-form [shop]="shop" (create)="onCreate($event)" (update)="onUpdate($event)" (cancel)="onShopFormCancel()">
       </shop-form>
     </div>

@@ -9,28 +9,30 @@
         <!-- Categories -->
         <ul>
             <li *ngFor="let item of sidenav">
-                <a class="widget-content-category" [routerLink]="item.link ? item.link : null" 
-                    [class.has-sub-cat]="item.subnav && item.subnav.length > 0"
-                    [class.opened]="navlink===item.name" (click)="onNavLink(item.name)"> 
-                        <i class="fa" [ngClass]="item.icon"  *ngIf="validateRole(item.roles)"></i>
+                <ng-container *ngIf="validateRole(item.roles)">
+                    <a class="widget-content-category" [routerLink]="item.link ? item.link : null"
+                        [class.has-sub-cat]="item.subnav && item.subnav.length > 0" [class.opened]="navlink===item.name"
+                        (click)="onNavLink(item.name)">
+                        <i class="fa" [ngClass]="item.icon" ></i>
                         <span class="category-text"> {{item.name}}</span>
-                </a>
+                    </a>
 
-                <!-- Sub categories -->
-                <div class="widget-content-sub-category" [class.opened]="navlink===item.name"
-                    *ngIf="item.subnav && item.subnav.length > 0">
-                    <ul>
-                        <li *ngFor="let subn of item.subnav" (click)="onSubNav(subn.name)">
-                            <a  *ngIf="validateRole(subn.roles)" class="widget-content-sub-category-list" [routerLink]="subn.link"
-                                [style.font-weight]="subNav==subn.name?'700':'100'">
-                                <i *ngIf="!!subn.icon" class="fa" [ngClass]="subn.icon"
-                                    style="font-weight: inherit;"></i>
-                                <span class="sub-category-text"> &nbsp; {{subn.name}}</span>
-                            </a>
-                        </li>
+                    <!-- Sub categories -->
+                    <div class="widget-content-sub-category" [class.opened]="navlink===item.name"
+                        *ngIf="item.subnav && item.subnav.length > 0">
+                        <ul>
+                            <li *ngFor="let subn of item.subnav" (click)="onSubNav(subn.name)">
+                                <a *ngIf="validateRole(subn.roles)" class="widget-content-sub-category-list"
+                                    [routerLink]="subn.link" [style.font-weight]="subNav==subn.name?'700':'100'">
+                                    <i *ngIf="!!subn.icon" class="fa" [ngClass]="subn.icon"
+                                        style="font-weight: inherit;"></i>
+                                    <span class="sub-category-text"> &nbsp; {{subn.name}}</span>
+                                </a>
+                            </li>
 
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
+                </ng-container>
             </li>
         </ul>
     </div>
