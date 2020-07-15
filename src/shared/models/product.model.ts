@@ -9,6 +9,7 @@ export interface Product {
     priority: number;
     active: boolean;
     publish: boolean;
+    image_count: number;
     image_urls: string[];
     thumb: string[];
 }

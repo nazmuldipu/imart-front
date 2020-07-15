@@ -16,10 +16,16 @@ export class ProductService {
 
   create(product: Product): Observable<Product> {
     var formData = new FormData();
+    
     Object.keys(product).forEach((key) => {
       formData.append(key, product[key]);
     });
-
+    
+    formData.delete('images')
+    for (var i = 0; i < product['images'].length; i++) {
+      formData.append('images', product['images'][i]);
+    }
+    
     return this.dataSource.sendRequest('POST', this.productUrl, formData, true, null);
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Product } from 'src/shared/models/product.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Category } from 'src/shared/models/category.model';
@@ -9,7 +9,7 @@ import { Brand } from 'src/shared/models/brand.model';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnChanges {
   @Input() product: Product;
   @Input() categories: Category[];
   @Input() brands: Brand[];
@@ -23,12 +23,23 @@ export class ProductFormComponent implements OnInit {
   form: FormGroup;
 
   exists = false;
-  file: File;
+  files: File[] = [];
+  errorMessage = '';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) { this.createForm(); }
 
-  ngOnInit(): void {
-    this.createForm();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.product && this.product._id) {
+      this.exists = true;
+      this.category = this.categories.find(cat => cat._id === this.product.category._id);
+      this.brand = this.brands.find(b => b._id === this.product.brand._id);
+      const value = {
+        categoryId: this.product.category._id,
+        brandId: this.product.brand._id,
+        ...this.product
+      };
+      this.form.patchValue(value);
+    }
   }
 
   createForm() {
@@ -37,16 +48,28 @@ export class ProductFormComponent implements OnInit {
       categoryId: ['', Validators.required],
       brandId: ['', Validators.required],
       priority: [0, [Validators.required, Validators.min(0)]],
-      image: [null]
+      images: [null],
+      thumb: [null]
     });
   }
 
   uploadFile(event) {
+    if (event.target.files.length > 0 && event.target.files.length < 5) {
+      const file = event.target.files;
+      this.form.patchValue({
+        images: file
+      });
+    } else if (event.target.files.length > 4) {
+      this.errorMessage = 'Product image limit is 4';
+    }
+  }
+
+  uploadThumb(event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({
-      image: file
+      thumb: file
     });
-    this.form.get('image').updateValueAndValidity()
+    this.form.get('thumb').updateValueAndValidity()
   }
 
   onCategory(id) {

@@ -19,7 +19,8 @@
     </div>
 
     <div class="row" *ngIf="!loading">
-        <div [ngClass]="showProductForm?'col-md-6':''" class="col-12">
+
+        <div [ngClass]="product?'col-md-6':''" class="col-12 pr-0">
             <nav class="navbar navbar-light bg-light border">
                 <a class="navbar-brand">Product List</a>
                 <button type="button" class="btn btn-success btn-sm" (click)="onShowProductForm()">
@@ -45,17 +46,17 @@
                     <tbody *ngIf="products.length > 0">
                         <tr *ngFor="let product of products; index as i">
                             <td>
-                                <img class="product-image" [src]="imageUrl + product._id + '/0'"
+                                <img class="product-image" [src]="thumbUrl + product._id "
                                     [alt]="product.name + ' image'" />
                             </td>
                             <td><a (click)="onDetails(product._id)" class="text-primary"> {{ product.name }} </a></td>
                             <td class="text-center">{{ product.priority }}</td>
                             <td class="text-center">{{ product.status }}</td>
-                            <td class="text-center">{{ product.approved?'Active':'Inactive' }}</td>
+                            <td class="text-center">{{ product.active?'Active':'Inactive' }}</td>
                             <td class="text-right">
-                                <button class="btn btn-sm" [ngClass]="product.approved?'btn-danger':'btn-primary'"
+                                <button class="btn btn-sm" [ngClass]="product.active?'btn-danger':'btn-primary'"
                                     (click)="onToggleActive(product._id, product.active)">
-                                    <i class="fa" [ngClass]="product.approved?'fa-ban':'fa-check'"></i></button>
+                                    <i class="fa" [ngClass]="product.active?'fa-ban':'fa-check'"></i></button>
 
                                 <button class="btn btn-sm btn-warning mx-1" (click)="onEdit(product._id)">
                                     <i class="fa fa-pencil"></i>
@@ -69,11 +70,58 @@
                 </table>
             </div>
         </div>
+        <div class="col-md-6 col-12" *ngIf="!showProductForm && product">
+            <div class="row m-0">
+                <div *ngFor='let in of counter(product.image_count) ;let i = index' class="column">
+                    <img class="img-fluid" [src]="imageUrl + product._id + '/' + i" [alt]="product.name + ' image'"
+                        style="max-height: 400px;width:100%" />
+                </div>
+            </div>
 
+
+            <h3 class="text-center">{{product.name}}</h3>
+            <table class="table table-striped border">
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <th>{{product.slug}}</th>
+                    </tr>
+                    <tr>
+                        <td>Priority</td>
+                        <th>{{product.priority}}</th>
+                    </tr>
+                    <tr>
+                        <td>Active</td>
+                        <th>{{ product.active?'Active':'Inactive' }}</th>
+                    </tr>
+                    <tr>
+                        <td>Max price</td>
+                        <th>{{product.max_price}}</th>
+                    </tr>
+                    <tr>
+                        <td>Min price</td>
+                        <th>{{product.min_price}}</th>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <th>{{product.category?.name}}</th>
+                    </tr>
+                    <tr>
+                        <td>Brand</td>
+                        <th>{{product.brand?.name}}</th>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            <div class="d-flex flex-row-reverse">
+                <button class="btn btn-danger" (click)="onClose()">Close</button>
+            </div>
+        </div>
         <div class="col-md-6 col-12" *ngIf="showProductForm">
             <product-form [categories]="categories" [brands]="brands" [product]="product" (create)="onCreate($event)"
                 (update)="onUpdate($event)" (close)="onClose()">
             </product-form>
         </div>
+
     </div>
 </div>

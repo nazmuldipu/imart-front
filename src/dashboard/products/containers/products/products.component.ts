@@ -19,11 +19,12 @@ export class ProductsComponent implements OnInit {
   categories: Category[] = [];
   brands: Brand[] = [];
   imageUrl = '';
+  thumbUrl = '';
   message = '';
   errorMessage = '';
 
   loading = false;
-  showProductForm = true;
+  showProductForm = false;
 
   constructor(private categoryService: CategoryService,
     private brandService: BrandService,
@@ -31,6 +32,7 @@ export class ProductsComponent implements OnInit {
     private utilService: UtilService,
     public toastService: ToastService) {
     this.imageUrl = this.productService.productLink + '/image/';
+    this.thumbUrl = this.productService.productLink + '/thumb/';
   }
 
   ngOnInit(): void {
@@ -140,6 +142,10 @@ export class ProductsComponent implements OnInit {
     this.loading = false;
     this.message = '';
     this.errorMessage = '';
+  }
+
+  counter(i: number) {
+    return new Array(i-1);
   }
 
 }

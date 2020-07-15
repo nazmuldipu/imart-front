@@ -44,7 +44,7 @@ export class DashSideNavbarComponent implements OnInit {
         },
         {
           name: 'Products', icon: 'fa-shopping-bag',
-          roles: ['SHOP'], link: '/dashboard/products/',
+          roles: ['SHOP', 'ADMIN'], link: '/dashboard/products/',
         },
       ],
     },
