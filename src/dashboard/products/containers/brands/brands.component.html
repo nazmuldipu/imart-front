@@ -3,36 +3,20 @@
 </div>
 <div class="container">
   <loading *ngIf="loading"></loading>
-  <div
-    class="alert alert-success alert-dismissible show"
-    role="alert"
-    *ngIf="message.length > 0"
-  >
+  <div class="alert alert-success alert-dismissible show" role="alert" *ngIf="message.length > 0">
     <strong>Success! </strong> {{ message }}
-    <button type="button" class="close" (click)="onClose()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <button type="button" class="close" (click)="onClose()"> <span aria-hidden="true">&times;</span> </button>
   </div>
-  <div
-    class="alert alert-danger alert-dismissible show"
-    role="alert"
-    *ngIf="errorMessage.length > 0"
-  >
+  <div class="alert alert-danger alert-dismissible show" role="alert" *ngIf="errorMessage.length > 0">
     <strong>Failed! </strong> {{ errorMessage }}
-    <button type="button" class="close" (click)="onClose()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <button type="button" class="close" (click)="onClose()"> <span aria-hidden="true">&times;</span> </button>
   </div>
 
   <div class="row" *ngIf="!loading">
     <div class="col-12" *ngIf="!showBrandForm">
       <nav class="navbar navbar-light bg-light border">
         <a class="navbar-brand">Brand List</a>
-        <button
-          type="button"
-          class="btn btn-success btn-sm"
-          (click)="onShowBrandForm()"
-        >
+        <button type="button" class="btn btn-success btn-sm" (click)="onShowBrandForm()">
           + ADD BRAND
         </button>
       </nav>
@@ -53,25 +37,15 @@
           <tbody *ngIf="brands.length > 0">
             <tr *ngFor="let brand of brands; index as i">
               <td>
-                <img
-                  class="brand-image"
-                  [src]="imageUrl + brand._id"
-                  [alt]="brand.name + ' image'"
-                />
+                <img class="brand-image" [src]="imageUrl + brand._id" [alt]="brand.name + ' image'" />
               </td>
               <td>{{ brand.name }}</td>
               <td class="text-center">{{ brand.priority }}</td>
               <td class="text-right">
-                <button
-                  class="btn btn-sm btn-warning mx-1"
-                  (click)="onEdit(brand._id)"
-                >
+                <button class="btn btn-sm btn-warning mx-1" (click)="onEdit(brand._id)">
                   <i class="fa fa-pencil"></i>
                 </button>
-                <button
-                  class="btn btn-sm btn-danger mx-1"
-                  (click)="onDelete(brand._id)"
-                >
+                <button class="btn btn-sm btn-danger mx-1" (click)="onDelete(brand._id)">
                   <i class="fa fa-trash-o"></i>
                 </button>
               </td>
@@ -82,12 +56,8 @@
     </div>
 
     <div class="col-12" *ngIf="showBrandForm">
-      <brand-form
-        [brand]="brand"
-        (create)="onCreate($event)"
-        (update)="onUpdate($event)"
-        (cancel)="onBrandFormCancel()"
-      ></brand-form>
+      <brand-form [brand]="brand" (create)="onCreate($event)" (update)="onUpdate($event)"
+        (cancel)="onBrandFormCancel()"></brand-form>
     </div>
   </div>
 </div>

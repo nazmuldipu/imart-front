@@ -73,7 +73,7 @@
         <div class="col-md-6 col-12" *ngIf="!showProductForm && product">
             <div class="row m-0">
                 <div *ngFor='let in of counter(product.image_count) ;let i = index' class="column">
-                    <img class="img-fluid" [src]="imageUrl + product._id + '/' + i" [alt]="product.name + ' image'"
+                    <img class="img-fluid border" [src]="imageUrl + product._id + '/' + i" [alt]="product.name + ' image'"
                         style="max-height: 400px;width:100%" />
                 </div>
             </div>

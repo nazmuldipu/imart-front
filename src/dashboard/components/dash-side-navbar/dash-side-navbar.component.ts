@@ -26,18 +26,28 @@ export class DashSideNavbarComponent implements OnInit {
     },
     {
       name: 'Category',
-      link: '/dashboard/categories',
       icon: 'fa-cubes',
       roles: ['ADMIN'],
-      subnav: [],
+      subnav: [
+        {
+          name: 'Categories', icon: 'fa-cube',
+          roles: ['ADMIN'], link: '/dashboard/categories'
+        },
+        {
+          name: 'Sub Categories', icon: 'fa-flask',
+          roles: ['ADMIN'], link: '/dashboard/categories/sub-category'
+        },
+      ],
     },
     {
       name: 'Product',
-      icon: 'fa-archive',
+      icon: 'fa-tag',
       roles: ['ADMIN', 'SHOP'],
       subnav: [
-        { name: 'Brands', icon: 'fa-tags', 
-        roles: ['ADMIN'], link: '/dashboard/products/brands' },
+        {
+          name: 'Brands', icon: 'fa-tags',
+          roles: ['ADMIN'], link: '/dashboard/products/brands'
+        },
         {
           name: 'Shops', icon: 'fa-shopping-bag',
           roles: ['ADMIN'], link: '/dashboard/products/shops',

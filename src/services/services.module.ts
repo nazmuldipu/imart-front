@@ -9,6 +9,7 @@ import { ShopService } from './shop.service';
 import { ToastService } from './toast.service';
 import { UserService } from './user.service';
 import { UtilService } from './util.service';
+import { SubCategoryService } from './sub-category.service';
 
 @NgModule({
   providers:[
@@ -18,6 +19,7 @@ import { UtilService } from './util.service';
     CategoryService,
     ProductService,
     ShopService,
+    SubCategoryService,
     ToastService,
     UserService, 
     UtilService
