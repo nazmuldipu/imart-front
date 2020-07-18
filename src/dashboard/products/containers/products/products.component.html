@@ -38,7 +38,6 @@
                             <th>Image</th>
                             <th>Name</th>
                             <th class="text-center">Priority</th>
-                            <th class="text-center">Status</th>
                             <th class="text-center">Active</th>
                             <th class="text-right">Actions</th>
                         </tr>
@@ -51,7 +50,6 @@
                             </td>
                             <td><a (click)="onDetails(product._id)" class="text-primary"> {{ product.name }} </a></td>
                             <td class="text-center">{{ product.priority }}</td>
-                            <td class="text-center">{{ product.status }}</td>
                             <td class="text-center">{{ product.active?'Active':'Inactive' }}</td>
                             <td class="text-right">
                                 <button class="btn btn-sm" [ngClass]="product.active?'btn-danger':'btn-primary'"

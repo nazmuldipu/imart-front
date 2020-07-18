@@ -2,7 +2,7 @@
 <div class="container pt-4" *ngIf="!loading">
     <div class="banner-shop">
         <div class="banner-shop-thumb">
-            <a href="#"><img [src]="imageUrl + category?._id" alt=""></a>
+            <a href="#"><img [src]="catImageUrl + category?._id" alt=""></a>
         </div>
         <div class="banner-shop-info text-center">
             <h2>{{category.name}} style 2016</h2>
@@ -20,7 +20,7 @@
     <div class="row">
 
         <div class="col-md-3 col-12">
-            <side-nav-collapse [data]="sideNavData" (resp)="onSideNavClick($event)"></side-nav-collapse>
+            <side-nav-collapse [data]="subCategories" [title]="category?.name" (resp)="onSideNavClick($event)"></side-nav-collapse>
 
             <price-filter (resp)="onPriceFilter($event)"></price-filter>
 
@@ -58,7 +58,7 @@
 
                 <div class="row clearfix m-0 mb-2">
                     <div class="col-md-3 col-6" *ngFor="let product of products">
-                        <product1 [product]="product"></product1>
+                        <product1 [product]="product" [imageUrl]="prodImageUrl"></product1>
                     </div>
                 </div>
 

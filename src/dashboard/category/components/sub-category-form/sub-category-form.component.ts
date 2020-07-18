@@ -28,7 +28,6 @@ export class SubCategoryFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.subCategory && this.subCategory._id) {
       this.exists = true;
-      console.log(this.subCategory);
       this.category = this.categories.find(cat => cat._id === this.subCategory.category._id);
       const value = {
         categoryId: this.subCategory.category._id,

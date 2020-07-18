@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Product } from 'src/shared/models/product.model';
 
 @Component({
   selector: 'product1',
@@ -6,13 +7,19 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./product1.component.scss'],
 })
 export class Product1Component implements OnInit {
-  @Input() product:any;
+  @Input() product: Product;
+  @Input() imageUrl: string;
 
   imageIndex = 0;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
   onSlideImage(index) {
     this.imageIndex = index;
+  }
+
+  counter(i: number) {
+    return new Array(i);
   }
 }

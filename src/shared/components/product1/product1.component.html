@@ -1,23 +1,32 @@
+<!-- {{product | json}} -->
 <div class="item-pro-color">
     <div class="product-thumb">
         <div class="product-label">
             <span *ngIf="product.isNew" class="new-label">new</span>
             <span *ngIf="product.isSale" class="sale-label">sale</span>
         </div>
-        <a routerLink="/details/{{product.id}}" class="product-thumb-link">
-            <img *ngFor="let img of product.image_urls; index as i" [class.active]="i==imageIndex" [src]="img" alt="">
+        <a routerLink="/details/{{product._id}}" class="product-thumb-link">
+            <!-- <div *ngFor='let in of counter(product.image_count) ;let i = index'>
+                <img class="img-fluid border" [src]="imageUrl + product._id + '/' + i"
+                    [alt]="product.name + ' image'" />
+            </div> -->
+            <img *ngFor='let in of counter(product.image_count);let i = index' [class.active]="i==imageIndex"
+                [src]="imageUrl + product._id + '/' + i" alt="">
+            <!-- 
+                <img class="product-image" [src]="thumbUrl + product._id "
+                                    [alt]="product.name + ' image'" /> -->
         </a>
-        <a routerLink="/details/{{product.id}}" class="quickview-link plus fancybox.iframe"><span>quick view</span></a>
+        <a routerLink="/details/{{product._id}}" class="quickview-link plus fancybox.iframe"><span>quick view</span></a>
     </div>
     <div class="product-info">
         <div class="list-color">
-            <a *ngFor="let img of product.image_urls; index as i" (click)="onSlideImage(i)"
+            <a *ngFor="let in of counter(product.image_count);let i = index" (click)="onSlideImage(i)"
                 [ngStyle]="{'background-color':i==imageIndex ? '#868fff' : '#404040' }"></a>
         </div>
         <h3 class="product-title"><a href="detail.html">{{product.name}}</a></h3>
         <div class="product-price">
-            <ins><span>৳{{product.price}}</span></ins>
-            <del><span>৳{{product.old_price}}</span></del>
+            <ins><span>৳{{product.min_price}}</span></ins>
+            <del><span>৳{{product.max_price}}</span></del>
         </div>
         <div class="product-extra-link">
             <a href="#" class="addcart-link"><i class="fa fa-shopping-basket" aria-hidden="true"></i><span>Add to

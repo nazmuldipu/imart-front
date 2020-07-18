@@ -20,9 +20,11 @@ export class SubCategoryService {
       formData.append(key, subCategory[key]);
     });
 
-    formData.delete('images')
-    for (var i = 0; i < subCategory['images'].length; i++) {
-      formData.append('images', subCategory['images'][i]);
+    if (subCategory['images']) {
+      formData.delete('images')
+      for (var i = 0; i < subCategory['images'].length; i++) {
+        formData.append('images', subCategory['images'][i]);
+      }
     }
 
     return this.dataSource.sendRequest(
@@ -42,9 +44,11 @@ export class SubCategoryService {
       }
     });
 
-    formData.delete('images')
-    for (var i = 0; i < subCategory['images'].length; i++) {
-      formData.append('images', subCategory['images'][i]);
+    if (subCategory['images']) {
+      formData.delete('images')
+      for (var i = 0; i < subCategory['images'].length; i++) {
+        formData.append('images', subCategory['images'][i]);
+      }
     }
 
     return this.dataSource.sendRequest(
@@ -82,6 +86,16 @@ export class SubCategoryService {
       this.subCategoryUrl + `/${id}`,
       null,
       true,
+      null
+    );
+  }
+
+  getByCategorySlug(slug: string) {
+    return this.dataSource.sendRequest(
+      'GET',
+      this.subCategoryUrl + `/category/${slug}`,
+      null,
+      false,
       null
     );
   }

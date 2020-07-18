@@ -13,6 +13,8 @@ export interface Product {
     image_count: number;
     image_urls: string[];
     thumb: string[];
+    isNew: boolean;
+    isSale: boolean;
 }
 
 interface Category {
