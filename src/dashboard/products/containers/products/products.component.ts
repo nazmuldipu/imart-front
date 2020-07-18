@@ -7,6 +7,8 @@ import { Category } from 'src/shared/models/category.model';
 import { CategoryService } from 'src/services/category.service';
 import { BrandService } from 'src/services/brand.service';
 import { Brand } from 'src/shared/models/brand.model';
+import { SubCategory } from 'src/shared/models/sub-category.model';
+import { SubCategoryService } from 'src/services/sub-category.service';
 
 @Component({
   selector: 'app-products',
@@ -17,6 +19,7 @@ export class ProductsComponent implements OnInit {
   product: Product;
   products: Product[] = [];
   categories: Category[] = [];
+  subCategories: SubCategory[] = [];
   brands: Brand[] = [];
   imageUrl = '';
   thumbUrl = '';
@@ -27,6 +30,7 @@ export class ProductsComponent implements OnInit {
   showProductForm = false;
 
   constructor(private categoryService: CategoryService,
+    private subCategoryService: SubCategoryService,
     private brandService: BrandService,
     private productService: ProductService,
     private utilService: UtilService,
@@ -38,6 +42,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.getAllCategory();
+    this.getAllSubCategory();
     this.getAllBrand();
   }
 
@@ -56,6 +61,16 @@ export class ProductsComponent implements OnInit {
     this.loading = true;
     try {
       this.categories = await this.categoryService.getAll().toPromise();
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
+  }
+
+  async getAllSubCategory() {
+    this.loading = true;
+    try {
+      this.subCategories = await this.subCategoryService.getAll().toPromise();
     } catch (error) {
       this.errorMessage = error;
     }
@@ -145,7 +160,7 @@ export class ProductsComponent implements OnInit {
   }
 
   counter(i: number) {
-    return new Array(i-1);
+    return new Array(i);
   }
 
 }

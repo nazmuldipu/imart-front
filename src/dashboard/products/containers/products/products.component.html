@@ -20,7 +20,7 @@
 
     <div class="row" *ngIf="!loading">
 
-        <div [ngClass]="product?'col-md-6':''" class="col-12 pr-0">
+        <div [ngClass]="(product || showProductForm)?'col-md-6':''" class="col-12 pr-0">
             <nav class="navbar navbar-light bg-light border">
                 <a class="navbar-brand">Product List</a>
                 <button type="button" class="btn btn-success btn-sm" (click)="onShowProductForm()">
@@ -73,8 +73,8 @@
         <div class="col-md-6 col-12" *ngIf="!showProductForm && product">
             <div class="row m-0">
                 <div *ngFor='let in of counter(product.image_count) ;let i = index' class="column">
-                    <img class="img-fluid border" [src]="imageUrl + product._id + '/' + i" [alt]="product.name + ' image'"
-                        style="max-height: 400px;width:100%" />
+                    <img class="img-fluid border" [src]="imageUrl + product._id + '/' + i"
+                        [alt]="product.name + ' image'" />
                 </div>
             </div>
 
@@ -83,7 +83,7 @@
             <table class="table table-striped border">
                 <tbody>
                     <tr>
-                        <td>Name</td>
+                        <td>Name {{product.image_count}}</td>
                         <th>{{product.slug}}</th>
                     </tr>
                     <tr>
@@ -107,18 +107,23 @@
                         <th>{{product.category?.name}}</th>
                     </tr>
                     <tr>
+                        <td>SubCategory</td>
+                        <th>{{product?.sub_category?.name}}</th>
+                    </tr>
+                    <tr>
                         <td>Brand</td>
                         <th>{{product.brand?.name}}</th>
                     </tr>
-                    
+
                 </tbody>
             </table>
+            
             <div class="d-flex flex-row-reverse">
                 <button class="btn btn-danger" (click)="onClose()">Close</button>
             </div>
         </div>
         <div class="col-md-6 col-12" *ngIf="showProductForm">
-            <product-form [categories]="categories" [brands]="brands" [product]="product" (create)="onCreate($event)"
+            <product-form [categories]="categories" [subCategories]="subCategories" [brands]="brands" [product]="product" (create)="onCreate($event)"
                 (update)="onUpdate($event)" (close)="onClose()">
             </product-form>
         </div>

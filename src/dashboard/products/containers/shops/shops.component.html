@@ -20,7 +20,7 @@
   </div>
 
   <div class="row" *ngIf="!loading">
-    <div [ngClass]="showShopForm?'':'col-md-6'" class="col-12">
+    <div [ngClass]="shop?'col-md-6':''" class="col-12" *ngIf="!showShopForm">
       <nav class="navbar navbar-light bg-light border">
         <a class="navbar-brand">Shop List</a>
         <button type="button" class="btn btn-success btn-sm" (click)="onShowShopForm()">
@@ -53,16 +53,15 @@
               <td class="text-center">{{ shop.status }}</td>
               <td class="text-center">{{ shop.approved?'Active':'Inactive' }}</td>
               <td class="text-right">
-                <button class="btn btn-sm" [ngClass]="shop.approved?'btn-danger':'btn-primary'"
-                  (click)="onToggleActive(shop._id, shop.approved)">
-                  <i class="fa" [ngClass]="shop.approved?'fa-ban':'fa-check'"></i></button>
-
-                <button class="btn btn-sm btn-warning mx-1" (click)="onEdit(shop._id)">
-                  <i class="fa fa-pencil"></i>
-                </button>
-                <button class="btn btn-sm btn-danger mx-1" (click)="onDelete(shop._id)">
-                  <i class="fa fa-trash-o"></i>
-                </button>
+                <div class="btn-group rounded" role="group" aria-label="Basic example">
+                  <button type="button" class="btn border" [ngClass]="shop.approved?'btn-danger':'btn-primary'"
+                    (click)="onToggleActive(shop._id, shop.approved)"><i class="fa"
+                      [ngClass]="shop.approved?'fa-ban':'fa-check'"></i></button>
+                  <button type="button" class="btn btn-light border" (click)="onEdit(shop._id)"><i
+                      class="fa fa-pencil"></i></button>
+                  <button type="button" class="btn btn-light border" (click)="onDelete(shop._id)"><i
+                      class="fa fa-trash-o"></i></button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -84,8 +83,8 @@
             <th>{{shop.priority}}</th>
           </tr>
           <tr>
-            <td>Approved</td>
-            <th>{{shop.approved}}</th>
+            <td>Active</td>
+            <th>{{ shop.approved?'Active':'Inactive' }}</th>
           </tr>
           <tr>
             <td>Owner Name</td>
@@ -102,10 +101,10 @@
         </tbody>
       </table>
       <div class="d-flex flex-row-reverse">
-        <button class="btn btn-danger" (click)="onClose()">Close</button>      
+        <button class="btn btn-danger" (click)="onClose()">Close</button>
       </div>
     </div>
-    <div class="col-md-6 col-12" *ngIf="showShopForm">
+    <div class="col-12" *ngIf="showShopForm">
       <shop-form [shop]="shop" (create)="onCreate($event)" (update)="onUpdate($event)" (cancel)="onShopFormCancel()">
       </shop-form>
     </div>

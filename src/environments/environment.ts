@@ -6,10 +6,15 @@ export const environment = {
   production: false,
   // PROTOCOL: 'https',
   // PORT: '',
-  // SERVER: 'imartltd.herokuapp.com',
+  // SERVER: 'api.hotelswave.com',
+  
   PROTOCOL: 'http',
   PORT: ':3000',
-  SERVER: '192.168.0.12',
+  SERVER: 'localhost',
+
+  // PROTOCOL: 'http',
+  // PORT: ':3000',
+  // SERVER: '172.104.46.200',
 };
 
 /* https://imartltd.herokuapp.com/ */ 

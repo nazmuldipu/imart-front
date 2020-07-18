@@ -2,13 +2,19 @@
     <a class="navbar-brand">{{ exists ? "Update" : "Add" }} Product</a>
 </nav>
 
-<div class="list-group" *ngIf="!category">
+<div class="list-group" *ngIf="!category && !subCategory && !brand">
     <li class="list-group-item"><strong>Please select a Category first</strong></li>
     <a class="list-group-item list-group-item-action list-group-item-light py-1 text-dark"
         *ngFor="let cat of categories" (click)="onCategory(cat._id)">{{cat.name}}</a>
 </div>
 
-<div class="list-group" *ngIf="category && !brand">
+<div class="list-group" *ngIf="category && !subCategory && !brand">
+    <li class="list-group-item"><strong>Please select a SubCategory</strong></li>
+    <a class="list-group-item list-group-item-action list-group-item-light py-1 text-dark"
+        *ngFor="let scat of subCategories" (click)="onSubCategory(scat._id)">{{scat.name}}</a>
+</div>
+
+<div class="list-group" *ngIf="category && subCategory && !brand">
     <li class="list-group-item"><strong>Please select a Brand</strong></li>
     <a class="list-group-item list-group-item-action list-group-item-light py-1 text-dark" *ngFor="let br of brands"
         (click)="onBrand(br._id)">{{br.name}}</a>

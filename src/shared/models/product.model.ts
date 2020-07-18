@@ -5,6 +5,7 @@ export interface Product {
     max_price: number;
     min_price: number;
     category: Category;
+    sub_category: SubCategory;
     brand: Brand;
     priority: number;
     active: boolean;
@@ -16,9 +17,18 @@ export interface Product {
 
 interface Category {
     _id: string;
+    slug: string;
     name: string;
     image_urls: string[];
 }
+
+interface SubCategory {
+    _id: string;
+    slug: string;
+    name: string;
+    image_urls: string[];
+}
+
 
 interface Brand {
     _id: string;

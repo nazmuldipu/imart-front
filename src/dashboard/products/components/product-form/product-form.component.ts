@@ -3,6 +3,7 @@ import { Product } from 'src/shared/models/product.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Category } from 'src/shared/models/category.model';
 import { Brand } from 'src/shared/models/brand.model';
+import { SubCategory } from 'src/shared/models/sub-category.model';
 
 @Component({
   selector: 'product-form',
@@ -12,6 +13,7 @@ import { Brand } from 'src/shared/models/brand.model';
 export class ProductFormComponent implements OnChanges {
   @Input() product: Product;
   @Input() categories: Category[];
+  @Input() subCategories: SubCategory[];
   @Input() brands: Brand[];
 
   @Output() create = new EventEmitter<Product>();
@@ -20,6 +22,7 @@ export class ProductFormComponent implements OnChanges {
 
   brand: Brand;
   category: Category;
+  subCategory: SubCategory;
   form: FormGroup;
 
   exists = false;
@@ -46,6 +49,7 @@ export class ProductFormComponent implements OnChanges {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       categoryId: ['', Validators.required],
+      subCategoryId: ['', Validators.required],
       brandId: ['', Validators.required],
       priority: [0, [Validators.required, Validators.min(0)]],
       images: [null],
@@ -75,6 +79,11 @@ export class ProductFormComponent implements OnChanges {
   onCategory(id) {
     this.category = this.categories.find(cat => cat._id === id);
     this.form.controls.categoryId.setValue(id);
+  }
+
+  onSubCategory(id){
+    this.subCategory = this.subCategories.find(sc => sc._id === id);
+    this.form.controls.subCategoryId.setValue(id);
   }
 
   onBrand(id) {

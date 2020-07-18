@@ -3,21 +3,13 @@
 </div>
 
 <div class="container">
-  <div
-    class="alert alert-success alert-dismissible show"
-    role="alert"
-    *ngIf="message.length > 0"
-  >
+  <div class="alert alert-success alert-dismissible show" role="alert" *ngIf="message.length > 0">
     <strong>Success! </strong> {{ message }}
     <button type="button" class="close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div
-    class="alert alert-danger alert-dismissible show"
-    role="alert"
-    *ngIf="errorMessage.length > 0"
-  >
+  <div class="alert alert-danger alert-dismissible show" role="alert" *ngIf="errorMessage.length > 0">
     <strong>Failed! </strong> {{ errorMessage }}
     <button type="button" class="close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
@@ -41,48 +33,39 @@
         <tbody *ngIf="categories.length > 0">
           <tr *ngFor="let cat of categories; index as i">
             <td>
-              <img
-                class="category-image"
-                [src]="imageUrl + cat._id"
-                [alt]="cat.name + ' image'"
-              />
+              <img class="category-image" [src]="imageUrl + cat._id" [alt]="cat.name + ' image'" />
             </td>
             <td class="text-center">
-              <img
-                class="category-image"
-                [src]="thumbUrl + cat._id"
-                [alt]="cat.name + ' thumb'"
-              />
+              <img class="category-image" [src]="thumbUrl + cat._id" [alt]="cat.name + ' thumb'" />
               <!-- {{ cat.createdAt | date: "h:mm a, d/M/yy" }} -->
             </td>
             <td class="text-center">{{ cat.name }}</td>
             <td class="text-center">{{ cat.priority }}</td>
             <td class="text-right">
-              <button class="btn btn-sm btn-primary mx-1" (click)="onThumbnail(cat._id)">
+              <div class="btn-group rounded" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-light border" (click)="onThumbnail(cat._id)"><i class="fa fa-picture-o"></i></button>
+                <button type="button" class="btn btn-light border" (click)="onEdit(cat._id)"><i class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-light border" (click)="onDelete(cat._id)"><i class="fa fa-trash-o"></i></button>
+              </div>
+              <!-- <button class="btn btn-sm btn-primary mx-1" (click)="onThumbnail(cat._id)">
                 <i class="fa fa-picture-o"></i>
               </button>
               <button class="btn btn-sm btn-warning mx-1" (click)="onEdit(cat._id)">
                 <i class="fa fa-pencil"></i>
               </button>
-              <button
-                class="btn btn-sm btn-danger mx-1"
-                (click)="onDelete(cat._id)"
-              >
+              <button class="btn btn-sm btn-danger mx-1" (click)="onDelete(cat._id)">
                 <i class="fa fa-trash-o"></i>
-              </button>
+              </button> -->
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="col-md-6 col-12">
-      <category-form
-        *ngIf="!loading && !thumbCategory"
-        [category]="category"
-        (create)="onCreate($event)"
-        (update)="onUpdate($event)"
-      ></category-form>
-      <category-thumb-form *ngIf="thumbCategory" [name]="thumbCategory.name" (create)="onThumbUpload($event)"></category-thumb-form>
+      <category-form *ngIf="!loading && !thumbCategory" [category]="category" (create)="onCreate($event)"
+        (update)="onUpdate($event)"></category-form>
+      <category-thumb-form *ngIf="thumbCategory" [name]="thumbCategory.name" (create)="onThumbUpload($event)">
+      </category-thumb-form>
     </div>
   </div>
 </div>
