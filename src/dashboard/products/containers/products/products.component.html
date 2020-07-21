@@ -3,7 +3,7 @@
 </div>
 
 <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
-<div class="container">
+<div class="container-fluid">
     <loading *ngIf="loading"></loading>
     <div class="alert alert-success alert-dismissible show" role="alert" *ngIf="message.length > 0">
         <strong>Success! </strong> {{ message }}
@@ -32,41 +32,50 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search Products" aria-label="Search">
                 </form>
 
-                <table class="table table-striped table-bordered table-responsive-sm mt-2">
+                <table class="table table-striped table-bordered mt-2"
+                    [ngClass]="(product || showProductForm)?'table-responsive':'table-responsive-sm'">
                     <thead>
                         <tr>
                             <th>Image</th>
                             <th>Name</th>
+                            <th>Brand</th>
+                            <th>Category</th>
+                            <th>Sub-Category</th>
                             <th class="text-center">Priority</th>
                             <th class="text-center">Active</th>
                             <th class="text-right">Actions</th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="products.length > 0">
-                        <tr *ngFor="let product of products; index as i">
+                    <tbody *ngIf="productsPage?.docs?.length > 0">
+                        <tr *ngFor="let product of productsPage.docs; index as i">
                             <td>
                                 <img class="product-image" [src]="thumbUrl + product._id "
                                     [alt]="product.name + ' image'" />
                             </td>
                             <td><a (click)="onDetails(product._id)" class="text-primary"> {{ product.name }} </a></td>
+                            <td>{{ product?.brand?.name }} </td>
+                            <td>{{ product?.category?.name }} </td>
+                            <td>{{ product?.sub_category?.name }} </td>
                             <td class="text-center">{{ product.priority }}</td>
                             <td class="text-center">{{ product.active?'Active':'Inactive' }}</td>
                             <td class="text-right">
-                                <button class="btn btn-sm" [ngClass]="product.active?'btn-danger':'btn-primary'"
-                                    (click)="onToggleActive(product._id, product.active)">
-                                    <i class="fa" [ngClass]="product.active?'fa-ban':'fa-check'"></i></button>
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
 
-                                <button class="btn btn-sm btn-warning mx-1" (click)="onEdit(product._id)">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <!-- <button class="btn btn-sm btn-danger mx-1" (click)="onDelete(product._id)">
-                        <i class="fa fa-trash-o"></i>
-                      </button> -->
+                                    <button type="button" class="btn border"
+                                        [ngClass]="product.active?'btn-danger':'btn-primary'"
+                                        (click)="onToggleActive(product._id, product.active)"> <i class="fa"
+                                            [ngClass]="product.active?'fa-ban':'fa-check'"></i> </button>
+                                    <button type="button" class="btn btn-light border" (click)="onEdit(product._id)"> <i
+                                            class="fa fa-pencil"></i> </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <pagination [page]="productsPage" (paginate)="onChangePage($event)"></pagination>
+
         </div>
         <div class="col-md-6 col-12" *ngIf="!showProductForm && product">
             <div class="row m-0">
@@ -115,14 +124,14 @@
 
                 </tbody>
             </table>
-            
+
             <div class="d-flex flex-row-reverse">
                 <button class="btn btn-danger" (click)="onClose()">Close</button>
             </div>
         </div>
         <div class="col-md-6 col-12" *ngIf="showProductForm">
-            <product-form [categories]="categories" [subCategories]="subCategories" [brands]="brands" [product]="product" (create)="onCreate($event)"
-                (update)="onUpdate($event)" (close)="onClose()">
+            <product-form [categories]="categories" [subCategories]="subCategories" [brands]="brands"
+                [product]="product" (create)="onCreate($event)" (update)="onUpdate($event)" (close)="onClose()">
             </product-form>
         </div>
 

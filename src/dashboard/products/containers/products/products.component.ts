@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/services/product.service';
-import { Product } from 'src/shared/models/product.model';
+import { Product, ProductPage } from 'src/shared/models/product.model';
 import { ToastService } from 'src/services/toast.service';
 import { UtilService } from 'src/services/util.service';
 import { Category } from 'src/shared/models/category.model';
@@ -15,9 +15,10 @@ import { SubCategoryService } from 'src/services/sub-category.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
+
 export class ProductsComponent implements OnInit {
   product: Product;
-  products: Product[] = [];
+  productsPage: ProductPage;
   categories: Category[] = [];
   subCategories: SubCategory[] = [];
   brands: Brand[] = [];
@@ -35,6 +36,7 @@ export class ProductsComponent implements OnInit {
     private productService: ProductService,
     private utilService: UtilService,
     public toastService: ToastService) {
+
     this.imageUrl = this.productService.productLink + '/image/';
     this.thumbUrl = this.productService.productLink + '/thumb/';
   }
@@ -46,15 +48,20 @@ export class ProductsComponent implements OnInit {
     this.getAllBrand();
   }
 
-  async getAllProducts() {
+  async getAllProducts(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.products = await this.productService.getAll().toPromise();
-      this.products.sort(this.utilService.dynamicSortObject('priority'));
+      this.productsPage = await this.productService.getAll(page, limit, sort, order).toPromise();
+      this.productsPage.docs.sort(this.utilService.dynamicSortObject('priority'));
     } catch (error) {
       this.errorMessage = error;
     }
     this.loading = false;
+  }
+
+  onChangePage(page) {
+    console.log(page);
+    this.getAllProducts(page.pageNumber, page.limit, page.sort, page.order);
   }
 
   async getAllCategory() {
@@ -92,13 +99,13 @@ export class ProductsComponent implements OnInit {
   }
 
   onEdit(id) {
-    const value = this.products.find((c) => c._id == id);
+    const value = this.productsPage.docs.find((c) => c._id == id);
     this.product = Object.assign({}, value);
     this.showProductForm = true;
   }
 
   onDetails(id) {
-    const value = this.products.find((c) => c._id == id);
+    const value = this.productsPage.docs.find((c) => c._id == id);
     this.product = Object.assign({}, value);
     this.showProductForm = false;
   }
@@ -110,7 +117,7 @@ export class ProductsComponent implements OnInit {
     try {
       const resp = await this.productService.create(event).toPromise();
       this.message = 'Product created';
-      this.products.push(resp);
+      this.productsPage.docs.push(resp);
       this.showProductForm = false;
     } catch (error) {
       this.errorMessage = error;
@@ -144,7 +151,7 @@ export class ProductsComponent implements OnInit {
         const classname = 'text-light' + (res.approved ? ' bg-primary' : ' bg-danger')
         this.toastService.show(mesg, { classname, delay: 3000 });
 
-        this.products.splice(this.products.findIndex(s => s._id == id), 1, res);
+        this.productsPage.docs.splice(this.productsPage.docs.findIndex(s => s._id == id), 1, res);
       } catch (err) {
         this.errorMessage = err;
       }

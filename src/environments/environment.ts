@@ -4,13 +4,14 @@
 
 export const environment = {
   production: false,
-  PROTOCOL: 'https',
-  PORT: '',
-  SERVER: 'api.hotelswave.com',
   
-  // PROTOCOL: 'http',
-  // PORT: ':3000',
-  // SERVER: 'localhost',
+  // PROTOCOL: 'https',
+  // PORT: '',
+  // SERVER: 'api.hotelswave.com',
+  
+  PROTOCOL: 'http',
+  PORT: ':80',
+  SERVER: 'localhost',
 
   // PROTOCOL: 'http',
   // PORT: ':3000',

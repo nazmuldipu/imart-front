@@ -38,3 +38,16 @@ interface Brand {
     slug: string;
     image_urls: string[];
 }
+
+export interface ProductPage {
+    docs: Product[];
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    limit: number;
+    nextPage: number;
+    page: number;
+    pagingCounter: number;
+    prevPage: number;
+    totalDocs: number;
+    totalPages: number;
+}

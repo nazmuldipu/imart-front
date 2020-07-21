@@ -2,9 +2,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-auto col-auto px-0 px-md-2 pt-md-0">
-                
-                <img class="logo" src="assets/images/logo.png" alt="">
-                <span class="logo-dialog"> All in one store</span>
+                <a routerLink="/">
+                    <img class="logo" src="assets/images/logo.png" alt="">
+                    <span class="logo-dialog"> All in one store</span>
+                </a>
             </div>
             <div class="col-md col ">
                 <div class="search">
@@ -56,16 +57,16 @@
                     <div class="collapse navbar-collapse" id="imartnavbar" [class.show]="show">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Offers</a>
+                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()">Offers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Points</a>
+                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()">Points</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Product Request</a>
+                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()">Product Request</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()" >Recipes</a>
+                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()">Recipes</a>
                             </li>
                             <!-- <li class="nav-item">
                                 <a class="nav-link" href="#" (click)="toggleCollapse()" >Link</a>

@@ -9,6 +9,7 @@ import { Product } from 'src/shared/models/product.model';
 export class Product1Component implements OnInit {
   @Input() product: Product;
   @Input() imageUrl: string;
+  @Input() thumbUrl: string;
 
   imageIndex = 0;
   constructor() { }

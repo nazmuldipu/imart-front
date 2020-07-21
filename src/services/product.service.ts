@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RestDataService } from './rest-data.service';
-import { Product } from 'src/shared/models/product.model';
+import { Product, ProductPage } from 'src/shared/models/product.model';
 import { Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +38,21 @@ export class ProductService {
       }
     });
 
+    formData.delete('images')
+    for (var i = 0; i < product['images'].length; i++) {
+      formData.append('images', product['images'][i]);
+    }
+
     return this.dataSource.sendRequest('PUT', this.productUrl + `/${id}`, formData, true, null);
   }
 
-  getAll(): Observable<Product[]> {
-    return this.dataSource.sendRequest('GET', this.productUrl, null, false, null);
+  getAll(page: number, limit: number, sort: string, order: string): Observable<ProductPage> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString())
+      .set('sort', sort)
+      .set('order', order);
+    return this.dataSource.sendRequest('GET', this.productUrl, null, false, params);
   }
 
   get(id): Observable<Product> {

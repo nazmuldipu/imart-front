@@ -42,12 +42,19 @@
               <td>{{ brand.name }}</td>
               <td class="text-center">{{ brand.priority }}</td>
               <td class="text-right">
-                <button class="btn btn-sm btn-warning mx-1" (click)="onEdit(brand._id)">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+
+                  <button type="button" class="btn btn-light border" (click)="onDelete(brand._id)">
+                    <i class="fa fa-trash-o"></i> </button>
+                  <button type="button" class="btn btn-light border" (click)="onEdit(brand._id)">
+                    <i class="fa fa-pencil"></i> </button>
+                </div>
+                <!-- <button class="btn btn-sm btn-warning mx-1" (click)="onEdit(brand._id)">
                   <i class="fa fa-pencil"></i>
                 </button>
                 <button class="btn btn-sm btn-danger mx-1" (click)="onDelete(brand._id)">
                   <i class="fa fa-trash-o"></i>
-                </button>
+                </button> -->
               </td>
             </tr>
           </tbody>

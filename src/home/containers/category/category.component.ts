@@ -19,6 +19,7 @@ export class CategoryComponent implements OnInit {
   subCategories: SubCategory;
   catImageUrl = '';
   prodImageUrl = '';
+  prodThumbUrl = '';
   products: Product[] = [];
   loading = false;
   errorMessage = '';
@@ -33,6 +34,7 @@ export class CategoryComponent implements OnInit {
     this.id = activeRoute.snapshot.params['id'];
     this.catImageUrl = this.categoryService.catLink + '/image/';
     this.prodImageUrl = this.productService.productLink + '/image/'
+    this.prodThumbUrl = this.productService.productLink + '/thumb/';
   }
 
   ngOnInit(): void {

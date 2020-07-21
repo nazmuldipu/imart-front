@@ -36,8 +36,10 @@ export class ProductFormComponent implements OnChanges {
       this.exists = true;
       this.category = this.categories.find(cat => cat._id === this.product.category._id);
       this.brand = this.brands.find(b => b._id === this.product.brand._id);
+      this.subCategory = this.subCategories.find(sb => sb._id === this.product?.sub_category?._id)
       const value = {
         categoryId: this.product.category._id,
+        subCategoryId: this.product?.sub_category?._id,
         brandId: this.product.brand._id,
         ...this.product
       };
@@ -81,7 +83,7 @@ export class ProductFormComponent implements OnChanges {
     this.form.controls.categoryId.setValue(id);
   }
 
-  onSubCategory(id){
+  onSubCategory(id) {
     this.subCategory = this.subCategories.find(sc => sc._id === id);
     this.form.controls.subCategoryId.setValue(id);
   }
@@ -95,6 +97,17 @@ export class ProductFormComponent implements OnChanges {
     this.category = null;
     this.brand = null;
     this.form.reset();
+  }
+
+  onSubCategoryChange() {
+    this.subCategory = null;
+  }
+  onCategoryChange() {
+    this.category = null;
+    this.subCategory = null;
+  }
+  onBrandChange() {
+    this.brand = null;
   }
 
   submit() {

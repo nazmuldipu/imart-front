@@ -14,6 +14,7 @@ import { SideAdvComponent } from './components/side-adv/side-adv.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SideAdvComponent,
     LoadingComponent,
     ToastComponent,
+    PaginationComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule,
     RouterModule, CarouselModule],
@@ -45,7 +47,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SideAdvComponent,
     ToastComponent,
     LoadingComponent,
-    NgbModule
+    NgbModule,
+    PaginationComponent
   ],
 })
 export class SharedModule { }
