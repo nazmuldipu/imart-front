@@ -47,11 +47,7 @@ export class ProductService {
   }
 
   getAll(page: number, limit: number, sort: string, order: string): Observable<ProductPage> {
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('limit', limit.toString())
-      .set('sort', sort)
-      .set('order', order);
+    const params = this.generateParam(page, limit, sort, order);
     return this.dataSource.sendRequest('GET', this.productUrl, null, false, params);
   }
 
@@ -59,16 +55,19 @@ export class ProductService {
     return this.dataSource.sendRequest('GET', this.productUrl + `/${id}`, null, false, null);
   }
 
-  getByCategorySlug(category_slug: string): Observable<Product[]> {
-    return this.dataSource.sendRequest('GET', this.productUrl + `/category/${category_slug}`, null, false, null);
+  getByCategorySlug(category_slug: string, page: number, limit: number, sort: string, order: string): Observable<ProductPage> {
+    const params = this.generateParam(page, limit, sort, order);
+    return this.dataSource.sendRequest('GET', this.productUrl + `/category/${category_slug}`, null, false, params);
   }
 
-  getBySubCategorySlug(sub_category_slug: string): Observable<Product[]> {
-    return this.dataSource.sendRequest('GET', this.productUrl + `/sub_category/${sub_category_slug}`, null, false, null);
+  getBySubCategorySlug(sub_category_slug: string, page: number, limit: number, sort: string, order: string): Observable<ProductPage> {
+    const params = this.generateParam(page, limit, sort, order);
+    return this.dataSource.sendRequest('GET', this.productUrl + `/sub_category/${sub_category_slug}`, null, false, params);
   }
 
-  getByBrandSlug(brand_slug: string): Observable<Product[]> {
-    return this.dataSource.sendRequest('GET', this.productUrl + `/brand/${brand_slug}`, null, false, null);
+  getByBrandSlug(brand_slug: string, page: number, limit: number, sort: string, order: string): Observable<Product[]> {
+    const params = this.generateParam(page, limit, sort, order);
+    return this.dataSource.sendRequest('GET', this.productUrl + `/brand/${brand_slug}`, null, false, params);
   }
 
   toggleActive(id): Observable<any> {
@@ -79,5 +78,13 @@ export class ProductService {
   togglePublish(id): Observable<any> {
     return this.dataSource.sendRequest('PATCH',
       this.productUrl + `/publish/${id}`, null, true, null);
+  }
+
+  generateParam(page: number, limit: number, sort: string, order: string): HttpParams {
+    return new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString())
+      .set('sort', sort)
+      .set('order', order);
   }
 }

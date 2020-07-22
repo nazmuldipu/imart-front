@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RestDataService } from './rest-data.service';
-import { SubCategory } from 'src/shared/models/sub-category.model';
+import { SubCategory, SubCategoryPage } from 'src/shared/models/sub-category.model';
 import { Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -60,13 +61,15 @@ export class SubCategoryService {
     );
   }
 
-  getAll(): Observable<SubCategory[]> {
+  getAll(page: number, limit: number, sort: string, order: string): Observable<SubCategoryPage> {
+    const params = this.generateParam(page, limit, sort, order);
+    console.log(params);
     return this.dataSource.sendRequest(
       'GET',
       this.subCategoryUrl,
       null,
       false,
-      null
+      params
     );
   }
 
@@ -90,7 +93,7 @@ export class SubCategoryService {
     );
   }
 
-  getByCategorySlug(slug: string) {
+  getByCategorySlug(slug: string): Observable<SubCategoryPage> {
     return this.dataSource.sendRequest(
       'GET',
       this.subCategoryUrl + `/category/${slug}`,
@@ -98,6 +101,14 @@ export class SubCategoryService {
       false,
       null
     );
+  }
+
+  generateParam(page: number, limit: number, sort: string, order: string): HttpParams {
+    return new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString())
+      .set('sort', sort)
+      .set('order', order);
   }
 
 }

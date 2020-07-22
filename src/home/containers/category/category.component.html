@@ -13,7 +13,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-dark text-white">
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Library</li>
+            <li class="breadcrumb-item active" aria-current="page">{{category?.name}}</li>
         </ol>
     </nav>
 
@@ -31,43 +31,28 @@
         </div>
 
         <div class="col-md-9 col-12">
-            <div class="products pb-3 mb-3">
-                <div class="products-bar clearfix">
-                    <div class="sort-paginav pull-right">
-                        <div class="select-box sort-bar">
-                            <label>Sort By:</label>
-                            <select>
-                                <option value="">position</option>
-                                <option value="">price</option>
-                            </select>
-                        </div>
-                        <div class="select-box">
-                            <label>Show:</label>
-                            <select>
-                                <option value="">20</option>
-                                <option value="">12</option>
-                                <option value="">24</option>
-                            </select>
-                        </div>
-                        <div class="pagi-bar">
-                            <a href="#" class="current-page">1</a>
-                            <a href="#">2</a>
-                            <a href="#" class="next-page"><i class="fa fa-caret-right" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
+            <div class="products py-2 mb-3">
+                <div class="text-center" *ngIf="!productPage?.docs?.length">
+                    <i class="fa fa-frown-o"></i> Sorry no product found
                 </div>
+                <div class="products-bar clearfix" *ngIf="productPage?.docs?.length">
+                    <pagination [page]="productPage" (paginate)="onChangePage($event)"></pagination>
+                </div>
+                
                 <loading *ngIf="loading"></loading>
-                <div class="row clearfix m-0 mb-2" *ngIf="!loading">
-                    <div class="col-md-3 col-6" *ngFor="let product of products">
+                <div class="row clearfix m-0" *ngIf="!loading">
+                    <div class="col-md-3 col-6" *ngFor="let product of productPage?.docs">
                         <product1 [product]="product" [imageUrl]="prodImageUrl" [thumbUrl]="prodThumbUrl"></product1>
                     </div>
+                    <div class="col-12" *ngIf="productPage?.docs?.length">
+                        <pagination [page]="productPage" (paginate)="onChangePage($event)"></pagination>
+                    </div>
                 </div>
-
-                <div class="pagi-bar bottom">
+                <!-- <div class="pagi-bar bottom">
                     <a class="current-page" href="#">1</a>
                     <a href="#">2</a>
                     <a class="next-page" href="#"><i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

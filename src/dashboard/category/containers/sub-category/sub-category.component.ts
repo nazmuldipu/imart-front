@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubCategoryService } from 'src/services/sub-category.service';
-import { SubCategory } from 'src/shared/models/sub-category.model';
+import { SubCategory, SubCategoryPage } from 'src/shared/models/sub-category.model';
 import { Category } from 'src/shared/models/category.model';
 import { UtilService } from 'src/services/util.service';
 import { CategoryService } from 'src/services/category.service';
@@ -12,7 +12,7 @@ import { CategoryService } from 'src/services/category.service';
 })
 export class SubCategoryComponent implements OnInit {
   subCategory: SubCategory;
-  subCategories: SubCategory[] = [];
+  subCategoryPage: SubCategoryPage;
   categories: Category[];
   imageUrl = '';
   message = '';
@@ -21,7 +21,7 @@ export class SubCategoryComponent implements OnInit {
   loading = false;
   showSubCategoryForm = false;
 
-  constructor(private subCategoryService: SubCategoryService, private categoryService: CategoryService, 
+  constructor(private subCategoryService: SubCategoryService, private categoryService: CategoryService,
     private utilService: UtilService) {
     this.imageUrl = this.subCategoryService.subCatLink + '/image/';
   }
@@ -31,11 +31,11 @@ export class SubCategoryComponent implements OnInit {
     this.getAllCategory();
   }
 
-  async getAllSubCategories() {
+  async getAllSubCategories(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.subCategories = await this.subCategoryService.getAll().toPromise();
-      this.subCategories.sort(this.utilService.dynamicSortObject('priority'));
+      this.subCategoryPage = await this.subCategoryService.getAll(page, limit, sort, order).toPromise();
+      // this.subCategoryPage.docs.sort(this.utilService.dynamicSortObject('priority'));
     } catch (error) {
       this.errorMessage = error;
     }
@@ -57,9 +57,13 @@ export class SubCategoryComponent implements OnInit {
   }
 
   onEdit(id) {
-    const value = this.subCategories.find((c) => c._id == id);
+    const value = this.subCategoryPage.docs.find((c) => c._id == id);
     this.subCategory = Object.assign({}, value);
     this.showSubCategoryForm = true;
+  }
+
+  onChangePage(page) {
+    this.getAllSubCategories(page.pageNumber, page.limit, page.sort, page.order);
   }
 
   async onCreate(subCategory: SubCategory) {
@@ -69,7 +73,7 @@ export class SubCategoryComponent implements OnInit {
     try {
       const resp = await this.subCategoryService.create(subCategory).toPromise();
       this.message = 'Sub Category created';
-      this.subCategories.push(resp);
+      this.subCategoryPage.docs.push(resp);
       this.showSubCategoryForm = false;
     } catch (error) {
       this.errorMessage = error;
@@ -99,8 +103,8 @@ export class SubCategoryComponent implements OnInit {
       try {
         const res = await this.subCategoryService.delete(id).toPromise();
         this.message = 'Sub Category deleted';
-        this.subCategories.splice(
-          this.subCategories.findIndex((c) => c._id == id),
+        this.subCategoryPage.docs.splice(
+          this.subCategoryPage.docs.findIndex((c) => c._id == id),
           1
         );
       } catch (err) {

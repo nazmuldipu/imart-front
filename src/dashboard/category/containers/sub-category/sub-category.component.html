@@ -38,8 +38,8 @@
                             <th class="text-right">Actions</th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="subCategories.length > 0">
-                        <tr *ngFor="let subCategorie of subCategories; index as i">
+                    <tbody *ngIf="subCategoryPage.docs.length > 0">
+                        <tr *ngFor="let subCategorie of subCategoryPage.docs; index as i">
                             <td>
                                 <img class="sub-category-image" [src]="imageUrl + subCategorie._id + '/0'"
                                     [alt]="subCategorie.name + ' image'" />
@@ -51,12 +51,17 @@
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
                                     <button type="button" class="btn btn-light border"
                                         (click)="onEdit(subCategorie._id)"> <i class="fa fa-pencil"></i> </button>
-                                    <button type="button" class="btn btn-light border" (click)="onDelete(subCategorie._id)"> <i class="fa fa-trash-o"></i></button>
-                                </div>                                
+                                    <button type="button" class="btn btn-light border"
+                                        (click)="onDelete(subCategorie._id)"> <i class="fa fa-trash-o"></i></button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+
+            </div>
+            <div>
+                <pagination [page]="subCategoryPage" (paginate)="onChangePage($event)"></pagination>
             </div>
         </div>
 

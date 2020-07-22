@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from 'src/shared/models/product.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Category } from 'src/shared/models/category.model';
 import { Brand } from 'src/shared/models/brand.model';
-import { SubCategory } from 'src/shared/models/sub-category.model';
+import { SubCategory, SubCategoryPage } from 'src/shared/models/sub-category.model';
+import { SubCategoryService } from 'src/services/sub-category.service';
 
 @Component({
   selector: 'product-form',
@@ -13,33 +14,39 @@ import { SubCategory } from 'src/shared/models/sub-category.model';
 export class ProductFormComponent implements OnChanges {
   @Input() product: Product;
   @Input() categories: Category[];
-  @Input() subCategories: SubCategory[];
   @Input() brands: Brand[];
-
+  
+  @Output() subcat = new EventEmitter<Category>();
   @Output() create = new EventEmitter<Product>();
   @Output() update = new EventEmitter<Product>();
   @Output() close = new EventEmitter<Boolean>();
-
+  
   brand: Brand;
   category: Category;
   subCategory: SubCategory;
+  subCategories: SubCategoryPage;
   form: FormGroup;
 
   exists = false;
   files: File[] = [];
   errorMessage = '';
+  loading = false;
 
-  constructor(private fb: FormBuilder) { this.createForm(); }
+  constructor(private fb: FormBuilder, private subCategoryService: SubCategoryService) {
+    this.createForm();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
+    // if(changes.su)
     if (this.product && this.product._id) {
+      console.log(changes);
       this.exists = true;
       this.category = this.categories.find(cat => cat._id === this.product.category._id);
       this.brand = this.brands.find(b => b._id === this.product.brand._id);
-      this.subCategory = this.subCategories.find(sb => sb._id === this.product?.sub_category?._id)
+      this.subCategory = this.subCategories.docs.find(sb => sb._id === this.product?.sub_category?._id)
       const value = {
         categoryId: this.product.category._id,
-        subCategoryId: this.product?.sub_category?._id,
+        // subCategoryId: this.product?.sub_category?._id,
         brandId: this.product.brand._id,
         ...this.product
       };
@@ -50,6 +57,7 @@ export class ProductFormComponent implements OnChanges {
   createForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', Validators.required],
       categoryId: ['', Validators.required],
       subCategoryId: ['', Validators.required],
       brandId: ['', Validators.required],
@@ -80,12 +88,28 @@ export class ProductFormComponent implements OnChanges {
 
   onCategory(id) {
     this.category = this.categories.find(cat => cat._id === id);
+    // this.subcat.emit(this.category);
     this.form.controls.categoryId.setValue(id);
+    console.log(this.category);
+    this.getAllSubCategoryByCategory(this.category.slug);
   }
 
   onSubCategory(id) {
-    this.subCategory = this.subCategories.find(sc => sc._id === id);
+    this.subCategory = this.subCategories.docs.find(sc => sc._id === id);
     this.form.controls.subCategoryId.setValue(id);
+    // this.getAllSubCategoryByCategory()
+  }
+
+
+  async getAllSubCategoryByCategory(cat_slug: string) {
+    this.loading = true;
+    try {
+      this.subCategories = await this.subCategoryService.getByCategorySlug(cat_slug).toPromise();
+      console.log(this.subCategories);
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
   }
 
   onBrand(id) {
@@ -96,6 +120,7 @@ export class ProductFormComponent implements OnChanges {
   onClear() {
     this.category = null;
     this.brand = null;
+    this.subCategory = null;
     this.form.reset();
   }
 

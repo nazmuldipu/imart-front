@@ -130,7 +130,7 @@
             </div>
         </div>
         <div class="col-md-6 col-12" *ngIf="showProductForm">
-            <product-form [categories]="categories" [subCategories]="subCategories" [brands]="brands"
+            <product-form [categories]="categories" [brands]="brands"
                 [product]="product" (create)="onCreate($event)" (update)="onUpdate($event)" (close)="onClose()">
             </product-form>
         </div>

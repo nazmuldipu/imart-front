@@ -7,7 +7,7 @@ import { Category } from 'src/shared/models/category.model';
 import { CategoryService } from 'src/services/category.service';
 import { BrandService } from 'src/services/brand.service';
 import { Brand } from 'src/shared/models/brand.model';
-import { SubCategory } from 'src/shared/models/sub-category.model';
+import { SubCategory, SubCategoryPage } from 'src/shared/models/sub-category.model';
 import { SubCategoryService } from 'src/services/sub-category.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   product: Product;
   productsPage: ProductPage;
   categories: Category[] = [];
-  subCategories: SubCategory[] = [];
+  subCategories: SubCategoryPage;
   brands: Brand[] = [];
   imageUrl = '';
   thumbUrl = '';
@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProducts();
     this.getAllCategory();
-    this.getAllSubCategory();
+    // this.getAllSubCategory();
     this.getAllBrand();
   }
 
@@ -60,7 +60,6 @@ export class ProductsComponent implements OnInit {
   }
 
   onChangePage(page) {
-    console.log(page);
     this.getAllProducts(page.pageNumber, page.limit, page.sort, page.order);
   }
 
@@ -74,10 +73,10 @@ export class ProductsComponent implements OnInit {
     this.loading = false;
   }
 
-  async getAllSubCategory() {
+  async getAllSubCategory(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.subCategories = await this.subCategoryService.getAll().toPromise();
+      this.subCategories = await this.subCategoryService.getAll(page, limit, sort, order).toPromise();
     } catch (error) {
       this.errorMessage = error;
     }
@@ -109,6 +108,10 @@ export class ProductsComponent implements OnInit {
     this.product = Object.assign({}, value);
     this.showProductForm = false;
   }
+
+  // onSelectCategory(category: Category) {
+  //   this.getAllSubCategoryByCategory(category.slug);
+  // }
 
   async onCreate(event) {
     this.loading = true;

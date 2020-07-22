@@ -24,7 +24,7 @@ export class PaginationComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.page) {
+    if (changes.page && this.page) {
       this.pagi.limit = this.page.limit;
       this.pagi.pageNumber = this.page.page;
     }

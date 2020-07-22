@@ -2,6 +2,8 @@
     <a class="navbar-brand">{{ exists ? "Update" : "Add" }} Product</a>
 </nav>
 
+
+
 <div class="list-group" *ngIf="!category && !subCategory">
     <li class="list-group-item"><strong>Please select a Category first</strong></li>
     <a class="list-group-item list-group-item-action list-group-item-light py-1 text-dark"
@@ -64,6 +66,16 @@
     </div>
 
     <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="description" formControlName="description" placeholder="Description"
+                rows="3"> </textarea>
+            <small class="text-danger" *ngIf="form.controls.description.errors && form.controls.description.touched">
+                Description required
+            </small>
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="priority" class="col-sm-2 col-form-label">Priority</label>
         <div class="col-sm-10">
             <input type="number" class="form-control" id="priority" formControlName="priority" placeholder="Priority" />
@@ -96,8 +108,6 @@
     </div>
 
     <div class="d-flex justify-content-end">
-        <button class="btn btn-danger btn-sm mx-1" (click)="onClose()">Close</button>
-        <button class="btn btn-warning btn-sm mx-1" (click)="onClear()">Clear</button>
         <button type="submit" class="btn btn-primary  mx-1  " [ngClass]="{
             disabled: form.invalid,
             'btn-warning': exists,
@@ -107,5 +117,8 @@
         </button>
     </div>
 </form>
+<button class="btn btn-danger btn-sm mx-1" (click)="onClose()">Close</button>
+<button class="btn btn-warning btn-sm mx-1" (click)="onClear()">Clear</button>
+
 <!-- {{form.value | json}} -->
 <!-- <p>product-form works!</p> -->
