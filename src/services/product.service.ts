@@ -38,9 +38,11 @@ export class ProductService {
       }
     });
 
-    formData.delete('images')
-    for (var i = 0; i < product['images'].length; i++) {
-      formData.append('images', product['images'][i]);
+    if (product['images']) {
+      formData.delete('images')
+      for (var i = 0; i < product['images'].length; i++) {
+        formData.append('images', product['images'][i]);
+      }
     }
 
     return this.dataSource.sendRequest('PUT', this.productUrl + `/${id}`, formData, true, null);

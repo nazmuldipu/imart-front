@@ -15,12 +15,12 @@ export class ProductFormComponent implements OnChanges {
   @Input() product: Product;
   @Input() categories: Category[];
   @Input() brands: Brand[];
-  
+
   @Output() subcat = new EventEmitter<Category>();
   @Output() create = new EventEmitter<Product>();
   @Output() update = new EventEmitter<Product>();
   @Output() close = new EventEmitter<Boolean>();
-  
+
   brand: Brand;
   category: Category;
   subCategory: SubCategory;
@@ -39,11 +39,11 @@ export class ProductFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // if(changes.su)
     if (this.product && this.product._id) {
-      console.log(changes);
       this.exists = true;
       this.category = this.categories.find(cat => cat._id === this.product.category._id);
       this.brand = this.brands.find(b => b._id === this.product.brand._id);
-      this.subCategory = this.subCategories.docs.find(sb => sb._id === this.product?.sub_category?._id)
+      this.getAllSubCategoryByCategory(this.category.slug);
+      this.form.reset();
       const value = {
         categoryId: this.product.category._id,
         // subCategoryId: this.product?.sub_category?._id,
@@ -90,7 +90,6 @@ export class ProductFormComponent implements OnChanges {
     this.category = this.categories.find(cat => cat._id === id);
     // this.subcat.emit(this.category);
     this.form.controls.categoryId.setValue(id);
-    console.log(this.category);
     this.getAllSubCategoryByCategory(this.category.slug);
   }
 
@@ -105,7 +104,13 @@ export class ProductFormComponent implements OnChanges {
     this.loading = true;
     try {
       this.subCategories = await this.subCategoryService.getByCategorySlug(cat_slug).toPromise();
-      console.log(this.subCategories);
+      if (this.exists) {
+        this.subCategory = this.subCategories.docs.find(sb => sb._id === this.product?.sub_category?._id)
+        const value = {
+          subCategoryId: this.product?.sub_category?._id,
+        };
+        this.form.patchValue(value);
+      }
     } catch (error) {
       this.errorMessage = error;
     }
@@ -118,6 +123,7 @@ export class ProductFormComponent implements OnChanges {
   }
 
   onClear() {
+    this.exists = false;
     this.category = null;
     this.brand = null;
     this.subCategory = null;

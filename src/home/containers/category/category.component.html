@@ -20,7 +20,7 @@
     <div class="row">
 
         <div class="col-md-3 col-12">
-            <side-nav-collapse [data]="subCategories" [title]="category?.name" (resp)="onSideNavClick($event)">
+            <side-nav-collapse [data]="subCategories?.docs" [title]="category?.name" (resp)="onSideNavClick($event)">
             </side-nav-collapse>
 
             <price-filter (resp)="onPriceFilter($event)"></price-filter>
