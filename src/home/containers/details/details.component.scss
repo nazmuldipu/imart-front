@@ -21,8 +21,13 @@ a {
   background: #fff none repeat scroll 0 0;
   margin-bottom: 20px;
   padding: 30px;
-  &-gallery-control {
-    padding: 15px 0;
+  &-gallery {
+    &-image {
+      height: 400px;
+    }
+    &-control {
+      padding: 15px 0;
+    }
   }
   &-social {
     margin: 30px auto auto;

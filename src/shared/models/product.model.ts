@@ -1,8 +1,11 @@
+import { ProductDetails } from './product-details.model';
+
 export interface Product {
     _id: string;
     name: string;
     description: string;
     slug: string;
+    rating: number;
     max_price: number;
     min_price: number;
     category: Category;
@@ -14,8 +17,10 @@ export interface Product {
     image_count: number;
     image_urls: string[];
     thumb: string[];
+    inStock: boolean;
     isNew: boolean;
     isSale: boolean;
+    details: ProductDetails
 }
 
 interface Category {

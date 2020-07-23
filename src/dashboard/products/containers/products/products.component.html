@@ -60,13 +60,15 @@
                             <td class="text-center">{{ product.active?'Active':'Inactive' }}</td>
                             <td class="text-right">
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
-
+                                    <!-- <button type="button" class="btn btn-light border"
+                                        (click)="onAddDetails(product._id)"> <i class="fa fa-list"></i> </button> -->
                                     <button type="button" class="btn border"
                                         [ngClass]="product.active?'btn-danger':'btn-primary'"
                                         (click)="onToggleActive(product._id, product.active)"> <i class="fa"
                                             [ngClass]="product.active?'fa-ban':'fa-check'"></i> </button>
                                     <button type="button" class="btn btn-light border" (click)="onEdit(product._id)"> <i
                                             class="fa fa-pencil"></i> </button>
+
                                 </div>
                             </td>
                         </tr>
@@ -125,15 +127,35 @@
                 </tbody>
             </table>
 
+            <!-- {{ product?.details?.items| json}} -->
+            <div *ngFor="let item of product?.details?.items">
+                <div class="row">
+                    <div class="col">
+                        <details-collapse [item]='item'></details-collapse>
+                    </div>
+                    <div class="col-auto pr-0">
+                        <button class="btn btn-sm btn-danger" (click)="onDeleteDetails(item.title)">Delete</button>
+                    </div>                     
+                </div>
+            </div>
+
+            <div class="col-12" *ngIf="showProductDetailsForm">
+                <product-details-form [productId]="product?._id" (create)="onAddProductDetails($event)">
+                </product-details-form>
+            </div>
+
             <div class="d-flex flex-row-reverse">
-                <button class="btn btn-danger" (click)="onClose()">Close</button>
+                <button class="btn btn-danger mx-1" (click)="onClose()">Close</button>
+                <button class="btn btn-primary mx-1" (click)="onProductDetails(product._id)">Add Product
+                    Details</button>
             </div>
         </div>
         <div class="col-md-6 col-12" *ngIf="showProductForm">
-            <product-form [categories]="categories" [brands]="brands"
-                [product]="product" (create)="onCreate($event)" (update)="onUpdate($event)" (close)="onClose()">
+            <product-form [categories]="categories" [brands]="brands" [product]="product" (create)="onCreate($event)"
+                (update)="onUpdate($event)" (close)="onClose()">
             </product-form>
         </div>
+
 
     </div>
 </div>

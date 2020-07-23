@@ -10,6 +10,7 @@ import { ToastService } from './toast.service';
 import { UserService } from './user.service';
 import { UtilService } from './util.service';
 import { SubCategoryService } from './sub-category.service';
+import { ProductDetailsService } from './product-details.service';
 
 @NgModule({
   providers:[
@@ -18,11 +19,12 @@ import { SubCategoryService } from './sub-category.service';
     BrandService,
     CategoryService,
     ProductService,
+    ProductDetailsService,
     ShopService,
     SubCategoryService,
     ToastService,
     UserService, 
     UtilService
-  ]
+  ],
 })
 export class ServicesModule { }

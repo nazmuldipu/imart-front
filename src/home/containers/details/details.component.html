@@ -5,7 +5,7 @@
             <li class="breadcrumb-item active" aria-current="page">Library</li>
         </ol>
     </nav>
-
+    
     <div class="row">
         <div class="col-md-9 col-12">
             <div class="product-detail border radius">
@@ -13,43 +13,42 @@
                     <div class="col-md-5 col-12">
                         <div class="product-detail-gallery">
                             <div class="product-detail-gallery-image">
-                                <img [src]="product.image_urls[current].image" class="img-fluid mx-auto" alt="img1">
+                                <img class="img-fluid mx-auto"  [src]="imageUrls[current]?.image" alt="">
                             </div>
-                            <div class="product-detail-gallery-control">
-                                <ng-image-slider #nav [images]="product.image_urls" [infinite]="false" [autoSlide]="1"
+                            <div class="product-detail-gallery-control" *ngIf="imageUrls.length > 0">
+                                <ng-image-slider #nav [images]="imageUrls" [infinite]="false" [autoSlide]="1"
                                     [imagePopup]="false" [imageSize]="{width: '25%', height: 80}"
                                     (imageClick)="onThumbImageClick($event)" slideImage="1"></ng-image-slider>
                             </div>
                         </div>
                         <div class="product-detail-social">
                             <ul class="list-social-detail list-inline-block">
-                                <li><a class="soci-fa soc-tumblr"><i class="fa fa-tumblr"
-                                            aria-hidden="true"></i></a></li>
+                                <li><a class="soci-fa soc-tumblr"><i class="fa fa-tumblr" aria-hidden="true"></i></a>
+                                </li>
                                 <li><a class="soci-fa soc-facebook"><i class="fa fa-facebook"
                                             aria-hidden="true"></i></a></li>
-                                <li><a class="soci-fa soc-twitter"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i></a></li>
-                                <li><a class="soci-fa soc-print"><i class="fa fa-print"
-                                            aria-hidden="true"></i></a></li>
+                                <li><a class="soci-fa soc-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </li>
+                                <li><a class="soci-fa soc-print"><i class="fa fa-print" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-7 col-12">
                         <div class="product-detail-info">
-                            <h2 class="product-detail-info-title">{{product.name}}</h2>
+                            <h2 class="product-detail-info-title">{{product?.name}}</h2>
 
                             <div class="product-detail-rate">
-                                <div class="product-detail-rating" [style.width.%]="product.rating"></div>
+                                <div class="product-detail-rating" [style.width.%]="product?.rating"></div>
                             </div>
 
-                            <p class="desc">{{product.details}}</p>
+                            <p class="desc">{{product?.description}}</p>
 
                             <div class="product-detail-price">
-                                <ins><span>৳ {{product.price}}</span></ins>
+                                <ins><span>৳ {{product?.min_price}}</span></ins>
                             </div>
                             <div class="product-detail-available">
                                 <strong>Availability: </strong>
-                                <span class="in-stock">{{product.inStock ? 'In Stock':'Out of Stock'}}</span>
+                                <span class="in-stock">{{product?.inStock ? 'In Stock':'Out of Stock'}}</span>
                             </div>
 
                             <a class="mail-to-friend" href="#">Email to a Friend</a>
@@ -58,11 +57,11 @@
                                     <strong><sup>*</sup>Size:</strong><span
                                         class="current-size">{{productSize?.size}}</span>
                                 </div>
-                                <ul class="product-detail-size-filter">
-                                    <li *ngFor="let stock of product.stock;index as i"
+                                <!-- <ul class="product-detail-size-filter">
+                                    <li *ngFor="let stock of product?.stock;index as i"
                                         [class.active]="stock.size===productSize.size"><a
                                             (click)="setSize(stock)">{{stock.size}}</a></li>
-                                </ul>
+                                </ul> -->
                             </div>
 
                             <div class="product-detail-color">
@@ -101,11 +100,11 @@
                     </div>
                 </div>
                 <div class="product-detail-tab-detal">
-                    <details-collapse [item]='product.description'></details-collapse>
-                    <details-collapse [item]='product.tags'></details-collapse>
-                    <details-collapse [item]='product.reviews'></details-collapse>
-                    <details-collapse [item]='product.sizing_guide'></details-collapse>
-                    <details-collapse [item]='product.custom_tab'></details-collapse>
+                    <!-- <details-collapse [item]='product?.description'></details-collapse>
+                    <details-collapse [item]='product?.tags'></details-collapse>
+                    <details-collapse [item]='product?.reviews'></details-collapse>
+                    <details-collapse [item]='product?.sizing_guide'></details-collapse>
+                    <details-collapse [item]='product?.custom_tab'></details-collapse> -->
                 </div>
             </div>
             <product-related></product-related>

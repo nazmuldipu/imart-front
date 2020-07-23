@@ -15,6 +15,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { DetailsCollapseComponent } from './components/details-collapse/details-collapse.component';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     PriceFilterComponent,
     BestSellersComponent,
     BrandsComponent,
+    DetailsCollapseComponent,
     Product1Component,
     ProductRelatedComponent,
     ProductStyle1Component,
@@ -37,6 +40,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     BrandsComponent,
     CommonModule,
     FormsModule,
+    DetailsCollapseComponent,
     PriceFilterComponent,
     Product1Component,
     ProductRelatedComponent,

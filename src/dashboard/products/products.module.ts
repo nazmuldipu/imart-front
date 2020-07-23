@@ -7,6 +7,7 @@ import { ShopsComponent } from './containers/shops/shops.component';
 import { ShopFormComponent } from './components/shop-form/shop-form.component';
 import { ProductsComponent } from './containers/products/products.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ProductDetailsFormComponent } from './components/product-details-form/product-details-form.component';
 
 export const ROUTES: Routes = [
   { path: 'shops', component: ShopsComponent },
@@ -22,6 +23,7 @@ export const ROUTES: Routes = [
     ShopFormComponent,
     ProductsComponent,
     ProductFormComponent,
+    ProductDetailsFormComponent,
   ],
   imports: [SharedModule, RouterModule.forChild(ROUTES)],
 })

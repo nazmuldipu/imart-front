@@ -9,6 +9,7 @@ import { BrandService } from 'src/services/brand.service';
 import { Brand } from 'src/shared/models/brand.model';
 import { SubCategory, SubCategoryPage } from 'src/shared/models/sub-category.model';
 import { SubCategoryService } from 'src/services/sub-category.service';
+import { ProductDetailsService } from 'src/services/product-details.service';
 
 @Component({
   selector: 'app-products',
@@ -29,11 +30,13 @@ export class ProductsComponent implements OnInit {
 
   loading = false;
   showProductForm = false;
+  showProductDetailsForm = false;
 
   constructor(private categoryService: CategoryService,
     private subCategoryService: SubCategoryService,
     private brandService: BrandService,
     private productService: ProductService,
+    private productDetailsService: ProductDetailsService,
     private utilService: UtilService,
     public toastService: ToastService) {
 
@@ -93,6 +96,21 @@ export class ProductsComponent implements OnInit {
     this.loading = false;
   }
 
+  async getProductDetails(product_id: string) {
+    this.loading = true;
+    try {
+      const prod = this.productsPage.docs.find((c) => c._id == product_id);
+      this.product = Object.assign({}, prod);
+
+      const proDetails = await this.productDetailsService.getProductDetailsByProductId(product_id).toPromise();
+      this.product.details = proDetails;
+
+    } catch (error) {
+      console.log(error);
+    }
+    this.loading = false;
+  }
+
   onShowProductForm() {
     this.showProductForm = true;
   }
@@ -104,15 +122,36 @@ export class ProductsComponent implements OnInit {
   }
 
   onDetails(id) {
-    const value = this.productsPage.docs.find((c) => c._id == id);
-    this.product = Object.assign({}, value);
+    this.getProductDetails(id);
     this.showProductForm = false;
   }
 
-  // onSelectCategory(category: Category) {
-  //   this.getAllSubCategoryByCategory(category.slug);
-  // }
+  onProductDetails(id) {
+    this.showProductDetailsForm = true;
+  }
 
+  async onAddProductDetails(event) {
+    this.loading = true;
+    try {
+      const resp = await this.productDetailsService.add(this.product._id, event).toPromise();
+      this.showProductDetailsForm = false;
+    } catch (err) {
+      this.errorMessage = err;
+    }
+    this.loading = false;
+  }
+
+  async onDeleteDetails(title) {
+    this.loading = true;
+    try {
+      const resp = await this.productDetailsService.remove(this.product._id, title).toPromise();
+      this.onClose();
+    } catch (err) {
+      this.errorMessage = err;
+    }
+    this.loading = false;
+    console.log(title);
+  }
   async onCreate(event) {
     this.loading = true;
     this.errorMessage = '';
