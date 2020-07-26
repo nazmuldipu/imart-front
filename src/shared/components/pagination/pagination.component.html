@@ -1,6 +1,6 @@
 <div class="pull-right mb-1">
 
-    <div class="select-box sort-bar">
+    <div class="select-box sort-bar" *ngIf="!small">
         <label>Sort By:</label>
         <select name="sort" [(ngModel)]="pagi.sort" (change)="onSortChange()">
             <option value="priority">Popular</option>
@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="select-box">
+    <div class="select-box" *ngIf="!small">
         <label>Show:</label>
         <select name="limit" [(ngModel)]="pagi.limit" (change)="onLimitChange()">
             <option value=4 [selected]="page?.limit == 4">4</option>

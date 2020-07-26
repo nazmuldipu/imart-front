@@ -43,8 +43,8 @@
               <th class="text-right">Actions</th>
             </tr>
           </thead>
-          <tbody *ngIf="shops.length > 0">
-            <tr *ngFor="let shop of shops; index as i">
+          <tbody *ngIf="shops.docs.length > 0">
+            <tr *ngFor="let shop of shops.docs; index as i">
               <td>
                 <img class="shop-image" [src]="imageUrl + shop._id" [alt]="shop.name + ' image'" />
               </td>

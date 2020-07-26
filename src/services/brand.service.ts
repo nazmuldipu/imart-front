@@ -20,13 +20,7 @@ export class BrandService {
       formData.append(key, brand[key]);
     });
 
-    return this.dataSource.sendRequest(
-      'POST',
-      this.brandUrl,
-      formData,
-      true,
-      null
-    );
+    return this.dataSource.sendRequest('POST', this.brandUrl, formData, true, null);
   }
 
   update(id, brand): Observable<Brand> {
@@ -37,42 +31,18 @@ export class BrandService {
       }
     });
 
-    return this.dataSource.sendRequest(
-      'PUT',
-      this.brandUrl + `/${id}`,
-      formData,
-      true,
-      null
-    );
+    return this.dataSource.sendRequest('PUT', this.brandUrl + `/${id}`, formData, true, null);
   }
 
   getAll(): Observable<Brand[]> {
-    return this.dataSource.sendRequest(
-      'GET',
-      this.brandUrl,
-      null,
-      false,
-      null
-    );
+    return this.dataSource.sendRequest('GET', this.brandUrl, null, false, null);
   }
 
   get(id): Observable<Brand> {
-    return this.dataSource.sendRequest(
-      'GET',
-      this.brandUrl + `/${id}`,
-      null,
-      false,
-      null
-    );
+    return this.dataSource.sendRequest('GET', this.brandUrl + `/${id}`, null, false, null);
   }
 
   delete(id): Observable<any> {
-    return this.dataSource.sendRequest(
-      'DELETE',
-      this.brandUrl + `/${id}`,
-      null,
-      true,
-      null
-    );
+    return this.dataSource.sendRequest('DELETE', this.brandUrl + `/${id}`, null, true, null);
   }
 }

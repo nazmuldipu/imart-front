@@ -4,6 +4,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Products } from 'src/shared/json/dummy';
 import { Product } from 'src/shared/models/product.model';
 import { ProductService } from 'src/services/product.service';
+import { ProductDetails } from 'src/shared/models/product-details.model';
+import { ProductDetailsService } from 'src/services/product-details.service';
 
 @Component({
   selector: 'app-details',
@@ -200,6 +202,7 @@ export class DetailsComponent implements OnInit {
   //   ],
   // };
   product: Product;
+  productDetails: ProductDetails;
 
   imageObject = [];
   productSize = {
@@ -225,7 +228,7 @@ export class DetailsComponent implements OnInit {
     custom: false,
   };
 
-  constructor(private productService: ProductService, private activeRoute: ActivatedRoute) {
+  constructor(private productService: ProductService, private productDetailsService: ProductDetailsService, private activeRoute: ActivatedRoute) {
     this.id = activeRoute.snapshot.params['id'];
     // this.imageUrl = this.productService.productLink + '/image/';
   }
@@ -243,15 +246,26 @@ export class DetailsComponent implements OnInit {
     // });
   }
 
+  async getProductDetails(product_id) {
+    this.loading = true;
+    try {
+      this.productDetails = await this.productDetailsService.getProductDetailsByProductId(product_id).toPromise();
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
+  }
+
 
   async getProduct(id: string) {
     this.loading = true;
     try {
       this.product = await this.productService.get(id).toPromise();
+      this.getProductDetails(id);
       this.imageUrls = [];
       for (let i = 0; i < this.product.image_count; i++) {
         const url = this.productService.productLink + '/image/' + this.product._id + '/' + i;
-        this.imageUrls.push({ image: url, thumbImage: url})
+        this.imageUrls.push({ image: url, thumbImage: url })
       }
     } catch (error) {
       this.errorMessage = error;

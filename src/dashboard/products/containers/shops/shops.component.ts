@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Shop } from 'src/shared/models/shop.model';
+import { Shop, ShopPage } from 'src/shared/models/shop.model';
 import { ShopService } from 'src/services/shop.service';
 import { UtilService } from 'src/services/util.service';
 import { ToastService } from 'src/services/toast.service';
@@ -11,7 +11,7 @@ import { ToastService } from 'src/services/toast.service';
 })
 export class ShopsComponent implements OnInit {
   shop: Shop;
-  shops: Shop[] = [];
+  shops: ShopPage;
   imageUrl = '';
   message = '';
   errorMessage = '';
@@ -20,7 +20,7 @@ export class ShopsComponent implements OnInit {
   showShopForm = false;
 
 
-  constructor(private shopService: ShopService, private utilService: UtilService, 
+  constructor(private shopService: ShopService, private utilService: UtilService,
     public toastService: ToastService) {
     this.imageUrl = this.shopService.shopLink + '/image/';
   }
@@ -29,11 +29,11 @@ export class ShopsComponent implements OnInit {
     this.getAllShop();
   }
 
-  async getAllShop() {
+  async getAllShop(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.shops = await this.shopService.getAll().toPromise();
-      this.shops.sort(this.utilService.dynamicSortObject('priority'));
+      this.shops = await this.shopService.getAll(page, limit, sort, order).toPromise();
+      // this.shops.sort(this.utilService.dynamicSortObject('priority'));
     } catch (error) {
       this.errorMessage = error;
     }
@@ -46,17 +46,17 @@ export class ShopsComponent implements OnInit {
   onShopFormCancel() { this.onClose(); }
 
   onEdit(id) {
-    const value = this.shops.find((c) => c._id == id);
+    const value = this.shops.docs.find((c) => c._id == id);
     this.shop = Object.assign({}, value);
     this.showShopForm = true;
   }
 
-  onDetails(id){
-    const value = this.shops.find((c) => c._id == id);
+  onDetails(id) {
+    const value = this.shops.docs.find((c) => c._id == id);
     this.shop = Object.assign({}, value);
     this.showShopForm = false;
   }
-  
+
   async onCreate(shop: Shop) {
     this.loading = true;
     this.errorMessage = '';
@@ -64,7 +64,7 @@ export class ShopsComponent implements OnInit {
     try {
       const resp = await this.shopService.create(shop).toPromise();
       this.message = 'Shop created';
-      this.shops.push(resp);
+      this.shops.docs.push(resp);
       this.showShopForm = false;
     } catch (error) {
       this.errorMessage = error;
@@ -94,8 +94,8 @@ export class ShopsComponent implements OnInit {
       try {
         const res = await this.shopService.delete(id).toPromise();
         this.message = 'Shop deleted';
-        this.shops.splice(
-          this.shops.findIndex((c) => c._id == id),
+        this.shops.docs.splice(
+          this.shops.docs.findIndex((c) => c._id == id),
           1
         );
       } catch (err) {
@@ -103,18 +103,18 @@ export class ShopsComponent implements OnInit {
       }
     }
   }
-  
+
   async onToggleActive(id, status) {
 
     if (confirm('Are you sure to ' + (status ? 'Activate' : 'Deactivate') + ' ?')) {
       try {
         const res = await this.shopService.toggleApprove(id).toPromise();
 
-        const mesg = res.name +  (res.approved ? ' Activated' : ' Dectivated');
+        const mesg = res.name + (res.approved ? ' Activated' : ' Dectivated');
         const classname = 'text-light' + (res.approved ? ' bg-primary' : ' bg-danger')
         this.toastService.show(mesg, { classname, delay: 3000 });
 
-        this.shops.splice(this.shops.findIndex(s => s._id == id), 1, res);
+        this.shops.docs.splice(this.shops.docs.findIndex(s => s._id == id), 1, res);
       } catch (err) {
         this.errorMessage = err;
       }

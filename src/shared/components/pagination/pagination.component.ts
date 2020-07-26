@@ -8,6 +8,7 @@ import { ProductPage } from 'src/shared/models/product.model';
 })
 export class PaginationComponent implements OnChanges {
   @Input() page: ProductPage;
+  @Input() small: boolean;
 
   @Output() paginate = new EventEmitter<Pagi>();
 
@@ -65,7 +66,7 @@ export class PaginationComponent implements OnChanges {
     this.paginate.emit(this.pagi);
   }
 
-  onSortChange(){
+  onSortChange() {
     localStorage.setItem('sort', this.pagi.sort);
     this.pagi.pageNumber = 1;
     this.paginate.emit(this.pagi);
@@ -74,7 +75,7 @@ export class PaginationComponent implements OnChanges {
   onChange() {
     let n = parseInt(this.pagi.limit.toString())
     const value = { ...this.pagi, limit: n };
-    
+
 
     console.log(value);
     this.paginate.emit(value);

@@ -59,6 +59,15 @@ export class DashSideNavbarComponent implements OnInit {
       ],
     },
     {
+      name: 'Inventory',
+      icon: 'fa-houzz',
+      roles: ['ADMIN', 'SHOP'],
+      subnav: [
+        { name: 'Add', icon: 'fa-plus', link: '/dashboard/inventory/add' },
+        { name: 'List', icon: 'fa-list', link: '/dashboard/inventory' },
+      ],
+    },
+    {
       name: 'Users',
       icon: 'fa-users',
       roles: ['ADMIN'],

@@ -19,3 +19,16 @@ export interface Shop {
   description: string;
   createdAt: Date;
 }
+
+export interface ShopPage {
+  docs: Shop[];
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: number;
+  page: number;
+  pagingCounter: number;
+  prevPage: number;
+  totalDocs: number;
+  totalPages: number;
+}

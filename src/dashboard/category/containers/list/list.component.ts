@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
   thumbCategory: Category;
   imageUrl = '';
   thumbUrl = '';
-  loading = true;
+  loading = false;
   message = '';
   errorMessage = '';
   // /api/categories/image/5f02eb94629037161c106085
