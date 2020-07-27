@@ -3,6 +3,7 @@ import { RestDataService } from './rest-data.service';
 import { User } from 'src/shared/models/user.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class UserService {
   private _userSource = new BehaviorSubject<User>({} as User);
   user$ = this._userSource.asObservable();
 
-  constructor(private dataSource: RestDataService) {}
+  constructor(private dataSource: RestDataService) { }
 
   userRegistration(user: User): Observable<User> {
     return this.dataSource.sendRequest('POST', this.userUrl, user, false, null);
@@ -43,6 +44,11 @@ export class UserService {
     );
   }
 
+  search(param: string): Observable<User[]> {
+    const paramUrl = new HttpParams().set('param', param);
+    return this.dataSource.sendRequest('GET', this.userUrl + '/search', null, false, paramUrl)
+  }
+
   getUserProfile() {
     this.dataSource
       .sendRequest('GET', this.userUrl + '/me', null, true, null)
@@ -69,7 +75,7 @@ export class UserService {
     );
   }
 
-  changePassword(value):Observable<any>{
-    return this.dataSource.sendRequest('PATCH', this.userUrl+`/changePassword`, value, true, null);
+  changePassword(value): Observable<any> {
+    return this.dataSource.sendRequest('PATCH', this.userUrl + `/changePassword`, value, true, null);
   }
 }

@@ -70,10 +70,16 @@ export class IndexComponent implements OnInit {
     this.getInventoryByShopId(id);
   }
 
-  onClose() {
-    this.inventoryPage = null;
-    this.inventory = null;
-    this.shop = null;
+  onClose(value) {
+    switch (value) {
+      case 'details':
+        this.inventory = null;
+        break;
+      case 'list':
+        this.inventoryPage = null;
+        this.shop = null;
+        break;
+    }
   }
 
 }

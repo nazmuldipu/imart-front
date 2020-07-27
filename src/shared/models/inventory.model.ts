@@ -15,9 +15,10 @@ export interface Inventory {
     _id: string;
     shop: Shop;
     createdAt: Date;
-    createdBy: string;
+    createdBy: User;
     updatedAt: Date;
-    updatedBy: string;
+    updatedBy: User;
+    supplier: User;
     reference: string;
     items: ProductItem[];
 }
@@ -28,9 +29,14 @@ interface ProductItem {
     color_stock: ColorStock[];
 }
 
+interface User{
+    name: string;
+    phone: string;
+}
+
 interface ColorStock {
     color: string,
-    quantity: string,
+    quantity: number,
     price: number,
     purchase_price: number,
 }

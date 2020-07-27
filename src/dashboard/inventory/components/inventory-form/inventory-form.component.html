@@ -1,1 +1,48 @@
-<p>inventory-form works!</p>
+<nav class="navbar navbar-light bg-light border">
+    <a class="navbar-brand">Inventory Form</a>
+    <a type="button" class="btn btn-success btn-sm" routerLink="/dashboard/inventory">
+        <i class="fa fa-list"></i> INVENTORY LIST
+    </a>
+</nav>
+{{form.value | json}}
+
+<ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+</ng-template>
+
+<form [formGroup]="form" class="my-3 p-4 shifting-form label1 text-left" (ngSubmit)="submit()">
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="inventoryType">Inventory Type *</label>
+            <select class="form-control" id="inventoryType" formControlName="inventoryType">
+                <option value="" selected> N/A </option>
+                <option value="in"> In </option>
+                <option value="transfer"> Transfer </option>
+                <option value="sample"> Sample </option>
+                <option value="damage"> Damage </option>
+            </select>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="searchShop">Shop</label>
+            <input id="searchShop" type="text" class="form-control" [class.is-invalid]="searchFailed"
+                formControlName="shop" [ngbTypeahead]="searchShop" [resultTemplate]="rt"
+                [inputFormatter]="shopFormatter" placeholder="Shop name or owner number" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="supplier">Supplier</label>
+            <input id="supplier" type="text" class="form-control" [class.is-invalid]="searchFailed"
+                formControlName="supplier" [ngbTypeahead]="searchUser" [resultTemplate]="rt"
+                [inputFormatter]="userFormatter" placeholder="Supplier name or phone number" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <inventory-item-form [parent]="form" (addColorStock)="addColorStock($event)" (removeColorStock)="onRemoveColorStock($event)"></inventory-item-form>
+        </div>
+        <button class="btn btn-sm btn-info" type="button" (click)="pushInventoryItem()">
+            Add Inventory Item
+        </button>
+    </div>
+
+</form>

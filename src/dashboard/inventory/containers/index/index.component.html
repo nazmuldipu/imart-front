@@ -12,55 +12,15 @@
             <pagination [page]="shopPage" (paginate)="onChangeShopPage($event)" [small]="true"></pagination>
         </div>
         <div class="col-12" *ngIf="inventoryPage?.docs?.length && !inventory">
-            <nav class="navbar navbar-light bg-light border">
-                <a class="navbar-brand">Inventory List</a>
-                <a routerLink="//dashboard/inventory/add" class="btn btn-success btn-sm">
-                    + ADD Inventory
-                </a>
-            </nav>
-            <table class="table table-striped table-bordered table-responsive-sm">
-                <thead>
-                    <tr>
-                        <th>Created</th>
-                        <th>Reference</th>
-                        <th>Inventory Type</th>
-                        <th>Number of Products</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let inve of inventoryPage.docs">
-                        <td>{{inve.createdAt | date:'medium'}}</td>
-                        <td>{{inve.reference}}</td>
-                        <td>{{inve.inventoryType}}</td>
-                        <td>{{inve?.items?.length}}</td>
-                        <td class="text-right">
-                            <div class="btn-group rounded" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-light border"
-                                    (click)="onDetails(inve._id)">Details</button>
-                                <button type="button" class="btn btn-light border" (click)="onEdit(inve._id)"><i
-                                        class="fa fa-pencil"></i></button>
-                                <button type="button" class="btn btn-light border"><i
-                                        class="fa fa-trash-o"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <inventory-list [inventoryPage]="inventoryPage" (details)="onDetails($event)"></inventory-list>
             <pagination [page]="inventoryPage" (paginate)="onChangeInventoryPage(shop?._id, $event)" [small]="true">
             </pagination>
-            <button class="btn btn-sm btn-danger" (click)="onClose()">Close</button>
+            <button class="btn btn-sm btn-danger d-print-none" (click)="onClose('list')">Close</button>
         </div>
 
         <div class="col-12" *ngIf="inventory">
-            <nav class="navbar navbar-light bg-light border">
-                <a class="navbar-brand">Inventory Details</a>
-                <a routerLink="//dashboard/inventory/add" class="btn btn-success btn-sm">
-                    + ADD Inventory
-                </a>
-            </nav>
-
-            <button class="btn btn-sm btn-danger" (click)="onClose()">Close</button>
+            <inventory-details [inventory]="inventory"></inventory-details>
+            <button class="btn btn-sm btn-danger d-print-none" (click)="onClose('details')">Close</button>
         </div>
     </div>
 </div>

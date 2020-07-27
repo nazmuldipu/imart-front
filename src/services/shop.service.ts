@@ -53,6 +53,11 @@ export class ShopService {
       this.shopUrl + `/approve/${id}`, null, true, null);
   }
 
+  search(param: string): Observable<Shop[]> {
+    const paramUrl = new HttpParams().set('param', param);
+    return this.dataSource.sendRequest('GET', this.shopUrl + '/search', null, false, paramUrl)
+  }
+
   generateParam(page: number, limit: number, sort: string, order: string): HttpParams {
     return new HttpParams()
       .set('page', page.toString())

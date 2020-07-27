@@ -5,12 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <nav class="navbar navbar-light bg-light border">
-                <a class="navbar-brand">Inventory Form</a>
-                <a type="button" class="btn btn-success btn-sm" routerLink="/dashboard/inventory">
-                    <i class="fa fa-list"></i> INVENTORY LIST
-                </a>
-            </nav>
+            <inventory-form [shopList]="shopList"></inventory-form>
         </div>
     </div>
 </div>

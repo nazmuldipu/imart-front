@@ -1,0 +1,59 @@
+<ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+</ng-template>
+
+<div [formGroup]="parent">
+    <div formArrayName="items">
+
+        <div class="border p-2 my-2" *ngFor="let item of parent['controls'].items['controls']; let i = index">
+            <div [formGroupName]="i">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="product">Product</label>
+                        <input id="product" type="text" class="form-control" [class.is-invalid]="searchFailed"
+                            formControlName="product" [ngbTypeahead]="searchProduct" [resultTemplate]="rt"
+                            [inputFormatter]="productFormatter" placeholder="Product name or serial number" />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="size">Measure Size</label>
+                        <input class="form-control" formControlName="size" id="size" placeholder="Size {{ i + 1 }}" />
+                    </div>
+                    <div class="col-md-7">
+                        <div formArrayName="color_stock">
+                            <div class="border p-2 my-2"
+                                *ngFor="let cs of item['controls'].color_stock['controls']; let j = index">
+                                <div [formGroupName]="j">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="color">Color</label>
+                                            <input id="color" type="text" class="form-control" formControlName="color"
+                                                placeholder="Color" />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="quantity">Quantity</label>
+                                            <input id="quantity" type="number" class="form-control"
+                                                formControlName="quantity" placeholder="Quantity" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="purchase_price">Purchase Price</label>
+                                            <input id="purchase_price" type="number" class="form-control"
+                                                formControlName="purchase_price" placeholder="Purchase price " />
+                                        </div>
+                                        <div class="d-flex align-items-end mb-3">
+                                            <button class="btn btn-sm btn-danger" type="button"
+                                                (click)="onRemoveColorStock(i,j)">Remove</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <inventory-item-form [parent]="form"></inventory-item-form> -->
+                    </div>
+                    <button class="btn btn-sm btn-info" type="button" (click)="pushColorStock(i)">
+                        Add Stock
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

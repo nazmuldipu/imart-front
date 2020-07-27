@@ -57,6 +57,11 @@ export class ProductService {
     return this.dataSource.sendRequest('GET', this.productUrl + `/${id}`, null, false, null);
   }
 
+  search(param: string): Observable<Product[]> {
+    const paramUrl = new HttpParams().set('param', param);
+    return this.dataSource.sendRequest('GET', this.productUrl + '/search', null, false, paramUrl)
+  }
+
   getByCategorySlug(category_slug: string, page: number, limit: number, sort: string, order: string): Observable<ProductPage> {
     const params = this.generateParam(page, limit, sort, order);
     return this.dataSource.sendRequest('GET', this.productUrl + `/category/${category_slug}`, null, false, params);
