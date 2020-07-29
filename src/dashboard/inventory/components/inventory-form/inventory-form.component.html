@@ -11,7 +11,16 @@
 </ng-template>
 
 <form [formGroup]="form" class="my-3 p-4 shifting-form label1 text-left" (ngSubmit)="submit()">
+
     <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="reference">Reference* </label>
+            <input type="text" class="form-control" id="reference" formControlName="reference"
+                placeholder="Reference " />
+            <small class="text-danger" *ngIf="form.controls.reference.errors && form.controls.reference.touched">
+                Reference required
+            </small>
+        </div>
         <div class="col-md-6 mb-3">
             <label for="inventoryType">Inventory Type *</label>
             <select class="form-control" id="inventoryType" formControlName="inventoryType">
@@ -38,10 +47,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <inventory-item-form [parent]="form" (addColorStock)="addColorStock($event)" (removeColorStock)="onRemoveColorStock($event)"></inventory-item-form>
+            <inventory-item-form [parent]="form" (addColorStock)="addColorStock($event)"
+                (removeColorStock)="onRemoveColorStock($event)"></inventory-item-form>
         </div>
         <button class="btn btn-sm btn-info" type="button" (click)="pushInventoryItem()">
             Add Inventory Item
+        </button>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary" [ngClass]="{
+            disabled: form.invalid,
+            'btn-warning': exists,
+            'btn-success': !exists
+          }">
+            {{ exists ? "Update" : "Create" }}
         </button>
     </div>
 

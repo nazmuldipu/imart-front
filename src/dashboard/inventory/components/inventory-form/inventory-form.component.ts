@@ -89,6 +89,7 @@ export class InventoryFormComponent implements OnChanges {
   createForm() {
     this.form = this.fb.group({
       inventoryType: ['', Validators.required],
+      reference: ['', Validators.required],
       shop: ['', Validators.required],
       supplier: ['', Validators.required],
       items: this.fb.array([this.createInventoryItem()])
@@ -129,8 +130,7 @@ export class InventoryFormComponent implements OnChanges {
     return this.fb.group({
       color: ['', Validators.required],
       quantity: ['', Validators.required],
-      purchase_price: ['', Validators.required],
-      price: ['', Validators.required],
+      purchase_price: ['', Validators.required]
     })
   }
 
