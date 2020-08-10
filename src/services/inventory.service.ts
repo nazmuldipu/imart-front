@@ -12,8 +12,16 @@ export class InventoryService {
 
   constructor(private dataSource: RestDataService) { }
 
-  create(inventory: Inventory): Observable<Inventory> {
-    return this.dataSource.sendRequest('POST', this.inventoryUrl, inventory, true, null);
+  create(event: Inventory): Observable<Inventory> {
+    const items = [];
+    for (let i = 0; i < event.items.length; i++) {
+      const item = { productId: event.items[i].product._id, size: event.items[i].size, color_stock: event.items[i].color_stock }
+      items.push(item);
+    }
+    const value = { inventoryType: event.inventoryType, reference: event.reference, shopId: event.shop._id, supplierId: event.supplier._id, items }
+    console.log(value);
+
+    return this.dataSource.sendRequest('POST', this.inventoryUrl, value, true, null);
   }
 
   getInventory(id: string): Observable<Inventory> {

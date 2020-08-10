@@ -13,6 +13,7 @@ export interface InventoryPage {
 
 export interface Inventory {
     _id: string;
+    inventoryType: string;
     shop: Shop;
     createdAt: Date;
     createdBy: User;
@@ -30,6 +31,7 @@ interface ProductItem {
 }
 
 interface User{
+    _id: string,
     name: string;
     phone: string;
 }
@@ -42,11 +44,13 @@ interface ColorStock {
 }
 
 interface Product {
+    _id: string,
     name: string,
     slug: string
 }
 
 interface Shop {
+    _id: string,
     name: string,
     slug: string
 }

@@ -27,12 +27,12 @@
                     + ADD PRODUCT
                 </button>
             </nav>
-            <div class="p-3 border border-top-0">
+            <div class="p-3 border border-top-0 bg-white">
                 <form class="my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search Products" aria-label="Search">
                 </form>
 
-                <table class="table table-striped table-bordered mt-2"
+                <table class="table table-hover table-bordered mt-2 text-secondary"
                     [ngClass]="(product || showProductForm)?'table-responsive':'table-responsive-sm'">
                     <thead>
                         <tr>
@@ -89,38 +89,38 @@
 
 
             <h3 class="text-center">{{product.name}}</h3>
-            <table class="table table-striped border">
+            <table class="table table-hover border bg-white">
                 <tbody>
                     <tr>
-                        <td>Name {{product.image_count}}</td>
+                        <td class="pl-2">Name</td>
                         <th>{{product.slug}}</th>
                     </tr>
                     <tr>
-                        <td>Priority</td>
+                        <td class="pl-2">Priority</td>
                         <th>{{product.priority}}</th>
                     </tr>
                     <tr>
-                        <td>Active</td>
+                        <td class="pl-2">Active</td>
                         <th>{{ product.active?'Active':'Inactive' }}</th>
                     </tr>
                     <tr>
-                        <td>Max price</td>
+                        <td class="pl-2">Max price</td>
                         <th>{{product.max_price}}</th>
                     </tr>
                     <tr>
-                        <td>Min price</td>
+                        <td class="pl-2">Min price</td>
                         <th>{{product.min_price}}</th>
                     </tr>
                     <tr>
-                        <td>Category</td>
+                        <td class="pl-2">Category</td>
                         <th>{{product.category?.name}}</th>
                     </tr>
                     <tr>
-                        <td>SubCategory</td>
+                        <td class="pl-2">SubCategory</td>
                         <th>{{product?.sub_category?.name}}</th>
                     </tr>
                     <tr>
-                        <td>Brand</td>
+                        <td class="pl-2">Brand</td>
                         <th>{{product.brand?.name}}</th>
                     </tr>
 
@@ -129,13 +129,13 @@
 
             <!-- {{ product?.details?.items| json}} -->
             <div *ngFor="let item of product?.details?.items">
-                <div class="row">
-                    <div class="col">
+                <div class="row m-0 bg-white py-2">
+                    <div class="col ">
                         <details-collapse [item]='item'></details-collapse>
                     </div>
                     <div class="col-auto pl-0">
                         <button class="btn btn-sm btn-danger" (click)="onDeleteDetails(item.title)">Delete</button>
-                    </div>                     
+                    </div>
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
                 </product-details-form>
             </div>
 
-            <div class="d-flex flex-row-reverse">
+            <div class="d-flex flex-row-reverse py-3">
                 <button class="btn btn-danger mx-1" (click)="onClose()">Close</button>
                 <button class="btn btn-primary mx-1" (click)="onProductDetails(product._id)">Add Product
                     Details</button>

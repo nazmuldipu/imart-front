@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ShopService } from 'src/services/shop.service';
+import { InventoryService } from 'src/services/inventory.service';
+import { Inventory } from 'src/shared/models/inventory.model';
 import { Shop } from 'src/shared/models/shop.model';
-import { Observable } from 'rxjs/internal/Observable';
-import { debounceTime, distinctUntilChanged, map, switchMap, tap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'app-add',
@@ -17,10 +15,29 @@ export class AddComponent implements OnInit {
   message = '';
   errorMessage = '';
 
-  
-  constructor(private shopService: ShopService) { }
+
+  constructor(private inventoryService: InventoryService) { }
 
   ngOnInit(): void {
   }
-  
+
+  async onCreateInventory(event: Inventory) {
+    this.loading = true;
+    this.errorMessage = '';
+    this.message = '';
+    try {
+      const resp = await this.inventoryService.create(event).toPromise();
+      this.message = 'Inventory added';
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
+  }
+
+  onClose() {
+    this.loading = false;
+    this.errorMessage = '';
+    this.message = '';
+  }
+
 }

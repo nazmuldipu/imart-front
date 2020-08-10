@@ -21,12 +21,11 @@ export class InventoryDetailsComponent implements OnChanges {
         const items = this.inventory.items[i];
         for (let j = 0; j < items.color_stock.length; j++) {
           const cs = items.color_stock[0];
-          totalP += cs.price;
           totalQ += cs.quantity;
+          totalP += cs.purchase_price * cs.quantity;
         }
       }
       this.total = { price: totalP, quantity: totalQ };
-      console.log(this.total);
     }
   }
 

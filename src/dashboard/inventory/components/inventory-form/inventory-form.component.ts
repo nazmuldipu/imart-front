@@ -21,7 +21,7 @@ export class InventoryFormComponent implements OnChanges {
   @Output() shop = new EventEmitter<string>();
 
   form: FormGroup;
-  edit = false;
+  exists = false;
   mouseoverShifting = false;
 
   searching = false;
@@ -141,7 +141,9 @@ export class InventoryFormComponent implements OnChanges {
   }
 
   submit() {
-    console.log(this.form.value);
+    if(this.form.valid){
+      this.create.emit(this.form.value);
+    }
   }
 
 }
