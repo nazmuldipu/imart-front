@@ -10,6 +10,7 @@
         <div class="col-md-9 col-12">
             <div class="product-detail border radius">
                 <div class="row">
+                    <!-- product image and share buttons -->
                     <div class="col-md-5 col-12">
                         <div class="product-detail-gallery">
                             <div class="product-detail-gallery-image">
@@ -44,7 +45,14 @@
                             <p class="desc">{{product?.description}}</p>
 
                             <div class="product-detail-price">
-                                <ins><span>৳ {{product?.min_price}}</span></ins>
+                                <ins><span>৳ {{product?.price}}</span></ins>
+                            </div>
+                            <div *ngFor="let ps of productStocks" class="row">
+                                <div class="col-auto p-0 shadow shop-box">
+                                    <img class="shop-box-image" [src]="shopImageUrl + ps.shop._id"
+                                        [alt]="ps.shop.name + ' image'" />
+                                    <span class="shop-box-name">{{ps.shop.name}}</span>
+                                </div>
                             </div>
                             <div class="product-detail-available">
                                 <strong>Availability: </strong>

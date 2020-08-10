@@ -8,8 +8,7 @@ export interface ProductStock {
 
 interface colorStock {
     color: string,
-    quantity: string,
-    price: number,
+    quantity: string
     purchase_price: number,
 }
 

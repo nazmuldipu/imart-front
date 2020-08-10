@@ -6,8 +6,8 @@ export interface Product {
     description: string;
     slug: string;
     rating: number;
-    max_price: number;
-    min_price: number;
+    price: number;
+    old_price: number;
     category: Category;
     sub_category: SubCategory;
     brand: Brand;

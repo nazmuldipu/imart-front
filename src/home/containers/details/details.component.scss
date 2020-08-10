@@ -375,6 +375,22 @@ a {
   }
 }
 
+.shop-box {
+  // border: 1px solid;
+  width: 100px;
+  &-name {
+    text-overflow: hidden;
+    overflow: hidden;
+    width: 100px;
+    white-space: nowrap;
+  }
+  &-image {
+    margin: auto;
+    height: 50px;
+    max-width: 100px;
+    display: block;
+  }
+}
 sup {
   color: #ff4400;
   margin-right: 5px;
