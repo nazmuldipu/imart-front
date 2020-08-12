@@ -34,6 +34,7 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="col-md-7 col-12">
                         <div class="product-detail-info">
                             <h2 class="product-detail-info-title">{{product?.name}}</h2>
@@ -47,23 +48,29 @@
                             <div class="product-detail-price">
                                 <ins><span>৳ {{product?.price}}</span></ins>
                             </div>
-                            <div *ngFor="let ps of productStocks" class="row">
-                                <div class="col-auto p-0 shadow shop-box">
+                            
+                            <!-- Stocked shop list -->
+                            {{stock | json}}
+                            <hr>
+                            {{selected | json}}
+                            <div class="row">
+                                <div *ngFor="let ps of productStocks" class="col-auto p-0 mx-1 shadow shop-box" [class.active]="ps._id==stock._id" (click)="onSelectShop(ps._id)">
                                     <img class="shop-box-image" [src]="shopImageUrl + ps.shop._id"
                                         [alt]="ps.shop.name + ' image'" />
                                     <span class="shop-box-name">{{ps.shop.name}}</span>
                                 </div>
                             </div>
+
                             <div class="product-detail-available">
                                 <strong>Availability: </strong>
-                                <span class="in-stock">{{product?.inStock ? 'In Stock':'Out of Stock'}}</span>
+                                <span class="in-stock">{{stock ? 'In Stock':'Out of Stock'}}</span>
                             </div>
 
                             <a class="mail-to-friend" href="#">Email to a Friend</a>
                             <div class="product-detail-size">
                                 <div class="product-detail-size-title">
                                     <strong><sup>*</sup>Size:</strong><span
-                                        class="current-size">{{productSize?.size}}</span>
+                                        class="current-size">{{stock?.size}}</span>
                                 </div>
                                 <!-- <ul class="product-detail-size-filter">
                                     <li *ngFor="let stock of product?.stock;index as i"
@@ -75,11 +82,11 @@
                             <div class="product-detail-color">
                                 <div class="product-detail-color-title">
                                     <strong><sup>*</sup>color:</strong><span
-                                        class="product-detail-current-color">{{productColor?.color}}</span>
+                                        class="product-detail-current-color">{{selected?.color}}</span>
                                 </div>
                                 <ul class="product-detail-filter color-filter">
-                                    <li *ngFor="let pcolor of productSize.color_stock"
-                                        [class.active]="productColor?.color === pcolor.color">
+                                    <li *ngFor="let pcolor of stock?.color_stock"
+                                        [class.active]="selected?.color === pcolor.color">
                                         <a (click)="setColor(pcolor)" *ngIf="pcolor.quantity > 0">
                                             <span [ngStyle]="{'background-color': pcolor.color}">
                                             </span>
@@ -108,7 +115,7 @@
                     </div>
                 </div>
                 <div class="product-detail-tab-detal">
-                    <div *ngFor="let item of productDetails.items">
+                    <div *ngFor="let item of productDetails?.items">
                         <details-collapse [item]='item'></details-collapse>
                     </div>
                 </div>

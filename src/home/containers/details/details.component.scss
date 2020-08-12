@@ -377,6 +377,7 @@ a {
 
 .shop-box {
   // border: 1px solid;
+  cursor: pointer;
   width: 100px;
   &-name {
     text-overflow: hidden;
@@ -387,8 +388,11 @@ a {
   &-image {
     margin: auto;
     height: 50px;
-    max-width: 100px;
+    max-width: 100%;
     display: block;
+  }
+  &.active{
+    border: 1px solid black;
   }
 }
 sup {

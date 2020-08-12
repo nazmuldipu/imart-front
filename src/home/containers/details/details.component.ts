@@ -26,32 +26,27 @@ export class DetailsComponent implements OnInit {
 
   product: Product;
   productDetails: ProductDetails;
+  stock: ProductStock;
   productStocks: ProductStock[] = [];
   shopImageUrl = '';
 
   imageObject = [];
-  productSize = {
-    size: 'S',
-    color_stock: [
-      { color: 'Red', quantity: 3 },
-      { color: 'Yellow', quantity: 5 },
-      { color: 'White', quantity: 2 },
-      { color: 'Orange', quantity: 5 },
-      { color: 'Cyan', quantity: 1 },
-      { color: 'Green', quantity: 0 },
-      { color: 'Purple', quantity: 5 },
-    ],
-  };
-  productColor;
+  // productSize = {
+  //   size: 'S',
+  //   color_stock: [
+  //     { color: 'Red', quantity: 3 },
+  //     { color: 'Yellow', quantity: 5 },
+  //     { color: 'White', quantity: 2 },
+  //     { color: 'Orange', quantity: 5 },
+  //     { color: 'Cyan', quantity: 1 },
+  //     { color: 'Green', quantity: 0 },
+  //     { color: 'Purple', quantity: 5 },
+  //   ],
+  // };
+  // productColor;
   quantity = 1;
+  selected;
 
-  show = {
-    description: false,
-    tags: false,
-    reviews: false,
-    sizing: false,
-    custom: false,
-  };
 
   constructor(private productService: ProductService, private productDetailsService: ProductDetailsService,
     private productStockService: ProductStockService, private shopService: ShopService, private activeRoute: ActivatedRoute) {
@@ -65,7 +60,7 @@ export class DetailsComponent implements OnInit {
       this.getProduct(this.id);
     }
     // this.productSize = this.product.stock[0];
-    this.productColor = this.productSize.color_stock[0];
+    // this.productColor = this.productSize.color_stock[0];
 
     // this.imageObject = [];
     // this.product.image_urls.forEach((url) => {
@@ -87,12 +82,23 @@ export class DetailsComponent implements OnInit {
     this.loading = true;
     try {
       this.productStocks = await this.productStockService.getProductStockByProductId(product_id).toPromise();
+      for (let i = 0; i < this.productStocks.length; i++) {
+        for (let j = 0; j < this.productStocks[i].color_stock.length; j++) {
+          if (this.productStocks[i].color_stock[j].quantity > 0) {
+            this.stock = this.productStocks[i];
+            this.selected = this.productStocks[i].color_stock[j];
+            break;
+          }
+        }
+        if (this.stock) {
+          break;
+        }
+      }
     } catch (error) {
       this.errorMessage = error;
     }
     this.loading = false;
   }
-
 
   async getProduct(id: string) {
     this.loading = true;
@@ -114,31 +120,46 @@ export class DetailsComponent implements OnInit {
   onThumbImageClick(event) {
     this.current = event;
   }
-
-  setSize(size) {
-    this.productSize = size;
-    this.productColor = null;
-    for (let pcolor of this.productSize.color_stock) {
-      if (pcolor.quantity > 0) {
-        this.productColor = pcolor;
+  onSelectShop(id) {
+    this.stock = this.productStocks.find(sh => sh._id == id);
+    for (let j = 0; j < this.stock.color_stock.length; j++) {
+      if (this.stock.color_stock[j].quantity > 0) {
+        this.selected = this.stock.color_stock[j];
         break;
       }
     }
   }
-  setColor(color) {
-    this.productColor = color;
+  setSize(size) {
+    // this.productSize = size;
+    // this.productColor = null;
+    // for (let pcolor of this.productSize.color_stock) {
+    //   if (pcolor.quantity > 0) {
+    //     this.productColor = pcolor;
+    //     break;
+    //   }
+    // }
   }
+
+  setColor(color) {
+    this.selected = color;
+  }
+
   setQuantity(num) {
-    this.quantity += num;
+    if (this.selected.quantity > this.quantity) {
+      this.quantity += num;
+    }
     if (this.quantity < 1) this.quantity = 1;
     if (this.quantity > 10) this.quantity = 10;
   }
+
   addToCart() {
     console.log('Add to cart');
   }
+
   addToFavourite() {
     console.log('addToFavourite');
   }
+
   onRefresh() {
     console.log('onRefresh');
   }
