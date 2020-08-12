@@ -1,7 +1,7 @@
 <div class="container-fluid component-head">
   <h3>Brands</h3>
 </div>
-<div class="container">
+<div class="container-fluid">
   <loading *ngIf="loading"></loading>
   <div class="alert alert-success alert-dismissible show" role="alert" *ngIf="message.length > 0">
     <strong>Success! </strong> {{ message }}
@@ -16,50 +16,17 @@
     <div class="col-12" *ngIf="!showBrandForm">
       <nav class="navbar navbar-light bg-light border">
         <a class="navbar-brand">Brand List</a>
-        <button type="button" class="btn btn-success btn-sm" (click)="onShowBrandForm()">
-          + ADD BRAND
-        </button>
-      </nav>
-      <div class="p-3 border border-top-0">
-        <form class="my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search Brands" aria-label="Search">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2 py-1" type="search" placeholder="Search Brands" aria-label="Search"
+            (keyup)="onSearch($event.target.value)">
+          <button type="button" class="btn btn-success btn-sm" (click)="onShowBrandForm()">
+            + ADD BRAND
+          </button>
         </form>
-
-        <table class="table table-striped table-bordered table-responsive-sm mt-2">
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th class="text-center">Priority</th>
-              <th class="text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="brands.length > 0">
-            <tr *ngFor="let brand of brands; index as i">
-              <td>
-                <img class="brand-image" [src]="imageUrl + brand._id" [alt]="brand.name + ' image'" />
-              </td>
-              <td>{{ brand.name }}</td>
-              <td class="text-center">{{ brand.priority }}</td>
-              <td class="text-right">
-                <div class="btn-group mr-2" role="group" aria-label="First group">
-
-                  <button type="button" class="btn btn-light border" (click)="onDelete(brand._id)">
-                    <i class="fa fa-trash-o"></i> </button>
-                  <button type="button" class="btn btn-light border" (click)="onEdit(brand._id)">
-                    <i class="fa fa-pencil"></i> </button>
-                </div>
-                <!-- <button class="btn btn-sm btn-warning mx-1" (click)="onEdit(brand._id)">
-                  <i class="fa fa-pencil"></i>
-                </button>
-                <button class="btn btn-sm btn-danger mx-1" (click)="onDelete(brand._id)">
-                  <i class="fa fa-trash-o"></i>
-                </button> -->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      </nav>
+      <brand-list [brands]="brands" [imageUrl]="imageUrl" (edit)="onEdit($event)" (delete)="onDelete($event)">
+      </brand-list>
+      <pagination *ngIf="brandPage" [page]="brandPage" (paginate)="onChangePage($event)"></pagination>
     </div>
 
     <div class="col-12" *ngIf="showBrandForm">

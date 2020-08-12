@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Brand } from 'src/shared/models/brand.model';
+import { Brand, BrandPage } from 'src/shared/models/brand.model';
 import { BrandService } from 'src/services/brand.service';
 import { UtilService } from 'src/services/util.service';
 
@@ -10,6 +10,7 @@ import { UtilService } from 'src/services/util.service';
 })
 export class BrandsComponent implements OnInit {
   brand: Brand;
+  brandPage: BrandPage;
   brands: Brand[] = [];
   imageUrl = '';
   message = '';
@@ -29,15 +30,37 @@ export class BrandsComponent implements OnInit {
     this.getAllBrand();
   }
 
-  async getAllBrand() {
+  async getAllBrand(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.brands = await this.brandService.getAll().toPromise();
-      this.brands.sort(this.utilService.dynamicSortObject('priority'));
+      this.brandPage = await this.brandService.getAll(page, limit, sort, order).toPromise();
+      this.brands = this.brandPage.docs;
     } catch (error) {
       this.errorMessage = error;
     }
     this.loading = false;
+  }
+
+  async onSearch(event) {
+    if (event.length > 2) {
+      this.loading = true;
+      this.brandPage = null;
+      try {
+        await this.brandService.search(event.toLowerCase()).subscribe(data => {
+          this.brands = data ? data : [];
+        });
+        // console.log(value);
+      } catch (error) {
+        this.errorMessage = error;
+      }
+      this.loading = false
+    } else if (event.length == 0) {
+      this.getAllBrand();
+    }
+  }
+
+  onChangePage(page) {
+    this.getAllBrand(page.pageNumber, page.limit, page.sort, page.order);
   }
 
   onShowBrandForm() {
@@ -49,7 +72,7 @@ export class BrandsComponent implements OnInit {
   }
 
   onEdit(id) {
-    const value = this.brands.find((c) => c._id == id);
+    const value = this.brandPage.docs.find((c) => c._id == id);
     this.brand = Object.assign({}, value);
     this.showBrandForm = true;
   }
@@ -61,7 +84,7 @@ export class BrandsComponent implements OnInit {
     try {
       const resp = await this.brandService.create(brand).toPromise();
       this.message = 'Category created';
-      this.brands.push(resp);
+      this.brandPage.docs.push(resp);
       this.showBrandForm = false;
     } catch (error) {
       this.errorMessage = error;
@@ -91,8 +114,8 @@ export class BrandsComponent implements OnInit {
       try {
         const res = await this.brandService.delete(id).toPromise();
         this.message = 'Brand deleted';
-        this.brands.splice(
-          this.brands.findIndex((c) => c._id == id),
+        this.brandPage.docs.splice(
+          this.brandPage.docs.findIndex((c) => c._id == id),
           1
         );
       } catch (err) {

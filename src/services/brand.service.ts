@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RestDataService } from './rest-data.service';
-import { Brand } from 'src/shared/models/brand.model';
+import { Brand, BrandPage } from 'src/shared/models/brand.model';
 import { Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -34,8 +35,14 @@ export class BrandService {
     return this.dataSource.sendRequest('PUT', this.brandUrl + `/${id}`, formData, true, null);
   }
 
-  getAll(): Observable<Brand[]> {
-    return this.dataSource.sendRequest('GET', this.brandUrl, null, false, null);
+  getAll(page: number, limit: number, sort: string, order: string): Observable<BrandPage> {
+    const params = this.generateParam(page, limit, sort, order);
+    return this.dataSource.sendRequest('GET', this.brandUrl, null, false, params);
+  }
+
+  search(param: string): Observable<Brand[]> {
+    const paramUrl = new HttpParams().set('param', param);
+    return this.dataSource.sendRequest('GET', this.brandUrl + '/search', null, false, paramUrl)
   }
 
   get(id): Observable<Brand> {
@@ -44,5 +51,13 @@ export class BrandService {
 
   delete(id): Observable<any> {
     return this.dataSource.sendRequest('DELETE', this.brandUrl + `/${id}`, null, true, null);
+  }
+
+  generateParam(page: number, limit: number, sort: string, order: string): HttpParams {
+    return new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString())
+      .set('sort', sort)
+      .set('order', order);
   }
 }

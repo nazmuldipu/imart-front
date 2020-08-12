@@ -6,7 +6,7 @@ import { UtilService } from 'src/services/util.service';
 import { Category } from 'src/shared/models/category.model';
 import { CategoryService } from 'src/services/category.service';
 import { BrandService } from 'src/services/brand.service';
-import { Brand } from 'src/shared/models/brand.model';
+import { Brand, BrandPage } from 'src/shared/models/brand.model';
 import { SubCategory, SubCategoryPage } from 'src/shared/models/sub-category.model';
 import { SubCategoryService } from 'src/services/sub-category.service';
 import { ProductDetailsService } from 'src/services/product-details.service';
@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   productsPage: ProductPage;
   categories: Category[] = [];
   subCategories: SubCategoryPage;
-  brands: Brand[] = [];
+  brands: BrandPage;
   imageUrl = '';
   thumbUrl = '';
   message = '';
@@ -86,10 +86,11 @@ export class ProductsComponent implements OnInit {
     this.loading = false;
   }
 
-  async getAllBrand() {
+  async getAllBrand(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.brands = await this.brandService.getAll().toPromise();
+      this.brands = await this.brandService.getAll(page, limit, sort, order).toPromise();
+      // this.brands.sort(this.utilService.dynamicSortObject('priority'));
     } catch (error) {
       this.errorMessage = error;
     }

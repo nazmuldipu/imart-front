@@ -1,0 +1,31 @@
+<div class="p-3 border border-top-0  bg-white">
+    <table class="table table-hover table-bordered table-responsive-sm mt-2 text-secondary">
+        <thead>
+            <tr>
+                <th>Sl #</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th class="text-center">Priority</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="brands.length > 0">
+            <tr *ngFor="let brand of brands; index as i">
+                <td>{{i+1}}</td>
+                <td>
+                    <img class="brand-image" [src]="imageUrl + brand._id" [alt]="brand.name + ' image'" />
+                </td>
+                <td>{{ brand.name }}</td>
+                <td class="text-center">{{ brand.priority }}</td>
+                <td class="text-right">
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-light border" (click)="onDelete(brand._id)">
+                            <i class="fa fa-trash-o"></i> </button>
+                        <button type="button" class="btn btn-light border" (click)="onEdit(brand._id)">
+                            <i class="fa fa-pencil"></i> </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
