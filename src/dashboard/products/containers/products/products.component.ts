@@ -86,6 +86,23 @@ export class ProductsComponent implements OnInit {
     this.loading = false;
   }
 
+  async onBrandSearch(event) {
+
+    if (event.length > 2) {
+      this.loading = true;
+      try {
+        await this.brandService.search(event.toLowerCase()).subscribe(data => {
+          this.brands = data ? data : [];
+        });
+      } catch (error) {
+        this.errorMessage = error;
+      }
+      this.loading = false
+    } else if (event.length == 0) {
+      this.getAllBrand();
+    }
+  }
+
   async getAllBrand(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {

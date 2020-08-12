@@ -20,6 +20,7 @@ export class ProductFormComponent implements OnChanges {
   @Output() create = new EventEmitter<Product>();
   @Output() update = new EventEmitter<Product>();
   @Output() close = new EventEmitter<Boolean>();
+  @Output() brandSearch = new EventEmitter<string>();
 
   brand: Brand;
   category: Category;
@@ -61,6 +62,10 @@ export class ProductFormComponent implements OnChanges {
       categoryId: ['', Validators.required],
       subCategoryId: ['', Validators.required],
       brandId: ['', Validators.required],
+      barcode: ['', [Validators.required, Validators.min(0)]],
+      point: [0, [Validators.required, Validators.min(0)]],
+      price: [0, [Validators.required, Validators.min(0)]],
+      old_price: [0, [Validators.required, Validators.min(0)]],
       priority: [0, [Validators.required, Validators.min(0)]],
       images: [null],
       thumb: [null]
@@ -99,6 +104,9 @@ export class ProductFormComponent implements OnChanges {
     // this.getAllSubCategoryByCategory()
   }
 
+  async onSearchBrand(event) {
+    this.brandSearch.emit(event.name);     
+  }
 
   async getAllSubCategoryByCategory(cat_slug: string) {
     this.loading = true;

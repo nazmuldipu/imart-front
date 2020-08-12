@@ -3,6 +3,7 @@ import { ProductDetails } from './product-details.model';
 export interface Product {
     _id: string;
     name: string;
+    barcode: string;
     description: string;
     slug: string;
     rating: number;
@@ -12,6 +13,7 @@ export interface Product {
     sub_category: SubCategory;
     brand: Brand;
     priority: number;
+    point: number;
     active: boolean;
     publish: boolean;
     image_count: number;

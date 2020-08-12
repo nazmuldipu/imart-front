@@ -16,11 +16,17 @@
 
 <div class="list-group" *ngIf="subCategory && !brand">
     <li class="list-group-item"><strong>Please select a Brand</strong></li>
+    <form #brandSearch="ngForm" class="ml-auto form-inline my-2 my-lg-0" (ngSubmit)="onSearchBrand(brandSearch.value)">
+        <input class="form-control mr-sm-2 py-1" type="search" placeholder="Search Brands" aria-label="Search"
+            name="name" ngModel>
+        <button class="btn btn-sm btn-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
     <a class="list-group-item list-group-item-action list-group-item-light py-1 text-dark" *ngFor="let br of brands"
         (click)="onBrand(br._id)">{{br.name}}</a>
 </div>
 
-<form [formGroup]="form" (ngSubmit)="submit()" class="p-3 border" *ngIf="category && subCategory && brand">
+<form [formGroup]="form" (ngSubmit)="submit()" class="p-3 border bg-white" *ngIf="category && subCategory && brand">
     <div class="form-group row">
         <label for="category" class="col-sm-2 col-form-label">Category</label>
         <div class="col-sm-8">
@@ -51,12 +57,26 @@
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-10">
-            <input type="name" class="form-control" id="name" formControlName="name" placeholder="Product name" />
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Product name" />
             <small class="text-danger" *ngIf="form.controls.name.errors && form.controls.name.touched">
                 <div [hidden]="!form.controls['name'].errors.required">
                     Name required
                 </div>
                 <div [hidden]="!form.controls['name'].errors.minlength">
+                    Minimum Length should be 3
+                </div>
+            </small>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="barcode" class="col-sm-2 col-form-label">Barcode</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="barcode" formControlName="barcode" placeholder="Product barcode" />
+            <small class="text-danger" *ngIf="form.controls.barcode.errors && form.controls.barcode.touched">
+                <div [hidden]="!form.controls['barcode'].errors.required">
+                    Barcode required
+                </div>
+                <div [hidden]="!form.controls['barcode'].errors.minlength">
                     Minimum Length should be 3
                 </div>
             </small>
@@ -75,13 +95,52 @@
     </div>
     <div class="form-group row">
         <label for="priority" class="col-sm-2 col-form-label">Priority</label>
-        <div class="col-sm-10">
+        <div class="col-sm-4">
             <input type="number" class="form-control" id="priority" formControlName="priority" placeholder="Priority" />
             <small class="text-danger" *ngIf="form.controls.priority.errors && form.controls.priority.touched">
                 <div [hidden]="!form.controls['priority'].errors.required">
                     Priority required
                 </div>
                 <div [hidden]="!form.controls['priority'].errors.min">
+                    Minimum value should be 0
+                </div>
+            </small>
+        </div>
+        <label for="priority" class="col-sm-2 col-form-label">Point</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" id="point" formControlName="point" placeholder="Point" />
+            <small class="text-danger" *ngIf="form.controls.point.errors && form.controls.point.touched">
+                <div [hidden]="!form.controls['point'].errors.required">
+                    Point required
+                </div>
+                <div [hidden]="!form.controls['point'].errors.min">
+                    Minimum value should be 0
+                </div>
+            </small>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="price" class="col-sm-2 col-form-label">Price</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" id="price" formControlName="price" placeholder="Price" />
+            <small class="text-danger" *ngIf="form.controls.price.errors && form.controls.price.touched">
+                <div [hidden]="!form.controls['price'].errors.required">
+                    Price required
+                </div>
+                <div [hidden]="!form.controls['price'].errors.min">
+                    Minimum value should be 0
+                </div>
+            </small>
+        </div>
+        <label for="old_price" class="col-sm-2 col-form-label">Old price</label>
+        <div class="col-sm-4">
+            <input type="number" class="form-control" id="old_price" formControlName="old_price"
+                placeholder="Old price" />
+            <small class="text-danger" *ngIf="form.controls.old_price.errors && form.controls.old_price.touched">
+                <div [hidden]="!form.controls['old_price'].errors.required">
+                    Old price required
+                </div>
+                <div [hidden]="!form.controls['old_price'].errors.min">
                     Minimum value should be 0
                 </div>
             </small>

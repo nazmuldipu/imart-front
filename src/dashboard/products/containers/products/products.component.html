@@ -151,7 +151,7 @@
             </div>
         </div>
         <div class="col-md-6 col-12" *ngIf="showProductForm">
-            <product-form [categories]="categories" [brands]="brands" [product]="product" (create)="onCreate($event)"
+            <product-form [categories]="categories" [brands]="brands" [product]="product" (create)="onCreate($event)" (brandSearch)="onBrandSearch($event)"
                 (update)="onUpdate($event)" (close)="onClose()">
             </product-form>
         </div>
