@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   productsPage: ProductPage;
   categories: Category[] = [];
   subCategories: SubCategoryPage;
-  brands: BrandPage;
+  brands: Brand[] = [];
   imageUrl = '';
   thumbUrl = '';
   message = '';
@@ -89,7 +89,8 @@ export class ProductsComponent implements OnInit {
   async getAllBrand(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.brands = await this.brandService.getAll(page, limit, sort, order).toPromise();
+      const value = await this.brandService.getAll(page, limit, sort, order).toPromise();
+      this.brands = value.docs;
       // this.brands.sort(this.utilService.dynamicSortObject('priority'));
     } catch (error) {
       this.errorMessage = error;
