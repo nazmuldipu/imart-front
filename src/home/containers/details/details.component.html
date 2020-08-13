@@ -48,13 +48,11 @@
                             <div class="product-detail-price">
                                 <ins><span>৳ {{product?.price}}</span></ins>
                             </div>
-                            
+
                             <!-- Stocked shop list -->
-                            {{stock | json}}
-                            <hr>
-                            {{selected | json}}
                             <div class="row">
-                                <div *ngFor="let ps of productStocks" class="col-auto p-0 mx-1 shadow shop-box" [class.active]="ps._id==stock._id" (click)="onSelectShop(ps._id)">
+                                <div *ngFor="let ps of stocks" class="col-auto p-0 mx-1 shadow shop-box"
+                                    [class.active]="ps.shop._id==stock.shop._id" (click)="onSelectShop(ps.shop._id)">
                                     <img class="shop-box-image" [src]="shopImageUrl + ps.shop._id"
                                         [alt]="ps.shop.name + ' image'" />
                                     <span class="shop-box-name">{{ps.shop.name}}</span>
@@ -69,8 +67,7 @@
                             <a class="mail-to-friend" href="#">Email to a Friend</a>
                             <div class="product-detail-size">
                                 <div class="product-detail-size-title">
-                                    <strong><sup>*</sup>Size:</strong><span
-                                        class="current-size">{{stock?.size}}</span>
+                                    <strong><sup>*</sup>Size:</strong><span class="current-size">{{stock?.size}}</span>
                                 </div>
                                 <!-- <ul class="product-detail-size-filter">
                                     <li *ngFor="let stock of product?.stock;index as i"

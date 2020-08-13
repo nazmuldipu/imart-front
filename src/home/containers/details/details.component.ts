@@ -26,7 +26,8 @@ export class DetailsComponent implements OnInit {
 
   product: Product;
   productDetails: ProductDetails;
-  stock: ProductStock;
+  stocks;
+  stock;
   productStocks: ProductStock[] = [];
   shopImageUrl = '';
 
@@ -82,18 +83,41 @@ export class DetailsComponent implements OnInit {
     this.loading = true;
     try {
       this.productStocks = await this.productStockService.getProductStockByProductId(product_id).toPromise();
+
+      const values = [];
       for (let i = 0; i < this.productStocks.length; i++) {
-        for (let j = 0; j < this.productStocks[i].color_stock.length; j++) {
-          if (this.productStocks[i].color_stock[j].quantity > 0) {
-            this.stock = this.productStocks[i];
-            this.selected = this.productStocks[i].color_stock[j];
-            break;
+        let ps = this.productStocks[i];
+
+        const ind = values.findIndex(sp => sp.shop._id == ps.shop._id);
+        if (ind == -1) {
+          const obj = { shop: ps.shop, size_array: [{ size: ps.size, color_stock: [] }] }
+          for (let j = 0; j < ps.color_stock.length; j++) {
+            obj.size_array[obj.size_array.length - 1].color_stock.push(ps.color_stock[j])
+          }
+          values.push(obj);
+        } else {
+          values[ind].size_array.push({ size: ps.size, color_stock: [] })
+          for (let j = 0; j < ps.color_stock.length; j++) {
+            values[ind].size_array[values[ind].size_array.length - 1].color_stock.push(ps.color_stock[j])
           }
         }
-        if (this.stock) {
-          break;
-        }
+
       }
+      this.stocks = values;
+
+      /*Select first selected shop and */
+      // for (let i = 0; i < this.stocks.length; i++) {
+      //   for (let j = 0; j < this.stocks[i].color_stock.length; j++) {
+      //     if (this.productStocks[i].color_stock[j].quantity > 0) {
+      this.stock = this.stocks[0];
+      this.selected = this.stocks[0].size_array[0];
+      //       break;
+      //     }
+      //   }
+      //   if (this.stock) {
+      //     break;
+      //   }
+      // }
     } catch (error) {
       this.errorMessage = error;
     }
@@ -121,13 +145,13 @@ export class DetailsComponent implements OnInit {
     this.current = event;
   }
   onSelectShop(id) {
-    this.stock = this.productStocks.find(sh => sh._id == id);
-    for (let j = 0; j < this.stock.color_stock.length; j++) {
-      if (this.stock.color_stock[j].quantity > 0) {
-        this.selected = this.stock.color_stock[j];
-        break;
-      }
-    }
+    this.stock = this.stocks.find(sh => sh.shop._id == id);
+    // for (let j = 0; j < this.stock.size_arraycolor_stock.length; j++) {
+    //   if (this.stock.color_stock[j].quantity > 0) {
+    //     this.selected = this.stock.color_stock[j];
+    //     break;
+    //   }
+    // }
   }
   setSize(size) {
     // this.productSize = size;
