@@ -69,12 +69,21 @@
                                 <div class="product-detail-size-title">
                                     <strong><sup>*</sup>Size:</strong><span class="current-size">{{stock?.size}}</span>
                                 </div>
+                                <!-- <span *ngFor="let sz of stock?.size_array" class="col-auto p-1 mx-1 size-box"
+                                    [class.active]="sz.size==selected?.size_array[0]?.size"
+                                    (click)="onSelectShop(ps.shop._id)">
+                                    <span class="shop-box-name">{{sz.size}}</span>
+                                </span> -->
                                 <!-- <ul class="product-detail-size-filter">
                                     <li *ngFor="let stock of product?.stock;index as i"
                                         [class.active]="stock.size===productSize.size"><a
                                             (click)="setSize(stock)">{{stock.size}}</a></li>
                                 </ul> -->
                             </div>
+
+                            {{stock | json}}
+                            <hr> {{selected | json}}
+
 
                             <div class="product-detail-color">
                                 <div class="product-detail-color-title">

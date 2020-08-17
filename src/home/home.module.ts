@@ -22,7 +22,7 @@ export const ROUTES: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: 'category/:id', component: CategoryComponent },
+      { path: 'category/:slug', component: CategoryComponent },
       { path: 'details/:id', component: DetailsComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },

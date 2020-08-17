@@ -5,19 +5,20 @@
                 {{title}}
             </div>
             <div class="widget-content" [class.opened]="titleCollapse">
-                <!-- Categories -->
+                <!--Sub Categories -->
                 <ul>
-                    <li *ngFor="let sub_cat of data">
+                    <li *ngFor="let sub_cat of data.sub_category">
                         <a class="widget-content-category"
                             [class.has-sub-cat]="sub_cat.sub_sub_category && sub_cat.sub_sub_category.length > 0"
-                            [class.opened]="sub_category === sub_cat.name"
-                            (click)="categoryClicked(sub_cat.name)">{{sub_cat.name}}</a>
+                            [class.opened]="sub_category?.slug === sub_cat.slug"
+                            (click)="onSubCategoryClick(sub_cat.slug)">{{sub_cat.name}}</a>
 
-                        <!-- Sub categories -->
+                        <!-- sub Sub categories -->
                         <ul *ngIf="sub_cat.sub_sub_category && sub_cat.sub_sub_category.length > 0"
-                            class="widget-content-sub-category" [class.opened]="sub_category === sub_cat.name">
+                            class="widget-content-sub-category" [class.opened]="sub_category?.slug === sub_cat.slug">
                             <li *ngFor="let subc of sub_cat.sub_sub_category">
-                                <a class="widget-content-sub-category-list" (click)="onSubCategoryCliked(subc.name)">{{subc.name}}</a>
+                                <a class="widget-content-sub-category-list"
+                                    (click)="onSubSubCategoryClik(subc.slug)">{{subc.name}}</a>
                             </li>
                         </ul>
 

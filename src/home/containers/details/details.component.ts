@@ -28,6 +28,7 @@ export class DetailsComponent implements OnInit {
   productDetails: ProductDetails;
   stocks;
   stock;
+  colors;
   productStocks: ProductStock[] = [];
   shopImageUrl = '';
 
@@ -110,7 +111,9 @@ export class DetailsComponent implements OnInit {
       //   for (let j = 0; j < this.stocks[i].color_stock.length; j++) {
       //     if (this.productStocks[i].color_stock[j].quantity > 0) {
       this.stock = this.stocks[0];
-      this.selected = this.stocks[0].size_array[0];
+      this.selected = { shop: this.stock.shop, size_array: [this.stock.size_array[0]] }
+      // this.colors = 
+      // this.selected = this.stocks[0];
       //       break;
       //     }
       //   }
@@ -146,6 +149,8 @@ export class DetailsComponent implements OnInit {
   }
   onSelectShop(id) {
     this.stock = this.stocks.find(sh => sh.shop._id == id);
+
+    this.selected = { shop: this.stock.shop, size_array: [this.stock.size_array[0]] }
     // for (let j = 0; j < this.stock.size_arraycolor_stock.length; j++) {
     //   if (this.stock.color_stock[j].quantity > 0) {
     //     this.selected = this.stock.color_stock[j];

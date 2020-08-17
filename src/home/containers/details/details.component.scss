@@ -391,9 +391,14 @@ a {
     max-width: 100%;
     display: block;
   }
-  &.active{
-    border: 1px solid black;
-  }
+}
+.size-box {
+  cursor: pointer;
+  border: 1px solid #f0f0f0;
+}
+.size-box.active,
+.shop-box.active {
+  border: 1px solid black;
 }
 sup {
   color: #ff4400;

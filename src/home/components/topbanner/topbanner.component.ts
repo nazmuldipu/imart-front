@@ -1,17 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Category } from 'src/shared/models/category.model';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-topbanner',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './topbanner.component.html',
   styleUrls: ['./topbanner.component.scss'],
 })
-export class TopbannerComponent implements OnInit {
-  @Input() categories: Category[];
-
-  @Input() thumbUrl: string;
-  
-  constructor() {}
-
-  ngOnInit(): void {}
+export class TopbannerComponent {
+  @Input() sideNav: any;
 }

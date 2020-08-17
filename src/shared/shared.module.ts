@@ -16,6 +16,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { DetailsCollapseComponent } from './components/details-collapse/details-collapse.component';
+import { CategoryComponentComponent } from './components/category-component/category-component.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { DetailsCollapseComponent } from './components/details-collapse/details-
     LoadingComponent,
     ToastComponent,
     PaginationComponent,
+    CategoryComponentComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule,
     RouterModule, CarouselModule],
@@ -52,7 +54,8 @@ import { DetailsCollapseComponent } from './components/details-collapse/details-
     ToastComponent,
     LoadingComponent,
     NgbModule,
-    PaginationComponent
+    PaginationComponent,
+    CategoryComponentComponent
   ],
 })
 export class SharedModule { }

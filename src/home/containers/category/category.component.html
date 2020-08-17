@@ -1,26 +1,26 @@
 <!--  -->
 <div class="container">
     <div class="banner-shop">
-        <div class="banner-shop-thumb" *ngIf="category">
-            <a href="#"><img [src]="catImageUrl + category?._id" alt=""></a>
+        <div class="banner-shop-thumb" *ngIf="categoryNav">
+            <a href="#"><img [src]="categoryNav?.image_urls[0]" alt=""></a>
         </div>
         <div class="banner-shop-info text-center">
-            <h2>{{category?.name}} style 2016</h2>
-            <p>Apple, Samsung, LG</p>
+            <h2>{{categoryNav?.name}}</h2>
+            <!-- <p>Apple, Samsung, LG</p> -->
         </div>
     </div>
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-dark text-white">
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{category?.name}}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{categoryNav?.name}}</li>
         </ol>
     </nav>
 
     <div class="row">
 
         <div class="col-md-3 col-12">
-            <side-nav-collapse [data]="subCategories?.docs" [title]="category?.name" (resp)="onSideNavClick($event)">
+            <side-nav-collapse [data]="categoryNav" [sub_category]="sub_category" [title]="categoryNav?.name" (resp)="onSideNavClick($event)">
             </side-nav-collapse>
 
             <price-filter (resp)="onPriceFilter($event)"></price-filter>
@@ -32,17 +32,34 @@
 
         <div class="col-md-9 col-12">
             <div class="products py-2 mb-3">
+                <!-- Show sub-categories -->
+                <div *ngIf="categoryNav && (!sub_category || sub_category?.sub_sub_category.length == 0)" class="row m-0">
+                    <div class="col-auto pr-0" *ngFor="let sub_cat of categoryNav?.sub_category">
+                        <category-component [data]="sub_cat" (select)="onSelectSubCategory($event)">
+                        </category-component>
+                    </div>
+                </div>
+
+                <div *ngIf="sub_category?.sub_sub_category.length> 0" class="row m-0">
+                    <div class="col-auto pr-0" *ngFor="let sub_cat of sub_category?.sub_sub_category">
+                        <category-component [data]="sub_cat" (select)="onSelectSubSubCategory($event)">
+                        </category-component>
+                    </div>
+                </div>
+
+
+
                 <div class="text-center" *ngIf="!productPage?.docs?.length">
                     <i class="fa fa-frown-o"></i> Sorry no product found
                 </div>
                 <div class="products-bar clearfix" *ngIf="productPage?.docs?.length">
                     <pagination [page]="productPage" (paginate)="onChangePage($event)"></pagination>
                 </div>
-                
+
                 <loading *ngIf="loading"></loading>
                 <div class="row clearfix m-0" *ngIf="!loading">
                     <div class="col-md-3 col-6" *ngFor="let product of productPage?.docs">
-                        <product1 [product]="product" [imageUrl]="prodImageUrl" [thumbUrl]="prodThumbUrl"></product1>
+                        <!-- <product1 [product]="product" [imageUrl]="prodImageUrl" [thumbUrl]="prodThumbUrl"></product1> -->
                     </div>
                     <div class="col-12" *ngIf="productPage?.docs?.length">
                         <pagination [page]="productPage" (paginate)="onChangePage($event)"></pagination>

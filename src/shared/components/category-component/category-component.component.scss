@@ -1,0 +1,45 @@
+.item-pro-color:hover {
+  z-index: 9;
+}
+.item-pro-color {
+  background: #fff none repeat scroll 0 0;
+  position: relative;
+  text-align: center;
+  margin: 0 -1px 20px;
+  transition: all 0.5s ease-out 0s;
+  -webkit-transition: all 0.5s ease-out 0s;
+}
+
+.item-thumb {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  &-link {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    img {
+      width: 200px;
+      height: 180px;
+      transition: all 0.5s ease-out 0s;
+      -webkit-transition: all 0.5s ease-out 0s;
+    }
+  }
+  &-title {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+    // text-transform: uppercase;
+  }
+}
+.item-thumb:hover {
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  .item-thumb-title {
+    color: #f40;
+  }
+  .item-thumb-link img {
+    transform: scale(1.1);
+  }
+}

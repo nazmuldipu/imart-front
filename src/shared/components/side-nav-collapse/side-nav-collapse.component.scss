@@ -93,7 +93,7 @@
       transition: ease-in-out 500ms max-height;
       &.opened {
         max-height: 100vh;
-        padding: 10px;
+        // padding: 10px;
         transition: ease-in-out 1000ms max-height;
       }
       &-list {

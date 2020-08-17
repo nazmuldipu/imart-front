@@ -7,12 +7,13 @@ import { SubCategory } from 'src/shared/models/sub-category.model';
   styleUrls: ['./side-nav-collapse.component.scss'],
 })
 export class SideNavCollapseComponent implements OnInit {
-  @Input() data: SubCategory[];
+  @Input() data;
   @Input() title: any;
+  @Input() sub_category;
+
   @Output() resp = new EventEmitter<any>();
 
   titleCollapse = true;
-  sub_category = '';
 
   constructor() { }
 
@@ -21,24 +22,15 @@ export class SideNavCollapseComponent implements OnInit {
   widgetTitleCollapse() {
     this.titleCollapse = !this.titleCollapse;
     this.sub_category = '';
+    this.resp.emit({ reset: true });
   }
 
-  categoryClicked(name) {
-    //Set subcategory components
-    if (this.sub_category === name) {
-      this.sub_category = '';
-    } else {
-      this.sub_category = name;
-    }
-
-    //if no sub category contain then emit
-    const obj = this.data.find((c) => c.name === name);
-    if (!!obj) {
-      this.resp.emit({ sub_category: obj.slug });
-    }
+  onSubCategoryClick(slug) {
+    const obj = this.data.sub_category.find(sc => sc.slug === slug);
+    this.resp.emit({ sub_category: obj.slug });
   }
 
-  onSubCategoryCliked(name) {
-    this.resp.emit({ category: this.sub_category, subCagegory: name });
+  onSubSubCategoryClik(slug) {
+    this.resp.emit({ sub_category: this.sub_category.slug, sub_sub_category: slug });
   }
 }

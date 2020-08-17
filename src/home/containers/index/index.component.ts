@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/services/category.service';
 import { Category } from 'src/shared/models/category.model';
 import { UtilService } from 'src/services/util.service';
+import { SideNavigation } from 'src/shared/json/side-nav';
 
 @Component({
   selector: 'app-index',
@@ -14,11 +15,13 @@ export class IndexComponent implements OnInit {
   loading = false;
   errorMessage = '';
 
+  sideNav = SideNavigation;
+  
   constructor(
     private categoryService: CategoryService,
     private utilService: UtilService
   ) {
-    this.getAllCategory();
+    // this.getAllCategory();
     this.thumbUrl = this.categoryService.catLink + '/thumb/';
   }
 

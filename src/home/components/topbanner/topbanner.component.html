@@ -6,8 +6,11 @@
             <div class="cat-icon4">
                 <div class="wrap-cat-icon">
                     <ul class="list-cat-icon">
-                        <li *ngFor="let cat of categories"><a [routerLink]="'/category/'+cat._id"><img class="category-image" [src]="thumbUrl + cat._id" /><span>{{ cat.name }}</span></a></li>
-                        
+                        <li *ngFor="let cat of sideNav.category"><a [routerLink]="'/category/'+cat.slug"><img
+                                    class="category-image"
+                                    [src]="'assets/images/icons/'+cat.slug+'.svg'" /><span>{{ cat.name }}</span></a>
+                        </li>
+
                         <!-- <li class="has-cat-mega">
                             <a href="#"><img src="assets/images/cat-icon/cat1.png" alt=""><span>Mobiles &amp;
                                     Tablets</span></a>
