@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/services/category.service';
 import { Category } from 'src/shared/models/category.model';
 import { UtilService } from 'src/services/util.service';
-import { SideNavigation } from 'src/shared/json/side-nav';
+import { CategoryTree } from 'src/shared/json/category-tree';
 
 @Component({
   selector: 'app-index',
@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
   loading = false;
   errorMessage = '';
 
-  sideNav = SideNavigation;
+  sideNav = CategoryTree;
   
   constructor(
     private categoryService: CategoryService,

@@ -33,33 +33,32 @@
         <div class="col-md-9 col-12">
             <div class="products py-2 mb-3">
                 <!-- Show sub-categories -->
-                <div *ngIf="categoryNav && (!sub_category || sub_category?.sub_sub_category.length == 0)" class="row m-0">
+                <div *ngIf="!productPage && categoryNav && (!sub_category || sub_category?.sub_sub_category.length == 0)" class="row m-0">
                     <div class="col-auto pr-0" *ngFor="let sub_cat of categoryNav?.sub_category">
                         <category-component [data]="sub_cat" (select)="onSelectSubCategory($event)">
                         </category-component>
                     </div>
                 </div>
 
-                <div *ngIf="sub_category?.sub_sub_category.length> 0" class="row m-0">
+                <div *ngIf="!productPage && sub_category?.sub_sub_category.length> 0" class="row m-0">
                     <div class="col-auto pr-0" *ngFor="let sub_cat of sub_category?.sub_sub_category">
                         <category-component [data]="sub_cat" (select)="onSelectSubSubCategory($event)">
                         </category-component>
                     </div>
                 </div>
 
-
-
-                <div class="text-center" *ngIf="!productPage?.docs?.length">
-                    <i class="fa fa-frown-o"></i> Sorry no product found
-                </div>
-                <div class="products-bar clearfix" *ngIf="productPage?.docs?.length">
+                
+                <!-- <div class="products-bar clearfix" *ngIf="productPage?.docs?.length">
                     <pagination [page]="productPage" (paginate)="onChangePage($event)"></pagination>
-                </div>
+                </div> -->
 
                 <loading *ngIf="loading"></loading>
-                <div class="row clearfix m-0" *ngIf="!loading">
+                <div class="row clearfix m-0" *ngIf="!loading && productPage">
+                    <div class="col-12 text-center" *ngIf="productPage.docs.length == 0">
+                        <i class="fa fa-frown-o"></i> Sorry no product found
+                    </div>
                     <div class="col-md-3 col-6" *ngFor="let product of productPage?.docs">
-                        <!-- <product1 [product]="product" [imageUrl]="prodImageUrl" [thumbUrl]="prodThumbUrl"></product1> -->
+                        <product1 [product]="product" [imageUrl]="prodImageUrl" [thumbUrl]="prodThumbUrl"></product1>
                     </div>
                     <div class="col-12" *ngIf="productPage?.docs?.length">
                         <pagination [page]="productPage" (paginate)="onChangePage($event)"></pagination>

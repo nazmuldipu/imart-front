@@ -1,32 +1,31 @@
-<!-- {{product | json}} -->
 <div class="item-pro-color">
     <div class="product-thumb">
         <div class="product-label">
             <span *ngIf="product.isNew" class="new-label">new</span>
             <span *ngIf="product.isSale" class="sale-label">sale</span>
         </div>
-        <a routerLink="/details/{{product._id}}" class="product-thumb-link">
+        <a routerLink="/details/{{product._id}}" class="product-thumb-link" target="_blank">
             <img class="active" [src]="thumbUrl + product._id" alt="">
             <!-- <img *ngFor='let in of counter(product.image_count);let i = index' [class.active]="i==imageIndex"
                 [src]="imageUrl + product._id + '/' + i" alt=""> -->
         </a>
-        <a routerLink="/details/{{product._id}}" class="quickview-link plus fancybox.iframe"><span>quick view</span></a>
+        <a routerLink="/details/{{product._id}}" class="quickview-link plus fancybox.iframe" target="_blank"><span>Add to cart</span></a>
     </div>
     <div class="product-info">
         <!-- <div class="list-color">
             <a *ngFor="let in of counter(product.image_count);let i = index" (click)="onSlideImage(i)"
                 [ngStyle]="{'background-color':i==imageIndex ? '#868fff' : '#404040' }"></a>
         </div> -->
-        <h3 class="product-title"><a href="detail.html">{{product.name}}</a></h3>
+        <h3 class="product-title"><a routerLink="/details/{{product._id}}" target="_blank">{{product.name}}</a></h3>
         <div class="product-price">
             <ins><span>৳{{product.price}}</span></ins>
-            <del><span>৳{{product.old_price}}</span></del>
+            <del *ngIf="product.old_price > 0"><span>৳{{product.old_price}}</span></del>
         </div>
         <div class="product-extra-link">
-            <a href="#" class="addcart-link"><i class="fa fa-shopping-basket" aria-hidden="true"></i><span>Add to
+            <a class="addcart-link" placement="bottom" ngbTooltip="Add to cart"><i class="fa fa-shopping-basket" aria-hidden="true"></i><span>Add to
                     Cart</span></a>
-            <a href="#" class="wishlist-link"><i class="fa fa-heart" aria-hidden="true"></i><span>Wishlist</span></a>
-            <a href="#" class="compare-link"><i class="fa fa-refresh" aria-hidden="true"></i><span>Compare</span></a>
+            <a class="wishlist-link" placement="bottom" ngbTooltip="Add to wish list"><i class="fa fa-heart" aria-hidden="true" ></i><span>Wishlist</span></a>
+            <a routerLink="/details/{{product._id}}" class="compare-link" target="_blank" placement="bottom" ngbTooltip="Details"><i class="fa fa-file-o" aria-hidden="true"></i></a>
         </div>
     </div>
 </div>

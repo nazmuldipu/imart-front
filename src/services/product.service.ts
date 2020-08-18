@@ -17,15 +17,25 @@ export class ProductService {
 
   create(product: Product): Observable<Product> {
     var formData = new FormData();
-
     Object.keys(product).forEach((key) => {
-      formData.append(key, product[key]);
+      if (key === 'category' || key === 'sub_category' || key === 'sub_sub_category' || key === 'brand') {
+        formData.append(key, JSON.stringify(product[key]));
+      }
+      else {
+        formData.append(key, product[key]);
+      }
     });
 
+    console.log(product);
+    new Response(formData).text().then(console.log)
+
     formData.delete('images')
+    formData.delete('thumb')
+
     for (var i = 0; i < product['images'].length; i++) {
       formData.append('images', product['images'][i]);
     }
+    formData.append('thumb', product['thumb']);
 
     return this.dataSource.sendRequest('POST', this.productUrl, formData, true, null);
   }
@@ -70,6 +80,11 @@ export class ProductService {
   getBySubCategorySlug(sub_category_slug: string, page: number, limit: number, sort: string, order: string): Observable<ProductPage> {
     const params = this.generateParam(page, limit, sort, order);
     return this.dataSource.sendRequest('GET', this.productUrl + `/sub_category/${sub_category_slug}`, null, false, params);
+  }
+
+  getBySubSubCategorySlug(sub_sub_category_slug: string, page: number, limit: number, sort: string, order: string): Observable<ProductPage> {
+    const params = this.generateParam(page, limit, sort, order);
+    return this.dataSource.sendRequest('GET', this.productUrl + `/sub_sub_category/${sub_sub_category_slug}`, null, false, params);
   }
 
   getByBrandSlug(brand_slug: string, page: number, limit: number, sort: string, order: string): Observable<Product[]> {

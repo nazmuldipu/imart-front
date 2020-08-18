@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { BrandService } from 'src/services/brand.service';
+import { CategoryService } from 'src/services/category.service';
+import { ProductDetailsService } from 'src/services/product-details.service';
 import { ProductService } from 'src/services/product.service';
-import { Product, ProductPage } from 'src/shared/models/product.model';
+import { SubCategoryService } from 'src/services/sub-category.service';
 import { ToastService } from 'src/services/toast.service';
 import { UtilService } from 'src/services/util.service';
-import { Category } from 'src/shared/models/category.model';
-import { CategoryService } from 'src/services/category.service';
-import { BrandService } from 'src/services/brand.service';
-import { Brand, BrandPage } from 'src/shared/models/brand.model';
-import { SubCategory, SubCategoryPage } from 'src/shared/models/sub-category.model';
-import { SubCategoryService } from 'src/services/sub-category.service';
-import { ProductDetailsService } from 'src/services/product-details.service';
+import { Brand } from 'src/shared/models/brand.model';
+import { Product, ProductPage } from 'src/shared/models/product.model';
+import { CategoryTree } from 'src/shared/json/category-tree';
+import { BrandsObjects } from 'src/shared/json/brands';
 
 @Component({
   selector: 'app-products',
@@ -18,11 +18,15 @@ import { ProductDetailsService } from 'src/services/product-details.service';
 })
 
 export class ProductsComponent implements OnInit {
+  sideNav = CategoryTree;
+
   product: Product;
   productsPage: ProductPage;
-  categories: Category[] = [];
-  subCategories: SubCategoryPage;
-  brands: Brand[] = [];
+  categories = [];
+  subCategories = [];
+  subSubCategories = [];
+  brands;
+  // brands: Brand[] = [];
   imageUrl = '';
   thumbUrl = '';
   message = '';
@@ -39,7 +43,7 @@ export class ProductsComponent implements OnInit {
     private productDetailsService: ProductDetailsService,
     private utilService: UtilService,
     public toastService: ToastService) {
-
+    this.brands = BrandsObjects;
     this.imageUrl = this.productService.productLink + '/image/';
     this.thumbUrl = this.productService.productLink + '/thumb/';
   }
@@ -48,7 +52,7 @@ export class ProductsComponent implements OnInit {
     this.getAllProducts();
     this.getAllCategory();
     // this.getAllSubCategory();
-    this.getAllBrand();
+    // this.getAllBrand();
   }
 
   async getAllProducts(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
@@ -67,53 +71,49 @@ export class ProductsComponent implements OnInit {
   }
 
   async getAllCategory() {
-    this.loading = true;
-    try {
-      this.categories = await this.categoryService.getAll().toPromise();
-    } catch (error) {
-      this.errorMessage = error;
-    }
-    this.loading = false;
+    this.categories = this.sideNav.category;
+    // this.loading = true;
+    // try {
+    //   this.categories = await this.categoryService.getAll().toPromise();
+    // } catch (error) {
+    //   this.errorMessage = error;
+    // }
+    // this.loading = false;
   }
 
   async getAllSubCategory(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
-    this.loading = true;
-    try {
-      this.subCategories = await this.subCategoryService.getAll(page, limit, sort, order).toPromise();
-    } catch (error) {
-      this.errorMessage = error;
-    }
-    this.loading = false;
+    // this.loading = true;
+    // try {
+    //   this.subCategories = await this.subCategoryService.getAll(page, limit, sort, order).toPromise();
+    // } catch (error) {
+    //   this.errorMessage = error;
+    // }
+    // this.loading = false;
   }
 
   async onBrandSearch(event) {
-
-    if (event.length > 2) {
-      this.loading = true;
-      try {
-        await this.brandService.search(event.toLowerCase()).subscribe(data => {
-          this.brands = data ? data : [];
-        });
-      } catch (error) {
-        this.errorMessage = error;
-      }
-      this.loading = false
-    } else if (event.length == 0) {
-      this.getAllBrand();
-    }
+    this.brands = BrandsObjects.filter(item =>
+      Object.keys(item).some(
+        k =>
+          item[k] != null &&
+          item[k]
+            .toString()
+            .toLowerCase()
+            .includes(event.toLowerCase())
+      ));
   }
 
-  async getAllBrand(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
-    this.loading = true;
-    try {
-      const value = await this.brandService.getAll(page, limit, sort, order).toPromise();
-      this.brands = value.docs;
-      // this.brands.sort(this.utilService.dynamicSortObject('priority'));
-    } catch (error) {
-      this.errorMessage = error;
-    }
-    this.loading = false;
-  }
+  // async getAllBrand(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
+  //   this.loading = true;
+  //   try {
+  //     const value = await this.brandService.getAll(page, limit, sort, order).toPromise();
+  //     this.brands = value.docs;
+  //     // this.brands.sort(this.utilService.dynamicSortObject('priority'));
+  //   } catch (error) {
+  //     this.errorMessage = error;
+  //   }
+  //   this.loading = false;
+  // }
 
   async getProductDetails(product_id: string) {
     this.loading = true;

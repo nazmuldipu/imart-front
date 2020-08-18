@@ -13,8 +13,8 @@ import { SubCategoryService } from 'src/services/sub-category.service';
 })
 export class ProductFormComponent implements OnChanges {
   @Input() product: Product;
-  @Input() categories: Category[];
-  @Input() brands: Brand[];
+  @Input() categories;
+  @Input() brands;
 
   @Output() subcat = new EventEmitter<Category>();
   @Output() create = new EventEmitter<Product>();
@@ -23,9 +23,11 @@ export class ProductFormComponent implements OnChanges {
   @Output() brandSearch = new EventEmitter<string>();
 
   brand: Brand;
-  category: Category;
-  subCategory: SubCategory;
-  subCategories: SubCategoryPage;
+  category;
+  subCategory;
+  subCategories;
+  subSubCategory;
+  subSubCategories;
   form: FormGroup;
 
   exists = false;
@@ -39,16 +41,16 @@ export class ProductFormComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     // if(changes.su)
-    if (this.product && this.product._id) {
+    if (this.product && this.product.slug) {
       this.exists = true;
-      this.category = this.categories.find(cat => cat._id === this.product.category._id);
-      this.brand = this.brands.find(b => b._id === this.product.brand._id);
+      this.category = this.categories.find(cat => cat.slug === this.product.category.slug);
+      this.brand = this.brands.find(b => b.slug === this.product.brand.slug);
       this.getAllSubCategoryByCategory(this.category.slug);
       this.form.reset();
       const value = {
-        categoryId: this.product.category._id,
+        categoryId: this.product.category.slug,
         // subCategoryId: this.product?.sub_category?._id,
-        brandId: this.product.brand._id,
+        brandId: this.product.brand.slug,
         ...this.product
       };
       this.form.patchValue(value);
@@ -59,9 +61,10 @@ export class ProductFormComponent implements OnChanges {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', Validators.required],
-      categoryId: ['', Validators.required],
-      subCategoryId: ['', Validators.required],
-      brandId: ['', Validators.required],
+      category: ['', Validators.required],
+      sub_category: ['', Validators.required],
+      sub_sub_category: [''],
+      brand: ['', Validators.required],
       barcode: ['', [Validators.required, Validators.min(0)]],
       point: [0, [Validators.required, Validators.min(0)]],
       price: [0, [Validators.required, Validators.min(0)]],
@@ -91,43 +94,39 @@ export class ProductFormComponent implements OnChanges {
     this.form.get('thumb').updateValueAndValidity()
   }
 
-  onCategory(id) {
-    this.category = this.categories.find(cat => cat._id === id);
+  onCategory(slug) {
+    this.category = this.categories.find(cat => cat.slug === slug);
     // this.subcat.emit(this.category);
-    this.form.controls.categoryId.setValue(id);
+    this.form.controls.category.setValue({ "name": this.category.name, "image_urls": this.category.image_urls });
     this.getAllSubCategoryByCategory(this.category.slug);
   }
 
-  onSubCategory(id) {
-    this.subCategory = this.subCategories.docs.find(sc => sc._id === id);
-    this.form.controls.subCategoryId.setValue(id);
-    // this.getAllSubCategoryByCategory()
+  onSubCategory(slug) {
+    this.subCategory = this.subCategories.find(sc => sc.slug === slug);
+    this.form.controls.sub_category.setValue({ "name": this.subCategory.name, "image_urls": this.subCategory.image_urls });
+    this.getAllSubCategoryBySubCategory(this.subCategory.slug)
   }
 
-  async onSearchBrand(event) {
-    this.brandSearch.emit(event.name);     
+  onSubSubCategory(slug) {
+    this.subSubCategory = this.subSubCategories.find(ssc => ssc.slug === slug);
+    this.form.controls.sub_sub_category.setValue({ "name": this.subSubCategory.name, "image_urls": this.subSubCategory.image_urls })
   }
 
-  async getAllSubCategoryByCategory(cat_slug: string) {
-    this.loading = true;
-    try {
-      this.subCategories = await this.subCategoryService.getByCategorySlug(cat_slug).toPromise();
-      if (this.exists) {
-        this.subCategory = this.subCategories.docs.find(sb => sb._id === this.product?.sub_category?._id)
-        const value = {
-          subCategoryId: this.product?.sub_category?._id,
-        };
-        this.form.patchValue(value);
-      }
-    } catch (error) {
-      this.errorMessage = error;
-    }
-    this.loading = false;
+  onSearchBrand(event) {
+    this.brandSearch.emit(event.name);
   }
 
-  onBrand(id) {
-    this.brand = this.brands.find(b => b._id === id);
-    this.form.controls.brandId.setValue(id);
+  getAllSubCategoryByCategory(cat_slug: string) {
+    this.subCategories = this.category.sub_category;
+  }
+
+  getAllSubCategoryBySubCategory(sub_cat_slug: string) {
+    this.subSubCategories = this.subCategory.sub_sub_category;
+  }
+
+  onBrand(slug) {
+    this.brand = this.brands.find(b => b.slug === slug);
+    this.form.controls.brand.setValue({ "name": this.brand.name, "image_urls": this.brand.image_urls });
   }
 
   onClear() {
@@ -137,14 +136,22 @@ export class ProductFormComponent implements OnChanges {
     this.subCategory = null;
     this.form.reset();
   }
-
-  onSubCategoryChange() {
-    this.subCategory = null;
-  }
+  
   onCategoryChange() {
     this.category = null;
     this.subCategory = null;
+    this.subSubCategory = null;
   }
+  
+  onSubCategoryChange() {
+    this.subCategory = null;
+    this.subSubCategory = null;
+  }
+
+  onSubSubCategoryChange() {
+    this.subSubCategory = null;
+  }
+
   onBrandChange() {
     this.brand = null;
   }

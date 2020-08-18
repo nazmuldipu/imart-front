@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/services/product.service';
-import { SideNavigation } from 'src/shared/json/side-nav';
+import { CategoryTree } from 'src/shared/json/category-tree';
 import { ProductPage } from 'src/shared/models/product.model';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProductPage } from 'src/shared/models/product.model';
   styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
-  sideNav = SideNavigation;
+  sideNav = CategoryTree;
   productPage: ProductPage;
 
   slug: string;
@@ -18,6 +18,8 @@ export class CategoryComponent implements OnInit {
   sub_category;
   sub_sub_category;
 
+  prodImageUrl;
+  prodThumbUrl;
   loading = false;
   errorMessage = '';
 
@@ -26,6 +28,8 @@ export class CategoryComponent implements OnInit {
     private activeRoute: ActivatedRoute
   ) {
     this.slug = activeRoute.snapshot.params['slug'];
+    this.prodImageUrl = this.productService.productLink + '/image/';
+    this.prodThumbUrl = this.productService.productLink + '/thumb/';
   }
 
   ngOnInit(): void {
@@ -62,6 +66,17 @@ export class CategoryComponent implements OnInit {
     this.loading = false;
   }
 
+  async getProductBySubSubCategory(sub_sub_category_slug: string, page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
+    this.loading = true;
+    try {
+      this.productPage = await this.productService.getBySubSubCategorySlug(sub_sub_category_slug, page, limit, sort, order).toPromise();
+      // window.scroll(0, 0);
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
+  }
+
   onChangePage(page) {
     // if (this.sub_category_slug == null) {
     //   this.getProductByCategory(this.category.slug, page.pageNumber, page.limit, page.sort, page.order)
@@ -87,12 +102,14 @@ export class CategoryComponent implements OnInit {
   onSelectSubCategory(slug) {
     this.sub_category = this.categoryNav.sub_category.find(sc => sc.slug == slug);
     if (this.sub_category && this.sub_category.sub_sub_category.length == 0) {
-      console.log('//TODO: Load product by sub_category', this.sub_category.slug);
+      // console.log('//TODO: Load product by sub_category', this.sub_category.slug);
+      this.getProductBySubCategory(this.sub_category.slug);
     }
   }
   onSelectSubSubCategory(slug) {
     this.sub_sub_category = this.sub_category.sub_sub_category.find(ssc => ssc.slug == slug);
-    console.log('//TODO: Load product by sub_sub_category', this.sub_sub_category.slug);
+    // console.log('//TODO: Load product by sub_sub_category', this.sub_sub_category.slug);
+    this.getProductBySubSubCategory(this.sub_sub_category.slug);
   }
 
   onPriceFilter(data) {

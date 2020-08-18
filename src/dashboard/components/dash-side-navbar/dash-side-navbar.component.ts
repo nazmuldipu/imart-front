@@ -24,34 +24,38 @@ export class DashSideNavbarComponent implements OnInit {
         { name: 'Widgets', icon: 'fa-windows', roles: ['ADMIN'], link: '/dashboard' },
       ],
     },
-    {
-      name: 'Category',
-      icon: 'fa-cubes',
-      roles: ['ADMIN'],
-      subnav: [
-        {
-          name: 'Categories', icon: 'fa-cube',
-          roles: ['ADMIN'], link: '/dashboard/categories'
-        },
-        {
-          name: 'Sub Categories', icon: 'fa-flask',
-          roles: ['ADMIN'], link: '/dashboard/categories/sub-category'
-        },
-      ],
-    },
+    // {
+    //   name: 'Category',
+    //   icon: 'fa-cubes',
+    //   roles: ['ADMIN'],
+    //   subnav: [
+    //     {
+    //       name: 'Categories', icon: 'fa-cube',
+    //       roles: ['ADMIN'], link: '/dashboard/categories'
+    //     },
+    //     {
+    //       name: 'Sub Categories', icon: 'fa-flask',
+    //       roles: ['ADMIN'], link: '/dashboard/categories/sub-category'
+    //     },
+    //   ],
+    // },
     {
       name: 'Product',
       icon: 'fa-tag',
       roles: ['ADMIN', 'SHOP'],
       subnav: [
+        // {
+        //   name: 'Brands', icon: 'fa-tags',
+        //   roles: ['ADMIN'], link: '/dashboard/products/brands'
+        // },
         {
-          name: 'Brands', icon: 'fa-tags',
-          roles: ['ADMIN'], link: '/dashboard/products/brands'
+          name: 'Storehouse', icon: 'fa-shield',
+          roles: ['ADMIN'], link: '/dashboard/products/storehouse'
         },
-        {
-          name: 'Shops', icon: 'fa-shopping-bag',
-          roles: ['ADMIN'], link: '/dashboard/products/shops',
-        },
+        // {
+        //   name: 'Shops', icon: 'fa-shopping-bag',
+        //   roles: ['ADMIN'], link: '/dashboard/products/shops',
+        // },
         {
           name: 'Products', icon: 'fa-shopping-bag',
           roles: ['SHOP', 'ADMIN'], link: '/dashboard/products/',

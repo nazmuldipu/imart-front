@@ -11,6 +11,7 @@ export interface Product {
     old_price: number;
     category: Category;
     sub_category: SubCategory;
+    sub_sub_category: SubSubCategory;
     brand: Brand;
     priority: number;
     point: number;
@@ -18,7 +19,7 @@ export interface Product {
     publish: boolean;
     image_count: number;
     image_urls: string[];
-    thumb: string[];
+    thumb: any;
     inStock: boolean;
     isNew: boolean;
     isSale: boolean;
@@ -39,6 +40,12 @@ interface SubCategory {
     image_urls: string[];
 }
 
+interface SubSubCategory {
+    _id: string;
+    slug: string;
+    name: string;
+    image_urls: string[];
+}
 
 interface Brand {
     _id: string;
