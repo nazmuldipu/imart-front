@@ -1,3 +1,4 @@
+
 export interface InventoryPage {
     docs: Inventory[];
     hasNextPage: boolean;
@@ -13,21 +14,21 @@ export interface InventoryPage {
 
 export interface Inventory {
     _id: string;
+    reference: string;
     inventoryType: string;
-    shop: Shop;
+    storehouse: Storehouse;
+    supplier: User;
     createdAt: Date;
     createdBy: User;
     updatedAt: Date;
     updatedBy: User;
-    supplier: User;
-    reference: string;
     items: ProductItem[];
 }
 
 interface ProductItem {
     product: Product;
-    size: string;
-    color_stock: ColorStock[];
+    quantity: number;
+    purchase_price: number;
 }
 
 interface User{
@@ -36,20 +37,13 @@ interface User{
     phone: string;
 }
 
-interface ColorStock {
-    color: string,
-    quantity: number,
-    price: number,
-    purchase_price: number,
-}
-
 interface Product {
     _id: string,
     name: string,
     slug: string
 }
 
-interface Shop {
+interface Storehouse {
     _id: string,
     name: string,
     slug: string

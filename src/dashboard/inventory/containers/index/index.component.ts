@@ -3,6 +3,8 @@ import { ShopService } from 'src/services/shop.service';
 import { InventoryService } from 'src/services/inventory.service';
 import { ShopPage, Shop } from 'src/shared/models/shop.model';
 import { Inventory, InventoryPage } from 'src/shared/models/inventory.model';
+import { StorehouseService } from 'src/services/storehouse.service';
+import { Storehouse, StorehousePage } from 'src/shared/models/storehouse.model';
 
 @Component({
   selector: 'app-index',
@@ -10,8 +12,8 @@ import { Inventory, InventoryPage } from 'src/shared/models/inventory.model';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent implements OnInit {
-  shop: Shop;
-  shopPage: ShopPage;
+  storehouse: Storehouse;
+  storehousePage: StorehousePage;
   inventory: Inventory;
   inventoryPage: InventoryPage;
 
@@ -19,34 +21,35 @@ export class IndexComponent implements OnInit {
   message = '';
   errorMessage = '';
 
-  constructor(private shopService: ShopService, private inventoryService: InventoryService) { }
+  constructor(private storehouseService: StorehouseService, private inventoryService: InventoryService) { }
 
   ngOnInit(): void {
-    this.getAllShops();
+    this.getAllStorehouse();
   }
 
-  async getAllShops(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
+  async getAllStorehouse(page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.shopPage = await this.shopService.getAll(page, limit, sort, order).toPromise();
+      this.storehousePage = await this.storehouseService.getAll(page, limit, sort, order).toPromise();
     } catch (error) {
       this.errorMessage = error;
     }
     this.loading = false;
   }
 
-  async getInventoryByShopId(shopId, page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
+  async getInventoryByStorehouseId(storehouseId, page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
-      this.inventoryPage = await this.inventoryService.getInventoryByShop(shopId, page, limit, sort, order).toPromise();
+      console.log(storehouseId);
+      this.inventoryPage = await this.inventoryService.getInventoryByStorehouse(storehouseId, page, limit, sort, order).toPromise();
     } catch (error) {
       this.errorMessage = error;
     }
     this.loading = false;
   }
 
-  onChangeShopPage(page) {
-    this.getAllShops(page.pageNumber, page.limit, page.sort, page.order)
+  onChangeStorehousePage(page) {
+    this.getAllStorehouse(page.pageNumber, page.limit, page.sort, page.order)
   }
 
   onDetails(id) {
@@ -59,15 +62,14 @@ export class IndexComponent implements OnInit {
     // this.inventory = Object.assign({}, value);
   }
 
-  onChangeInventoryPage(shopId, page) {
-    console.log(shopId, page);
-    this.getInventoryByShopId(shopId, page.pageNumber, page.limit, page.sort, page.order)
+  onChangeInventoryPage(storehouseId, page) {
+    this.getInventoryByStorehouseId(storehouseId, page.pageNumber, page.limit, page.sort, page.order)
   }
 
-  onSelectShop(id) {
-    const value = this.shopPage.docs.find((s) => s._id == id);
-    this.shop = Object.assign({}, value);
-    this.getInventoryByShopId(id);
+  onSelectStorehouse(id) {
+    const value = this.storehousePage.docs.find((s) => s._id == id);
+    this.storehouse = Object.assign({}, value);
+    this.getInventoryByStorehouseId(id);
   }
 
   onClose(value) {
@@ -77,7 +79,7 @@ export class IndexComponent implements OnInit {
         break;
       case 'list':
         this.inventoryPage = null;
-        this.shop = null;
+        this.storehouse = null;
         break;
     }
   }
