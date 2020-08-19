@@ -8,85 +8,69 @@
     </div>
 </nav>
 
-<div class="form-group row my-1">
-    <div class="col-sm-6">
-        <!-- <div class="row"> -->
+<div class="form-group row m-0 my-1">
+    <div class="col-sm-6 p-0">
         <label for="createdAt" class="col-auto col-form-label">Ref:</label>
         <label id="createdAt" class="col-form-label">{{inventory?.reference}}</label>
-        <!-- </div> -->
+    </div>
+    <div class="col-sm-6 p-0">
+        <label for="createdAt" class="col-auto col-form-label">Inventory Type:</label>
+        <label id="createdAt" class="col-form-label">{{inventory?.inventoryType}}</label>
     </div>
 </div>
-<div class="form-group row border-top my-1">
-    <div class="col-sm-6">
+<div class="form-group row border-top m-0 my-1">
+    <div class="col-sm-6 p-0">
         <label for="createdAt" class="col-auto col-form-label">Updated at: </label>
         <label id="createdAt" class="col-form-label">{{inventory?.updatedAt | date:'medium'}}</label>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 p-0">
         <label for="createdBy" class="col-auto col-form-label">Updated by: </label>
-        <label id="createdBy" class="col-form-label">{{inventory?.updatedBy?.name}}[{{inventory?.updatedBy?.phone}}]</label>
+        <label id="createdBy"
+            class="col-form-label">{{inventory?.updatedBy?.name}}[{{inventory?.updatedBy?.phone}}]</label>
     </div>
 </div>
-<div class="form-group row border-top my-1">
-    <div class="col-sm-6">
-    <label for="shop" class="col-auto col-form-label">Shop: </label>
+<div class="form-group row border-top m-0 my-1">
+    <div class="col-sm-6 p-0">
+        <label for="shop" class="col-auto col-form-label">Storehouse: </label>
         <label id="shop" class="col-form-label">{{inventory?.storehouse?.name}}</label>
     </div>
-    <div class="col-sm-6">
-    <label for="shop" class="col-auto col-form-label">Supplier: </label>
+    <div class="col-sm-6 p-0">
+        <label for="shop" class="col-auto col-form-label">Supplier: </label>
         <label id="shop" class="col-form-label">{{inventory?.supplier?.name}}[{{inventory?.supplier?.phone}}]</label>
     </div>
 </div>
 
-<table class="table table-hover table-bordered table-responsive-sm">
-    <thead>
-        <tr>
-            <th>Sl</th>
-            <th>Product</th>
-            <th>Size</th>
-            <th>
-                <div class="row m-0">
-                    <div class="col p-0">Color</div>
-                    <div class="col p-0 text-right">Quantity</div>
-                    <div class="col p-0 text-right">Purchase Price</div>
-                    <div class="col p-0 text-right">Total</div>
-                </div>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of inventory?.items; index as i">
-            <td>{{i+1}}</td>
-            <td>{{item?.product?.slug}}</td>
-            <td>{{item?.size}}</td>
-            <td>
-                <div class="row tbrow m-0" *ngFor="let cs of item.color_stock; index as j">
-                    <div class="col p-0 " [class.border-top]="j!=0">{{cs?.color}}</div>
-                    <div class="col p-0 text-right" [class.border-top]="j!=0">{{cs?.quantity}}</div>
-                    <div class="col p-0 text-right" [class.border-top]="j!=0">
-                        {{cs?.purchase_price | currency:'BDT':'symbol-narrow'}}</div>
-                    <div class="col p-0 text-right" [class.border-top]="j!=0">
-                        {{ (cs?.quantity * cs?.purchase_price) | currency:'BDT':'symbol-narrow'}}</div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="5"></td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <div class="row m-0">
-                    <div class="col p-0"><strong> Grand Total</strong></div>
-                    <div class="col p-0 text-right"><strong> {{total?.quantity}} </strong></div>
-                    <div class="col p-0 text-right"></div>
-                    <div class="col p-0 text-right"><strong> {{total?.price | currency:'BDT':'symbol-narrow'}} </strong>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+<div class="px-3">
+    <table class="table table-hover table-bordered table-responsive-sm">
+        <thead>
+            <tr>
+                <th>Sl</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Purchase Rate</th>
+                <th class="text-right">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of inventory?.items; index as i">
+                <td>{{i+1}}</td>
+                <td>{{item?.product?.slug}}</td>
+                <td>{{item?.quantity}}</td>
+                <td>{{item?.purchase_price | currency:'BDT':'symbol-narrow'}}</td>
+                <td class="text-right">{{(item?.quantity * item?.purchase_price) | currency:'BDT':'symbol-narrow'}}</td>
+            </tr>
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td><strong> Grand Total</strong></td>
+                <td><strong> {{total?.quantity}} </strong></td>
+                <td></td>
+                <td class="text-right"><strong>{{total?.price | currency:'BDT':'symbol-narrow'}}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

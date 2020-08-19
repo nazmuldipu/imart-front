@@ -4,7 +4,6 @@
         <i class="fa fa-list"></i> INVENTORY LIST
     </a>
 </nav>
-<!-- {{form.value | json}} -->
 
 <ng-template #rt let-r="result" let-t="term">
     <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
@@ -32,10 +31,10 @@
             </select>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="searchShop">Shop</label>
-            <input id="searchShop" type="text" class="form-control" [class.is-invalid]="searchFailed"
-                formControlName="shop" [ngbTypeahead]="searchShop" [resultTemplate]="rt"
-                [inputFormatter]="shopFormatter" placeholder="Shop name or owner number" />
+            <label for="storehouse">Storehouse</label>
+            <input id="storehouse" type="text" class="form-control" [class.is-invalid]="searchFailed"
+                formControlName="storehouse" [ngbTypeahead]="searchStorehouse" [resultTemplate]="rt"
+                [inputFormatter]="storehouseFormatter" placeholder="Shop name or owner number" />
         </div>
         <div class="col-md-6 mb-3">
             <label for="supplier">Supplier</label>
@@ -47,8 +46,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <inventory-item-form [parent]="form" (addColorStock)="addColorStock($event)"
-                (removeColorStock)="onRemoveColorStock($event)"></inventory-item-form>
+            <inventory-item-form [parent]="form" (removeItem)="onRemoveInventoryItem($event)"></inventory-item-form>
         </div>
         <button class="btn btn-sm btn-info" type="button" (click)="pushInventoryItem()">
             Add Inventory Item

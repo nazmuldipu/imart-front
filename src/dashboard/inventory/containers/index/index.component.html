@@ -1,7 +1,7 @@
 <div class="container-fluid component-head">
     <h3>Inventory</h3>
 </div>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-3" *ngIf="storehousePage?.docs?.length && !inventoryPage?.docs?.length">
             <ul class="list-group mb-1">
@@ -18,7 +18,7 @@
             <button class="btn btn-sm btn-danger d-print-none" (click)="onClose('list')">Close</button>
         </div>
 
-        <div class="col-12 bg-white pb-3" *ngIf="inventory">
+        <div class="col-12 bg-white px-0 pb-3" *ngIf="inventory">
             <inventory-details [inventory]="inventory"></inventory-details>
             <button class="btn btn-sm btn-danger d-print-none" (click)="onClose('details')">Close</button>
         </div>

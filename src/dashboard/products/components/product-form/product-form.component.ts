@@ -60,6 +60,7 @@ export class ProductFormComponent implements OnChanges {
   createForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
+      size: ['', Validators.required],
       description: ['', Validators.required],
       category: ['', Validators.required],
       sub_category: ['', Validators.required],
@@ -136,13 +137,13 @@ export class ProductFormComponent implements OnChanges {
     this.subCategory = null;
     this.form.reset();
   }
-  
+
   onCategoryChange() {
     this.category = null;
     this.subCategory = null;
     this.subSubCategory = null;
   }
-  
+
   onSubCategoryChange() {
     this.subCategory = null;
     this.subSubCategory = null;

@@ -3,6 +3,7 @@ import { ProductDetails } from './product-details.model';
 export interface Product {
     _id: string;
     name: string;
+    size: string;
     barcode: string;
     description: string;
     slug: string;

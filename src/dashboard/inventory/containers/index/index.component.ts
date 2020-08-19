@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ShopService } from 'src/services/shop.service';
 import { InventoryService } from 'src/services/inventory.service';
-import { ShopPage, Shop } from 'src/shared/models/shop.model';
-import { Inventory, InventoryPage } from 'src/shared/models/inventory.model';
 import { StorehouseService } from 'src/services/storehouse.service';
+import { Inventory, InventoryPage } from 'src/shared/models/inventory.model';
 import { Storehouse, StorehousePage } from 'src/shared/models/storehouse.model';
 
 @Component({

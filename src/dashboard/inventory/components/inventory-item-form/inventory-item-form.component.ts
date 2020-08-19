@@ -12,11 +12,11 @@ import { ProductService } from 'src/services/product.service';
 export class InventoryItemFormComponent implements OnInit {
   @Input() parent: FormGroup;
 
-  @Output() addColorStock = new EventEmitter<number>();
-  @Output() removeColorStock = new EventEmitter<any>();
+  @Output() removeItem = new EventEmitter<any>();
 
   searching = false;
   searchFailed = false;
+  total = 0;
 
   constructor(private productService: ProductService, private fb: FormBuilder) { }
 
@@ -44,13 +44,19 @@ export class InventoryItemFormComponent implements OnInit {
 
   productFormatter = (x) => x.name;
 
-  pushColorStock(i) {
-    this.addColorStock.emit(i);
+  onRemoveItem(i) {
+    this.removeItem.emit(i);
   }
 
-  onRemoveColorStock(i, j) {
-    console.log(i, j)
-    this.removeColorStock.emit({ item: i, color_stock: j });
+  updateTotal() {
+    const control = <FormArray>this.parent.get('items');
+    console.log('updateTotal size = ', control.length);
+    console.log(control);
+    let t = 0;
+    for (let i = 0; i < control.length; i++) {
+      console.log(control.value[i])
+      t += control.value[i].quantity * control.value[i].purchase_price;
+    }
+    this.total = t;
   }
-
 }
