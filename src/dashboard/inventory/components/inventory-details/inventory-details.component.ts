@@ -29,7 +29,6 @@ export class InventoryDetailsComponent implements OnChanges {
   }
 
   onPrint() {
-    console.log('On print');
     (window as any).print();
   }
 }

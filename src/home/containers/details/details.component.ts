@@ -32,24 +32,6 @@ export class DetailsComponent implements OnInit {
 
   quantity = 1;
   stockQuantity = 0;
-  // selected;
-
-  // imageObject = [];
-  // productSize = {
-  //   size: 'S',
-  //   color_stock: [
-  //     { color: 'Red', quantity: 3 },
-  //     { color: 'Yellow', quantity: 5 },
-  //     { color: 'White', quantity: 2 },
-  //     { color: 'Orange', quantity: 5 },
-  //     { color: 'Cyan', quantity: 1 },
-  //     { color: 'Green', quantity: 0 },
-  //     { color: 'Purple', quantity: 5 },
-  //   ],
-  // };
-  // productColor;
-
-
 
   constructor(private productService: ProductService, private productDetailsService: ProductDetailsService,
     private productStockService: ProductStockService, private activeRoute: ActivatedRoute) {

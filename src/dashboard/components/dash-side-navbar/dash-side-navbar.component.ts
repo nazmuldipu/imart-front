@@ -69,6 +69,7 @@ export class DashSideNavbarComponent implements OnInit {
       subnav: [
         { name: 'Add', icon: 'fa-plus', link: '/dashboard/inventory/add' },
         { name: 'List', icon: 'fa-list', link: '/dashboard/inventory' },
+        { name: 'Stocks', icon: 'fa-bar-chart', link: '/dashboard/inventory/stocks' },
       ],
     },
     {

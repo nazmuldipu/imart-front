@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RestDataService } from './rest-data.service';
-import { ProductStock } from 'src/shared/models/product-stock.model';
+import { ProductStock, ProductStockPage } from 'src/shared/models/product-stock.model';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -13,5 +13,9 @@ export class ProductStockService {
 
   getProductStockByProductId(productId: string): Observable<ProductStock[]> {
     return this.dataSource.sendRequest('GET', this.productStockUrl + `/product/${productId}`, null, false, null);
+  }
+  
+  getProductStockByStorehouseId(storehouseId: string): Observable<ProductStockPage> {
+    return this.dataSource.sendRequest('GET', this.productStockUrl + `/storehouse/${storehouseId}`, null, false, null);
   }
 }
