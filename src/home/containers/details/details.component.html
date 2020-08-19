@@ -49,73 +49,29 @@
                                 <ins><span>৳ {{product?.price}}</span></ins>
                             </div>
 
-                            <!-- Stocked shop list -->
-                            <div class="row">
-                                <div *ngFor="let ps of stocks" class="col-auto p-0 mx-1 shadow shop-box"
-                                    [class.active]="ps.shop._id==stock.shop._id" (click)="onSelectShop(ps.shop._id)">
-                                    <img class="shop-box-image" [src]="shopImageUrl + ps.shop._id"
-                                        [alt]="ps.shop.name + ' image'" />
-                                    <span class="shop-box-name">{{ps.shop.name}}</span>
-                                </div>
-                            </div>
-
                             <div class="product-detail-available">
                                 <strong>Availability: </strong>
-                                <span class="in-stock">{{stock ? 'In Stock':'Out of Stock'}}</span>
+                                <span class="in-stock">{{stockQuantity > 0 ? 'In Stock':'Out of Stock'}}</span>
                             </div>
 
                             <a class="mail-to-friend" href="#">Email to a Friend</a>
                             <div class="product-detail-size">
                                 <div class="product-detail-size-title">
-                                    <strong><sup>*</sup>Size:</strong><span class="current-size">{{stock?.size}}</span>
+                                    <strong><sup>*</sup>Size:</strong><span
+                                        class="current-size">{{product?.size}}</span>
                                 </div>
-                                <!-- <span *ngFor="let sz of stock?.size_array" class="col-auto p-1 mx-1 size-box"
-                                    [class.active]="sz.size==selected?.size_array[0]?.size"
-                                    (click)="onSelectShop(ps.shop._id)">
-                                    <span class="shop-box-name">{{sz.size}}</span>
-                                </span> -->
-                                <!-- <ul class="product-detail-size-filter">
-                                    <li *ngFor="let stock of product?.stock;index as i"
-                                        [class.active]="stock.size===productSize.size"><a
-                                            (click)="setSize(stock)">{{stock.size}}</a></li>
-                                </ul> -->
                             </div>
 
-                            {{stock | json}}
-                            <hr> {{selected | json}}
-
-
-                            <div class="product-detail-color">
-                                <div class="product-detail-color-title">
-                                    <strong><sup>*</sup>color:</strong><span
-                                        class="product-detail-current-color">{{selected?.color}}</span>
-                                </div>
-                                <ul class="product-detail-filter color-filter">
-                                    <li *ngFor="let pcolor of stock?.color_stock"
-                                        [class.active]="selected?.color === pcolor.color">
-                                        <a (click)="setColor(pcolor)" *ngIf="pcolor.quantity > 0">
-                                            <span [ngStyle]="{'background-color': pcolor.color}">
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
 
                             <div class="product-detail-extralink">
-                                <div class="detail-qty border radius">
-                                    <a (click)="setQuantity(-1)" class="qty-down"><i class="fa fa-caret-down"
-                                            aria-hidden="true"></i></a>
-                                    <span class="qty-val">{{quantity}}</span>
-                                    <a (click)="setQuantity(1)" class="qty-up"><i class="fa fa-caret-up"
-                                            aria-hidden="true"></i></a>
+                                <div class="quantityEditor">
+                                    <button (click)="setQuantity(-1)" class="btn btn-info rounded-0 rounded-left"><i
+                                            class="fa fa-minus" aria-hidden="true"></i></button>
+                                    <div class="QuantityTextContainer">{{quantity}}</div>
+                                    <button (click)="setQuantity(1)" class="btn btn-info rounded-0 rounded-right"><i
+                                            class="fa fa-plus" aria-hidden="true"></i></button>
                                 </div>
-                                <div class="product-extra-link2">
-                                    <a class="addcart-link" (click)="addToCart()">Add to Cart</a>
-                                    <a class="wishlist-link" (click)="addToFavourite()"><i aria-hidden="true"
-                                            class="fa fa-heart"></i></a>
-                                    <a class="compare-link" (click)="onRefresh()"><i aria-hidden="true"
-                                            class="fa fa-refresh"></i></a>
-                                </div>
+                                <button class="btn ml-2 btn-dark addCartButton" (click)="addToCart()">Add to Cart</button>  
                             </div>
                         </div>
                     </div>

@@ -43,17 +43,26 @@ export class ProductFormComponent implements OnChanges {
     // if(changes.su)
     if (this.product && this.product.slug) {
       this.exists = true;
-      this.category = this.categories.find(cat => cat.slug === this.product.category.slug);
-      this.brand = this.brands.find(b => b.slug === this.product.brand.slug);
-      this.getAllSubCategoryByCategory(this.category.slug);
+
       this.form.reset();
       const value = {
-        categoryId: this.product.category.slug,
-        // subCategoryId: this.product?.sub_category?._id,
-        brandId: this.product.brand.slug,
         ...this.product
       };
-      this.form.patchValue(value);
+
+      //remove all nested object _id s
+      delete value['slug']
+      delete value['brand']
+      delete value['category']
+      delete value['sub_category']
+      delete value['sub_sub_category']
+
+      //update local variables
+      this.onBrand(this.product.brand.slug);
+      this.onCategory(this.product.category.slug);
+      this.onSubCategory(this.product.sub_category.slug);
+      this.onSubSubCategory(this.product.sub_sub_category.slug);
+
+      this.form.patchValue({ ...value });
     }
   }
 
@@ -104,6 +113,7 @@ export class ProductFormComponent implements OnChanges {
 
   onSubCategory(slug) {
     this.subCategory = this.subCategories.find(sc => sc.slug === slug);
+    console.log(this.subCategory);
     this.form.controls.sub_category.setValue({ "name": this.subCategory.name, "image_urls": this.subCategory.image_urls });
     this.getAllSubCategoryBySubCategory(this.subCategory.slug)
   }

@@ -44,16 +44,31 @@ export class ProductService {
     var formData = new FormData();
     Object.keys(product).forEach((key) => {
       if (product[key] != null) {
-        formData.append(key, product[key]);
+        if (key === 'category' || key === 'sub_category' || key === 'sub_sub_category' || key === 'brand') {
+          formData.append(key, JSON.stringify(product[key]));
+        }
+        else {
+          formData.append(key, product[key]);
+        }
+        // formData.append(key, product[key]);
       }
     });
 
+    formData.delete('_id')
     if (product['images']) {
       formData.delete('images')
       for (var i = 0; i < product['images'].length; i++) {
         formData.append('images', product['images'][i]);
       }
     }
+
+    if (product['thumb']) {
+      formData.delete('thumb')
+      formData.append('thumb', product['thumb']);
+    }
+
+    console.log(product);
+    new Response(formData).text().then(console.log)
 
     return this.dataSource.sendRequest('PUT', this.productUrl + `/${id}`, formData, true, null);
   }

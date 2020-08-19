@@ -1,16 +1,9 @@
 export interface ProductStock {
     _id: string;
     product: Product;
-    shop: Shop;
-    size: string;
-    color_stock: colorStock[];
-}
-
-interface colorStock {
-    _id: string,
-    color: string,
-    quantity: number,
-    purchase_price: number,
+    storehouse: Storehouse;
+    quantity: number;
+    purchase_price: number;
 }
 
 interface Product {
@@ -19,7 +12,7 @@ interface Product {
     slug: string
 }
 
-interface Shop {
+interface Storehouse {
     _id: string,
     name: string,
     slug: string

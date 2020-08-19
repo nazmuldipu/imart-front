@@ -19,20 +19,22 @@ export class DetailsComponent implements OnInit {
   id;
   current = 0;
 
+
+  product: Product;
+  productDetails: ProductDetails;
+  productStocks: ProductStock[] = [];
+  inStock = false;
+
   loading = false;
   imageUrls = [];
   message = '';
   errorMessage = '';
 
-  product: Product;
-  productDetails: ProductDetails;
-  stocks;
-  stock;
-  colors;
-  productStocks: ProductStock[] = [];
-  shopImageUrl = '';
+  quantity = 1;
+  stockQuantity = 0;
+  // selected;
 
-  imageObject = [];
+  // imageObject = [];
   // productSize = {
   //   size: 'S',
   //   color_stock: [
@@ -46,85 +48,20 @@ export class DetailsComponent implements OnInit {
   //   ],
   // };
   // productColor;
-  quantity = 1;
-  selected;
+
 
 
   constructor(private productService: ProductService, private productDetailsService: ProductDetailsService,
-    private productStockService: ProductStockService, private shopService: ShopService, private activeRoute: ActivatedRoute) {
+    private productStockService: ProductStockService, private activeRoute: ActivatedRoute) {
     this.id = activeRoute.snapshot.params['id'];
     // this.imageUrl = this.productService.productLink + '/image/';
-    this.shopImageUrl = this.shopService.shopLink + '/image/';
+    // this.shopImageUrl = this.shopService.shopLink + '/image/';
   }
 
   ngOnInit(): void {
     if (this.id) {
       this.getProduct(this.id);
     }
-    // this.productSize = this.product.stock[0];
-    // this.productColor = this.productSize.color_stock[0];
-
-    // this.imageObject = [];
-    // this.product.image_urls.forEach((url) => {
-    //   this.imageObject.push({ thumbImage: url });
-    // });
-  }
-
-  async getProductDetails(product_id) {
-    this.loading = true;
-    try {
-      this.productDetails = await this.productDetailsService.getProductDetailsByProductId(product_id).toPromise();
-    } catch (error) {
-      this.errorMessage = error;
-    }
-    this.loading = false;
-  }
-
-  async getProductStock(product_id) {
-    this.loading = true;
-    try {
-      this.productStocks = await this.productStockService.getProductStockByProductId(product_id).toPromise();
-
-      const values = [];
-      for (let i = 0; i < this.productStocks.length; i++) {
-        let ps = this.productStocks[i];
-
-        const ind = values.findIndex(sp => sp.shop._id == ps.shop._id);
-        if (ind == -1) {
-          const obj = { shop: ps.shop, size_array: [{ size: ps.size, color_stock: [] }] }
-          for (let j = 0; j < ps.color_stock.length; j++) {
-            obj.size_array[obj.size_array.length - 1].color_stock.push(ps.color_stock[j])
-          }
-          values.push(obj);
-        } else {
-          values[ind].size_array.push({ size: ps.size, color_stock: [] })
-          for (let j = 0; j < ps.color_stock.length; j++) {
-            values[ind].size_array[values[ind].size_array.length - 1].color_stock.push(ps.color_stock[j])
-          }
-        }
-
-      }
-      this.stocks = values;
-
-      /*Select first selected shop and */
-      // for (let i = 0; i < this.stocks.length; i++) {
-      //   for (let j = 0; j < this.stocks[i].color_stock.length; j++) {
-      //     if (this.productStocks[i].color_stock[j].quantity > 0) {
-      this.stock = this.stocks[0];
-      this.selected = { shop: this.stock.shop, size_array: [this.stock.size_array[0]] }
-      // this.colors = 
-      // this.selected = this.stocks[0];
-      //       break;
-      //     }
-      //   }
-      //   if (this.stock) {
-      //     break;
-      //   }
-      // }
-    } catch (error) {
-      this.errorMessage = error;
-    }
-    this.loading = false;
   }
 
   async getProduct(id: string) {
@@ -144,37 +81,36 @@ export class DetailsComponent implements OnInit {
     this.loading = false;
   }
 
+  async getProductDetails(product_id) {
+    this.loading = true;
+    try {
+      this.productDetails = await this.productDetailsService.getProductDetailsByProductId(product_id).toPromise();
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
+  }
+
+  async getProductStock(product_id) {
+    this.loading = true;
+    try {
+      this.productStocks = await this.productStockService.getProductStockByProductId(product_id).toPromise();
+      console.log(this.productStocks);
+      for (let stock of this.productStocks) {
+        this.stockQuantity += stock.quantity;
+      }
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
+  }
+
   onThumbImageClick(event) {
     this.current = event;
   }
-  onSelectShop(id) {
-    this.stock = this.stocks.find(sh => sh.shop._id == id);
-
-    this.selected = { shop: this.stock.shop, size_array: [this.stock.size_array[0]] }
-    // for (let j = 0; j < this.stock.size_arraycolor_stock.length; j++) {
-    //   if (this.stock.color_stock[j].quantity > 0) {
-    //     this.selected = this.stock.color_stock[j];
-    //     break;
-    //   }
-    // }
-  }
-  setSize(size) {
-    // this.productSize = size;
-    // this.productColor = null;
-    // for (let pcolor of this.productSize.color_stock) {
-    //   if (pcolor.quantity > 0) {
-    //     this.productColor = pcolor;
-    //     break;
-    //   }
-    // }
-  }
-
-  setColor(color) {
-    this.selected = color;
-  }
 
   setQuantity(num) {
-    if (this.selected.quantity > this.quantity) {
+    if (this.stockQuantity > this.quantity) {
       this.quantity += num;
     }
     if (this.quantity < 1) this.quantity = 1;
