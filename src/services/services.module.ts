@@ -11,19 +11,21 @@ import { UserService } from './user.service';
 import { UtilService } from './util.service';
 import { SubCategoryService } from './sub-category.service';
 import { ProductDetailsService } from './product-details.service';
+import { ModalService } from './modal.service';
 
 @NgModule({
-  providers:[
+  providers: [
     AuthGuardService,
     AuthService,
     BrandService,
     CategoryService,
+    ModalService,
     ProductService,
     ProductDetailsService,
     ShopService,
     SubCategoryService,
     ToastService,
-    UserService, 
+    UserService,
     UtilService
   ],
 })

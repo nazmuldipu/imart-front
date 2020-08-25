@@ -16,13 +16,13 @@
             <a *ngFor="let in of counter(product.image_count);let i = index" (click)="onSlideImage(i)"
                 [ngStyle]="{'background-color':i==imageIndex ? '#868fff' : '#404040' }"></a>
         </div> -->
-        <h3 class="product-title"><a routerLink="/details/{{product._id}}" target="_blank">{{product.name}}</a></h3>
+        <h3 class="product-title"><a (click)="onShortDetails()" target="_blank">{{product.name}}</a></h3>
         <div class="product-price">
             <ins><span>৳{{product.price}}</span></ins>
             <del *ngIf="product.old_price > 0"><span>৳{{product.old_price}}</span></del>
         </div>
         <div class="product-extra-link">
-            <a class="addcart-link" placement="bottom" ngbTooltip="Add to cart"><i class="fa fa-shopping-basket" aria-hidden="true"></i><span>Add to
+            <a class="addcart-link" placement="bottom" ngbTooltip="Add to cart" (click)="addToCart(product._id)"><i class="fa fa-shopping-basket" aria-hidden="true"></i><span>Add to
                     Cart</span></a>
             <a class="wishlist-link" placement="bottom" ngbTooltip="Add to wish list"><i class="fa fa-heart" aria-hidden="true" ></i><span>Wishlist</span></a>
             <a routerLink="/details/{{product._id}}" class="compare-link" target="_blank" placement="bottom" ngbTooltip="Details"><i class="fa fa-file-o" aria-hidden="true"></i></a>

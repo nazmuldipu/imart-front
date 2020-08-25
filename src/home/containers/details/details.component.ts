@@ -9,6 +9,7 @@ import { ProductDetailsService } from 'src/services/product-details.service';
 import { ProductStockService } from 'src/services/product-stock.service';
 import { ProductStock } from 'src/shared/models/product-stock.model';
 import { ShopService } from 'src/services/shop.service';
+import { CartService } from 'src/services/cart.service';
 
 @Component({
   selector: 'app-details',
@@ -34,7 +35,7 @@ export class DetailsComponent implements OnInit {
   stockQuantity = 0;
 
   constructor(private productService: ProductService, private productDetailsService: ProductDetailsService,
-    private productStockService: ProductStockService, private activeRoute: ActivatedRoute) {
+    private productStockService: ProductStockService, private cartService:CartService, private activeRoute: ActivatedRoute) {
     this.id = activeRoute.snapshot.params['id'];
     // this.imageUrl = this.productService.productLink + '/image/';
     // this.shopImageUrl = this.shopService.shopLink + '/image/';

@@ -15,6 +15,7 @@ import { IndexComponent } from './containers/index/index.component';
 import { LoginComponent } from './containers/login/login.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { HomeComponent } from './home.component';
+import { DetailModalComponent } from './components/detail-modal/detail-modal.component';
 // import { DetailsCollapseComponent } from '../shared/components/details-collapse/details-collapse.component';
 
 export const ROUTES: Routes = [
@@ -45,6 +46,7 @@ export const ROUTES: Routes = [
     NewArrivalsComponent,
     DetailsComponent,
     CategoryComponent,
+    DetailModalComponent,
   ],
   imports: [
     CommonModule,

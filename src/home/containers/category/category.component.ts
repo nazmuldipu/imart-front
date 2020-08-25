@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/services/product.service';
 import { CategoryTree } from 'src/shared/json/category-tree';
-import { ProductPage } from 'src/shared/models/product.model';
+import { ProductPage, Product } from 'src/shared/models/product.model';
+import { CartService } from 'src/services/cart.service';
+import { Cart } from 'src/shared/models/cart.model';
+import { ModalService } from 'src/services/modal.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-category',
@@ -12,6 +16,8 @@ import { ProductPage } from 'src/shared/models/product.model';
 export class CategoryComponent implements OnInit {
   sideNav = CategoryTree;
   productPage: ProductPage;
+  product:Product;
+  cart: Cart;
 
   slug: string;
   categoryNav;
@@ -25,7 +31,8 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private activeRoute: ActivatedRoute
+    private cartService: CartService,
+    private activeRoute: ActivatedRoute, private modalService: NgbModal
   ) {
     this.slug = activeRoute.snapshot.params['slug'];
     this.prodImageUrl = this.productService.productLink + '/image/';
@@ -36,6 +43,18 @@ export class CategoryComponent implements OnInit {
     if (this.slug) {
       this.getCategoryNav(this.slug);
     }
+  }
+
+  openModal(targetModal) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static'
+    });
+  }
+
+  onSubmit() {
+    this.modalService.dismissAll();
+    // console.log("res:", this.editProfileForm.getRawValue());
   }
 
   getCategoryNav(slug) {
@@ -77,6 +96,11 @@ export class CategoryComponent implements OnInit {
     this.loading = false;
   }
 
+  onShortDetails(product:Product){
+    console.log(product);
+    this.product = product;
+  }
+
   onChangePage(page) {
     // if (this.sub_category_slug == null) {
     //   this.getProductByCategory(this.category.slug, page.pageNumber, page.limit, page.sort, page.order)
@@ -85,8 +109,22 @@ export class CategoryComponent implements OnInit {
     // }
   }
 
+  async onAddToCart(product_id) {
+    this.loading = true;
+    try {
+      const value = {
+        "productId": product_id,
+        "quantity": 1
+      }
+      this.cart = await this.cartService.addToCart(value).toPromise();
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
+  }
+
   onSideNavClick(data) {
-    if(data.reset){
+    if (data.reset) {
       this.sub_category = null;
       this.sub_sub_category = null;
       this.productPage = null;

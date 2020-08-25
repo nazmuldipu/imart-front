@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { DetailsCollapseComponent } from './components/details-collapse/details-collapse.component';
 import { CategoryComponentComponent } from './components/category-component/category-component.component';
+import { ModalDirective } from './directives/modal.directive';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { CategoryComponentComponent } from './components/category-component/cate
     ToastComponent,
     PaginationComponent,
     CategoryComponentComponent,
+    ModalDirective,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule,
     RouterModule, CarouselModule],
@@ -55,7 +57,8 @@ import { CategoryComponentComponent } from './components/category-component/cate
     LoadingComponent,
     NgbModule,
     PaginationComponent,
-    CategoryComponentComponent
+    CategoryComponentComponent,
+    ModalDirective
   ],
 })
 export class SharedModule { }
