@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
+import { CartService } from 'src/services/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
               this.activeRoute.snapshot.queryParamMap.get('returnUrl') ||
               '/';
             localStorage.setItem('returnUrl', returnUrl);
+            this.cartService.getMyCart();
             // let returnUrl = localStorage.getItem('returnUrl') || '/dashboard';
             this.router.navigateByUrl(returnUrl);
           }

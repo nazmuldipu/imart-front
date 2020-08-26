@@ -9,7 +9,8 @@ import { SubCategory } from 'src/shared/models/sub-category.model';
 export class SideNavCollapseComponent implements OnInit {
   @Input() data;
   @Input() title: any;
-  @Input() sub_category;
+
+  sub_category;
 
   @Output() resp = new EventEmitter<any>();
 
@@ -22,15 +23,16 @@ export class SideNavCollapseComponent implements OnInit {
   widgetTitleCollapse() {
     this.titleCollapse = !this.titleCollapse;
     this.sub_category = '';
-    this.resp.emit({ reset: true });
+    this.resp.emit({ sub_category: null, sub_sub_category: null, reset: true });
   }
 
   onSubCategoryClick(slug) {
-    const obj = this.data.sub_category.find(sc => sc.slug === slug);
-    this.resp.emit({ sub_category: obj.slug });
+    this.sub_category = this.data.sub_category.find(sc => sc.slug === slug);
+    this.resp.emit({ sub_category: this.sub_category.slug, sub_sub_category: null, reset: false });
   }
 
   onSubSubCategoryClik(slug) {
-    this.resp.emit({ sub_category: this.sub_category.slug, sub_sub_category: slug });
+    this.resp.emit({ sub_category: null, sub_sub_category: slug, reset: false });
   }
 }
+

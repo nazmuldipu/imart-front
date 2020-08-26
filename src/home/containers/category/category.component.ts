@@ -4,7 +4,7 @@ import { ProductService } from 'src/services/product.service';
 import { CategoryTree } from 'src/shared/json/category-tree';
 import { ProductPage, Product } from 'src/shared/models/product.model';
 import { CartService } from 'src/services/cart.service';
-import { Cart } from 'src/shared/models/cart.model';
+import { Cart, Product_list_cart } from 'src/shared/models/cart.model';
 import { ModalService } from 'src/services/modal.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,8 +16,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class CategoryComponent implements OnInit {
   sideNav = CategoryTree;
   productPage: ProductPage;
-  product:Product;
+  product: Product;
   cart: Cart;
+  product_list_cart: Product_list_cart;
 
   slug: string;
   categoryNav;
@@ -30,8 +31,7 @@ export class CategoryComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private productService: ProductService,
-    private cartService: CartService,
+    private productService: ProductService, private cartService: CartService,
     private activeRoute: ActivatedRoute, private modalService: NgbModal
   ) {
     this.slug = activeRoute.snapshot.params['slug'];
@@ -41,33 +41,52 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.slug) {
+      // this.cartService.getMyCart();
       this.getCategoryNav(this.slug);
+      this.getProductByCategory(this.slug);
     }
-  }
-
-  openModal(targetModal) {
-    this.modalService.open(targetModal, {
-      centered: true,
-      backdrop: 'static'
-    });
-  }
-
-  onSubmit() {
-    this.modalService.dismissAll();
-    // console.log("res:", this.editProfileForm.getRawValue());
+    this.cartService.cart$.subscribe(data => {
+      this.cart = data;
+      if (this.product && this.cart.product_list) {
+        this.product_list_cart = this.cart.product_list.find(pl => pl.product._id == this.product._id);
+      }
+    })
   }
 
   getCategoryNav(slug) {
     this.categoryNav = this.sideNav.category.find(cat => cat.slug == slug);
   }
 
+  onSideNavClick(data) {
+    console.log(data);
+    if (data.reset) {
+      this.sub_category = null;
+      this.sub_sub_category = null;
+      this.productPage = null;
+      this.getProductByCategory(this.slug);
+    }
+    if (data.sub_category) {
+      this.onSelectSubCategory(data.sub_category);
+    }
+    if (data.sub_sub_category) {
+      this.onSelectSubSubCategory(data.sub_sub_category);
+    }
+  }
+
+  onSelectSubCategory(slug) {
+    this.sub_category = this.categoryNav.sub_category.find(sc => sc.slug == slug);
+    this.getProductBySubCategory(slug);
+  }
+  
+  onSelectSubSubCategory(slug) {
+    this.sub_sub_category = this.sub_category.sub_sub_category.find(ssc => ssc.slug == slug);
+    this.getProductBySubSubCategory(this.sub_sub_category.slug);
+  }
+
   async getProductByCategory(category_slug: string, page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
     this.loading = true;
     try {
       this.productPage = await this.productService.getByCategorySlug(category_slug, page, limit, sort, order).toPromise();
-      // this.productPage.docs.sort(this.utilService.dynamicSortObject('priority'));
-      // this.sub_category_slug = null;
-      // window.scroll(0, 0);
     } catch (error) {
       this.errorMessage = error;
     }
@@ -96,61 +115,47 @@ export class CategoryComponent implements OnInit {
     this.loading = false;
   }
 
-  onShortDetails(product:Product){
-    console.log(product);
+  onShortDetails(targetModal, product: Product) {
     this.product = product;
+    if (this.cart.product_list && this.cart.product_list.length > 0) {
+      this.product_list_cart = this.cart.product_list.find(pl => pl.product._id == product._id);
+    }
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static',
+      size: 'xl',
+      scrollable: true
+    });
   }
+
+  openModal(targetModal) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static'
+    });
+  }
+
 
   onChangePage(page) {
-    // if (this.sub_category_slug == null) {
-    //   this.getProductByCategory(this.category.slug, page.pageNumber, page.limit, page.sort, page.order)
-    // } else {
-    //   this.getProductBySubCategory(this.sub_category_slug, page.pageNumber, page.limit, page.sort, page.order)
-    // }
+    //   // if (this.sub_category_slug == null) {
+    //   //   this.getProductByCategory(this.category.slug, page.pageNumber, page.limit, page.sort, page.order)
+    //   // } else {
+    //   //   this.getProductBySubCategory(this.sub_category_slug, page.pageNumber, page.limit, page.sort, page.order)
+    //   // }
   }
 
-  async onAddToCart(product_id) {
+  async onAddToCart(event) {
     this.loading = true;
     try {
-      const value = {
-        "productId": product_id,
-        "quantity": 1
-      }
-      this.cart = await this.cartService.addToCart(value).toPromise();
+      const resp = await this.cartService.addToCart(event).toPromise();
+      this.cartService._cartSource.next(resp);
     } catch (error) {
       this.errorMessage = error;
     }
     this.loading = false;
   }
 
-  onSideNavClick(data) {
-    if (data.reset) {
-      this.sub_category = null;
-      this.sub_sub_category = null;
-      this.productPage = null;
-    }
-    if (data.sub_category) {
-      this.onSelectSubCategory(data.sub_category);
-    }
-    if (data.sub_sub_category) {
-      this.onSelectSubSubCategory(data.sub_sub_category);
-    }
-  }
-
-  onSelectSubCategory(slug) {
-    this.sub_category = this.categoryNav.sub_category.find(sc => sc.slug == slug);
-    if (this.sub_category && this.sub_category.sub_sub_category.length == 0) {
-      // console.log('//TODO: Load product by sub_category', this.sub_category.slug);
-      this.getProductBySubCategory(this.sub_category.slug);
-    }
-  }
-  onSelectSubSubCategory(slug) {
-    this.sub_sub_category = this.sub_category.sub_sub_category.find(ssc => ssc.slug == slug);
-    // console.log('//TODO: Load product by sub_sub_category', this.sub_sub_category.slug);
-    this.getProductBySubSubCategory(this.sub_sub_category.slug);
-  }
-
-  onPriceFilter(data) {
-    console.log('Price filter', data);
-  }
+  // onPriceFilter(data) {
+  //   console.log('Price filter', data);
+  // }
 }

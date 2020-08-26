@@ -1,5 +1,5 @@
 export interface Cart {
-    product_list: Product_list[];
+    product_list: Product_list_cart[];
     poll: number;
     sub_total: number;
     total_discount: number;
@@ -9,7 +9,7 @@ export interface Cart {
     updatedBy: User;
 }
 
-interface Product_list {
+export interface Product_list_cart {
     product: Product;
     quantity: number;
     rate: number;

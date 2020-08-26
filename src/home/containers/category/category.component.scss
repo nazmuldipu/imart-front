@@ -1,6 +1,6 @@
 :host {
   display: block;
-  background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
+  background: #f8f8f9 none repeat scroll 0 0;
 }
 
 .banner-shop {
@@ -169,8 +169,8 @@
 }
 
 .products {
-  background: #fff none repeat scroll 0 0;
-  border: 1px solid #e5e5e5;
+  // background: #fff none repeat scroll 0 0;
+  // border: 1px solid #e5e5e5;
   border-radius: 4px;
   &-bar {
     border-bottom: 1px solid #e5e5e5;

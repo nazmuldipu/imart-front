@@ -18,6 +18,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { DetailsCollapseComponent } from './components/details-collapse/details-collapse.component';
 import { CategoryComponentComponent } from './components/category-component/category-component.component';
 import { ModalDirective } from './directives/modal.directive';
+import { Product2Component } from './components/product2/product2.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ModalDirective } from './directives/modal.directive';
     BrandsComponent,
     DetailsCollapseComponent,
     Product1Component,
+    Product2Component,
     ProductRelatedComponent,
     ProductStyle1Component,
     SideAdvComponent,
@@ -47,6 +49,7 @@ import { ModalDirective } from './directives/modal.directive';
     DetailsCollapseComponent,
     PriceFilterComponent,
     Product1Component,
+    Product2Component,
     ProductRelatedComponent,
     ProductStyle1Component,
     ReactiveFormsModule,
