@@ -86,6 +86,15 @@ export class DashSideNavbarComponent implements OnInit {
       ],
     },
     {
+      name: 'Orders',
+      icon: 'fa-clone',
+      roles: [],
+      subnav: [
+        { name: 'Cart', icon: 'fa-shopping-cart', link: '/dashboard/orders/cart' },
+        { name: 'Orders', icon: 'fa-archive', link: '/dashboard/orders/my-orders' },
+      ],
+    },
+    {
       name: 'Accessories',
       link: '/dashboard/categories/add',
       icon: 'fa-sign-language ',

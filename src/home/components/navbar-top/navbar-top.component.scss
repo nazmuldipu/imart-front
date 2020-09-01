@@ -21,3 +21,153 @@
   transition: all 0.5s ease-out 0s;
   -webkit-transition: all 0.5s ease-out 0s;
 }
+
+.cart-sm {
+  cursor: pointer;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  top: 40px;
+  right: 0;
+  // right: 300px;
+  background-color: #f40;
+  color: #fff;
+  text-align: center;
+  transition: right 0.1s linear;
+  // box-shadow: 2px 2px 3px #999;
+  // &.short {
+  //   right: 0;
+  //   transition: right 0.1s linear;
+  // }
+}
+
+.cart-icon {
+  margin-top: 20px;
+}
+
+.cart-value {
+  font-size: 12px;
+  position: absolute;
+  left: 32px;
+  top: 10px;
+}
+
+.cart-details {
+  position: fixed;
+  width: 0;
+  height: calc(100vh - 40px);
+  top: 40px;
+  right: 0px;
+  transition: ease-in-out 0.1s width;
+  background-color: white;
+  z-index: 4;
+  // -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  // -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
+  // box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  &.opened {
+    border-left: 1px solid #999;
+    width: 300px;
+    right: 0;
+    // max-width: 300px;
+  }
+}
+.cart {
+  display: flex;
+  &-header {
+    display: block;
+    padding: 5px;
+    background-color: #ccc;
+    // padding-left: 20px;
+    &-icon {
+      height: 40px;
+    }
+    &-text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+  &-body {
+    width: 100%;
+    height: calc(100vh - 131px);
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  &-products {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // overflow: auto;
+    // display: block;
+    font-family: "Montserrat";
+    font-size: 11px;
+    padding: 5px;
+    color: #555;
+    border-bottom: 1px solid #e8e8e8;
+    div {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    &-quantity {
+      font-size: 14px;
+      & i {
+        cursor: pointer;
+      }
+    }
+    &-info {
+      flex-grow: 1;
+      padding: 5px;
+    }
+    &-name {
+      font-weight: 600;
+    }
+    &-size {
+      font-size: 9px;
+      color: #777;
+    }
+    &-amount {
+      // float: right;
+      font-size: 11px;
+      & span {
+        font-weight: 600;
+      }
+      & i {
+        cursor: pointer;
+      }
+    }
+    &-image {
+      padding-left: 5px;
+      width: 40px;
+    }
+  }
+  &-total {
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    & div {
+      display: inline-block;
+    }
+    &-button {
+      cursor: pointer;
+      text-align: center;
+      width: 190px;
+      padding: 10px;
+      background-color: #f40;
+      color: white;
+      &:hover{
+        background-color: rgb(211, 57, 1);
+        color: black; 
+        font-weight: 700;         
+      }
+    }
+    &-text {
+      width: 100px;
+      color: #000;
+      text-align: right;
+    }
+    // margin-top: auto;
+  }
+}
+.btn-outline-danger {
+  margin-left: 120px;
+}

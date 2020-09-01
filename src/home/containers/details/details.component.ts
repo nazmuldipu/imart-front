@@ -35,7 +35,7 @@ export class DetailsComponent implements OnInit {
   stockQuantity = 0;
 
   constructor(private productService: ProductService, private productDetailsService: ProductDetailsService,
-    private productStockService: ProductStockService, private cartService:CartService, private activeRoute: ActivatedRoute) {
+    private productStockService: ProductStockService, private cartService: CartService, private activeRoute: ActivatedRoute) {
     this.id = activeRoute.snapshot.params['id'];
     // this.imageUrl = this.productService.productLink + '/image/';
     // this.shopImageUrl = this.shopService.shopLink + '/image/';
@@ -78,7 +78,6 @@ export class DetailsComponent implements OnInit {
     this.loading = true;
     try {
       this.productStocks = await this.productStockService.getProductStockByProductId(product_id).toPromise();
-      console.log(this.productStocks);
       for (let stock of this.productStocks) {
         this.stockQuantity += stock.quantity;
       }
@@ -100,8 +99,17 @@ export class DetailsComponent implements OnInit {
     if (this.quantity > 10) this.quantity = 10;
   }
 
-  addToCart() {
+  async addToCart() {
     console.log('Add to cart');
+    const value = { "productId": this.product._id, "quantity": this.quantity }
+    this.loading = true;
+    try {
+      const resp = await this.cartService.addToCart(value).toPromise();
+      this.cartService._cartSource.next(resp);
+    } catch (error) {
+      this.errorMessage = error;
+    }
+    this.loading = false;
   }
 
   addToFavourite() {

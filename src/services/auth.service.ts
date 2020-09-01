@@ -3,6 +3,7 @@ import { User } from 'src/shared/models/user.model';
 import { RestDataService } from './rest-data.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root',

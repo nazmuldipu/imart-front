@@ -1,0 +1,55 @@
+<div class="container-fluid component-head">
+    <h3>Cart</h3>
+</div>
+
+<div class="container">
+    <table class="table table-striped border " *ngIf="cart?.product_list?.length > 0">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Product Name</th>
+                <th class="text-right">Unit Price</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-right">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cart.product_list">
+                <td><img class="product-image" [src]="thumbUrl + item.product._id "
+                        [alt]="item.product.name + ' image'" />
+                </td>
+                <td><span class="product-name"> {{item.product.name}} </span><br><span
+                        class="product-size">{{item.product.size}}</span></td>
+                <td class="text-right currency">{{item.rate | currency:'BDT':'symbol-narrow'}}</td>
+                <td class="d-flex justify-content-center ">
+                    <!-- {{item.quantity}} -->
+                    <div class="quantityEditor pt-1">
+                        <button (click)="setQuantity(item.product._id, -1)"
+                            class="btn btn-info rounded-0 rounded-left"><i class="fa fa-minus"
+                                aria-hidden="true"></i></button>
+                        <div class="QuantityTextContainer">{{item.quantity}}</div>
+                        <button (click)="setQuantity(item.product._id, 1)"
+                            class="btn btn-info rounded-0 rounded-right"><i class="fa fa-plus"
+                                aria-hidden="true"></i></button>
+                    </div>
+                </td>
+                <td class="text-right currency">{{item.amount | currency:'BDT':'symbol-narrow'}}</td>
+                <td class="text-right p-2"><i class="fa fa-trash-o" (click)="onDelete(item.product._id)"></i></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right currency">Total</td>
+                <td class="text-right currency">{{total | currency:'BDT':'symbol-narrow'}}</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-sm btn-primary">Place Order</button>
+    </div>
+</div>

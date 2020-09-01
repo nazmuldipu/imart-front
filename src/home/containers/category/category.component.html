@@ -20,6 +20,13 @@
             <li class="breadcrumb-item active" *ngIf="sub_sub_category">{{sub_sub_category?.name}}</li>
         </ol>
     </nav>
+    
+    <div class="alert alert-danger alert-dismissible show" role="alert" *ngIf="errorMessage.length > 0">
+        <strong>Failed! </strong> {{ errorMessage }}
+        <button type="button" class="close" (click)="onClose()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
     <ng-template #editProfileModal let-modal>
         <detail-modal [product]="product" [prodImageUrl]="prodImageUrl" [cartProduct]="product_list_cart"

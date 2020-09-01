@@ -63,7 +63,7 @@
                             </div>
 
 
-                            <div class="product-detail-extralink">
+                            <div class="product-detail-extralink" *ngIf="stockQuantity > 0">
                                 <div class="quantityEditor">
                                     <button (click)="setQuantity(-1)" class="btn btn-info rounded-0 rounded-left"><i
                                             class="fa fa-minus" aria-hidden="true"></i></button>

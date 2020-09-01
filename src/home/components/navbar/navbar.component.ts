@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/services/cart.service';
+import { Cart } from 'src/shared/models/cart.model';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'navbar',
@@ -7,10 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   show = false;
+  cart: Cart;
 
-  constructor() { }
+  constructor(private cartService: CartService, private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.cartService.cart$.subscribe(data => {
+      this.cart = data;
+    })
   }
 
   toggleCollapse() {

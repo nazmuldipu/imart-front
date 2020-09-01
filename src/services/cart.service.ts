@@ -15,7 +15,10 @@ export class CartService {
   _cartSource = new BehaviorSubject<Cart>({} as Cart);
   cart$ = this._cartSource.asObservable();
 
-  constructor(private dataSource: RestDataService, public auth: AuthService, private router: Router) { }
+  constructor(private dataSource: RestDataService, public auth: AuthService, private router: Router) {
+    if (this.auth.isAuthenticated())
+      this.getMyCart();
+  }
 
   addToCart(cart): Observable<Cart> {
     if (this.auth.isAuthenticated())
@@ -36,6 +39,10 @@ export class CartService {
           console.log(error);
         }
       );
+  }
+
+  getCart(): Observable<Cart> {
+    return this.dataSource.sendRequest('GET', this.cartUrl + '/my', null, true, null);
   }
 
 }

@@ -77,7 +77,7 @@ export class CategoryComponent implements OnInit {
     this.sub_category = this.categoryNav.sub_category.find(sc => sc.slug == slug);
     this.getProductBySubCategory(slug);
   }
-  
+
   onSelectSubSubCategory(slug) {
     this.sub_sub_category = this.sub_category.sub_sub_category.find(ssc => ssc.slug == slug);
     this.getProductBySubSubCategory(this.sub_sub_category.slug);
@@ -154,6 +154,8 @@ export class CategoryComponent implements OnInit {
     }
     this.loading = false;
   }
+
+  onClose() { this.errorMessage = '' }
 
   // onPriceFilter(data) {
   //   console.log('Price filter', data);

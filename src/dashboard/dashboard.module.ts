@@ -21,11 +21,11 @@ export const ROUTES: Routes = [
         path: 'change-password',
         component: ChangePasswordComponent,
       },
-      // {
-      //   path: 'categories',
-      //   loadChildren: () =>
-      //     import('./category/category.module').then((m) => m.CategoryModule),
-      // },
+      {
+        path: 'orders',
+        loadChildren: () =>
+          import('./orders/orders.module').then((m) => m.OrdersModule),
+      },
       {
         path: 'products',
         loadChildren: () =>

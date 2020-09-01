@@ -87,8 +87,8 @@
             <div class="col-md-auto col-auto px-0 px-md-2 pt-2 pt-md-0 d-none d-sm-block">
                 <div class="row nav-icons py-3">
                     <div class="col-auto px-3">
-                        <a href=""><i class="fa fa-shopping-cart fa-2x"></i>
-                            <span class="cart-value">23</span></a>
+                        <a routerLink="/dashboard/orders/cart"><i class="fa fa-shopping-cart fa-2x"></i>
+                            <span class="cart-value">{{cart?.product_list?.length > 0 ? cart.product_list.length : 0}}</span></a>
                     </div>
                     <div class="col-auto px-3">
                         <a href=""><i class="fa fa-heart-o fa-2x"></i></a>
