@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light border border-bottom-0">
     <a class="navbar-brand">{{ exists ? "Update" : "Add" }} Product</a>
 </nav>
-
+{{product | json}}
 <div class="list-group" *ngIf="!brand">
     <li class="list-group-item"><strong>Please select a Brand</strong></li>
     <form #brandSearch="ngForm" class="ml-auto form-inline my-2 my-lg-0" (ngSubmit)="onSearchBrand(brandSearch.value)">
@@ -20,7 +20,7 @@
         *ngFor="let cat of categories" (click)="onCategory(cat.slug)">{{cat.name}}</a>
 </div>
 
-<div class="list-group" *ngIf="category && !subCategory">
+<div class="list-group" *ngIf="category && !subCategory && subCategories.length">
     <li class="list-group-item"><strong>Please select a Sub-Category</strong></li>
     <a class="list-group-item list-group-item-action list-group-item-light py-1 text-dark"
         *ngFor="let scat of subCategories" (click)="onSubCategory(scat.slug)">{{scat.name}}</a>
@@ -34,7 +34,7 @@
 
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="p-3 border bg-white"
-    *ngIf="category && subCategory && brand && (subCategory.sub_sub_category.length == 0 || subSubCategory)">
+    *ngIf="brand && category && (category.sub_category.length == 0 || subCategory) &&  ((category.sub_category.length == 0 || subCategory) || subCategory.sub_sub_category.length == 0 || subSubCategory)">
     <div class="form-group row">
         <label for="brand" class="col-sm-2 col-form-label">Brand</label>
         <div class="col-sm-8">
@@ -53,7 +53,7 @@
             <button class="btn btn-sm btn-warning" (click)="onCategoryChange()">Change</button>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" *ngIf="subCategory">
         <label for="category" class="col-sm-2 col-form-label">Sub Category</label>
         <div class="col-sm-8">
             <label class="form-control" id="category">{{subCategory?.name}}</label>

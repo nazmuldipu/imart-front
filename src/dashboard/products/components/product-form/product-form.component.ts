@@ -72,7 +72,7 @@ export class ProductFormComponent implements OnChanges {
       size: ['', Validators.required],
       description: ['', Validators.required],
       category: ['', Validators.required],
-      sub_category: ['', Validators.required],
+      sub_category: [''],
       sub_sub_category: [''],
       brand: ['', Validators.required],
       barcode: ['', [Validators.required, Validators.min(0)]],
@@ -113,9 +113,9 @@ export class ProductFormComponent implements OnChanges {
 
   onSubCategory(slug) {
     this.subCategory = this.subCategories.find(sc => sc.slug === slug);
-    console.log(this.subCategory);
+    // console.log(this.subCategory);
     this.form.controls.sub_category.setValue({ "name": this.subCategory.name, "image_urls": this.subCategory.image_urls });
-    this.getAllSubCategoryBySubCategory(this.subCategory.slug)
+    this.getAllSubSubCategoryBySubCategory(this.subCategory.slug)
   }
 
   onSubSubCategory(slug) {
@@ -131,7 +131,7 @@ export class ProductFormComponent implements OnChanges {
     this.subCategories = this.category.sub_category;
   }
 
-  getAllSubCategoryBySubCategory(sub_cat_slug: string) {
+  getAllSubSubCategoryBySubCategory(sub_cat_slug: string) {
     this.subSubCategories = this.subCategory.sub_sub_category;
   }
 

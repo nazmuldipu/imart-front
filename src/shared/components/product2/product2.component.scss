@@ -25,6 +25,9 @@
       line-height: 18px;
       margin: 0;
       text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &-size {
       font-size: 12px;

@@ -19,14 +19,15 @@ export class ProductService {
     var formData = new FormData();
     Object.keys(product).forEach((key) => {
       if (key === 'category' || key === 'sub_category' || key === 'sub_sub_category' || key === 'brand') {
-        formData.append(key, JSON.stringify(product[key]));
+        if (Object.keys(product[key]).length)
+          formData.append(key, JSON.stringify(product[key]));
       }
       else {
         formData.append(key, product[key]);
       }
     });
 
-    console.log(product);
+    // console.log(product);
     new Response(formData).text().then(console.log)
 
     formData.delete('images')
@@ -123,5 +124,10 @@ export class ProductService {
       .set('limit', limit.toString())
       .set('sort', sort)
       .set('order', order);
+  }
+
+
+  isEmptyObject(obj) {
+    return (obj && (Object.keys(obj).length === 0));
   }
 }

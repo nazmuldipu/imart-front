@@ -61,7 +61,7 @@ img {
 }
 
 .cat-icon4 .list-cat-icon > li > a {
-  color: #fff !important;
+  // color: #fff !important;
   text-decoration: none;
 }
 .cat-icon4 .list-cat-icon > li:hover > a {
@@ -186,7 +186,8 @@ li.menu-item-has-children:hover > .sub-menu {
 .color,
 .list-cat-icon > li:hover > a,
 .list-cat-mega-menu a:hover {
-  color: #f40;
+  // color: #f40;
+  color: white;
 }
 .banner-image {
   position: relative;
