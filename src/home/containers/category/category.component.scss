@@ -4,7 +4,7 @@
 }
 
 .banner-shop {
-  padding: 0 0 20px 0;
+  padding: 0 0 5px 0;
   overflow: hidden;
   position: relative;
 }
@@ -16,7 +16,7 @@
 
 .banner-shop-thumb a img {
   // width: auto;
-  margin:auto;
+  margin: auto;
   display: block;
   height: 250px;
   transition: all 0.5s ease-out 0s;
@@ -264,4 +264,32 @@
 .pagi-bar.bottom {
   display: block;
   text-align: center;
+}
+
+.list-cat-icon {
+  padding-left: 0;
+  background-color: white;
+  cursor: pointer;
+  li {
+    padding: 5px 0 5px 15px;
+    list-style-type: none;
+    &:hover {
+      background-color: burlywood;
+    }
+    img {
+      max-width: 20px;
+      margin-right: 10px;
+      transition: all 0.5s ease-out 0s;
+      -webkit-transition: all 0.5s ease-out 0s;
+    }
+    a {
+      color: #333;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: all 0.5s ease-out 0s;
+      -webkit-transition: all 0.5s ease-out 0s;
+    }
+  }
 }

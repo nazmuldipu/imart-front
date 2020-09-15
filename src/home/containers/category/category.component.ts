@@ -84,6 +84,7 @@ export class CategoryComponent implements OnInit {
   }
 
   async getProductByCategory(category_slug: string, page: number = 1, limit: number = 8, sort: string = 'priority', order: string = 'asc') {
+    this.categoryNav = this.sideNav.category.find(cat => cat.slug == category_slug);
     this.loading = true;
     try {
       this.productPage = await this.productService.getByCategorySlug(category_slug, page, limit, sort, order).toPromise();

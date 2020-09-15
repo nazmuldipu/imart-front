@@ -59,8 +59,8 @@ export class ProductFormComponent implements OnChanges {
       //update local variables
       this.onBrand(this.product.brand.slug);
       this.onCategory(this.product.category.slug);
-      this.onSubCategory(this.product.sub_category.slug);
-      this.onSubSubCategory(this.product.sub_sub_category.slug);
+      this.onSubCategory(this.product?.sub_category?.slug);
+      this.onSubSubCategory(this.product?.sub_sub_category?.slug);
 
       this.form.patchValue({ ...value });
     }
@@ -113,14 +113,18 @@ export class ProductFormComponent implements OnChanges {
 
   onSubCategory(slug) {
     this.subCategory = this.subCategories.find(sc => sc.slug === slug);
-    // console.log(this.subCategory);
-    this.form.controls.sub_category.setValue({ "name": this.subCategory.name, "image_urls": this.subCategory.image_urls });
-    this.getAllSubSubCategoryBySubCategory(this.subCategory.slug)
+    console.log(this.subCategory);
+    if (this.subCategory) {
+      this.form.controls.sub_category.setValue({ "name": this.subCategory.name, "image_urls": this.subCategory.image_urls });
+      this.getAllSubSubCategoryBySubCategory(this.subCategory.slug)
+    }
   }
 
   onSubSubCategory(slug) {
-    this.subSubCategory = this.subSubCategories.find(ssc => ssc.slug === slug);
-    this.form.controls.sub_sub_category.setValue({ "name": this.subSubCategory.name, "image_urls": this.subSubCategory.image_urls })
+    if (slug && this.subSubCategories)
+      this.subSubCategory = this.subSubCategories.find(ssc => ssc.slug === slug);
+    if (this.subSubCategory)
+      this.form.controls.sub_sub_category.setValue({ "name": this.subSubCategory.name, "image_urls": this.subSubCategory.image_urls })
   }
 
   onSearchBrand(event) {

@@ -20,7 +20,7 @@
             <li class="breadcrumb-item active" *ngIf="sub_sub_category">{{sub_sub_category?.name}}</li>
         </ol>
     </nav>
-    
+
     <div class="alert alert-danger alert-dismissible show" role="alert" *ngIf="errorMessage.length > 0">
         <strong>Failed! </strong> {{ errorMessage }}
         <button type="button" class="close" (click)="onClose()">
@@ -36,8 +36,15 @@
     <div class="row">
 
         <div class="col-md-3 col-12">
-            <side-nav-collapse [data]="categoryNav" [title]="categoryNav?.name" (resp)="onSideNavClick($event)">
-            </side-nav-collapse>
+            <!-- <side-nav-collapse [data]="categoryNav" [title]="categoryNav?.name" (resp)="onSideNavClick($event)">
+            </side-nav-collapse> -->
+
+            <ul class="list-cat-icon">
+                <li *ngFor="let cat of sideNav.category" (click)="getProductByCategory(cat.slug)">
+                    <img class="category-image" [src]="'assets/images/icons/'+cat.slug+'.svg'" />
+                    <span>{{ cat.name }}</span>
+                </li>
+            </ul>
 
             <!-- <price-filter (resp)="onPriceFilter($event)"></price-filter>
 

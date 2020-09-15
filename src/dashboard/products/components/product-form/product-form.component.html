@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light border border-bottom-0">
     <a class="navbar-brand">{{ exists ? "Update" : "Add" }} Product</a>
 </nav>
-{{product | json}}
+<!-- {{product | json}} -->
 <div class="list-group" *ngIf="!brand">
     <li class="list-group-item"><strong>Please select a Brand</strong></li>
     <form #brandSearch="ngForm" class="ml-auto form-inline my-2 my-lg-0" (ngSubmit)="onSearchBrand(brandSearch.value)">
