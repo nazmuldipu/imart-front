@@ -12,6 +12,7 @@ import { UtilService } from './util.service';
 import { SubCategoryService } from './sub-category.service';
 import { ProductDetailsService } from './product-details.service';
 import { ModalService } from './modal.service';
+import { OrderService } from './order.service';
 
 @NgModule({
   providers: [
@@ -20,6 +21,7 @@ import { ModalService } from './modal.service';
     BrandService,
     CategoryService,
     ModalService,
+    OrderService,
     ProductService,
     ProductDetailsService,
     ShopService,
