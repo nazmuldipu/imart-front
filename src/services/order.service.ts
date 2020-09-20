@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Order } from 'src/shared/models/order.model';
+import { Order, OrderPage } from 'src/shared/models/order.model';
 import { RestDataService } from './rest-data.service';
 
 @Injectable({
@@ -17,6 +17,10 @@ export class OrderService {
   
   confirmOrder(): Observable<Order> {
     return this.dataSource.sendRequest('POST', this.orderUrl + '/confirm', null, true, null);
+  }
+
+  getMyOrders():Observable<OrderPage>{
+    return this.dataSource.sendRequest('GET', this.orderUrl + '/my', null, true, null);
   }
 
 }

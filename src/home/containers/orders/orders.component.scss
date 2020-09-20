@@ -29,6 +29,35 @@
   color: black;
   background-color: rgb(255, 245, 245);
 }
-.product_image{
-    height: 90px;
+.product_image {
+  height: 70px;
+}
+.order {
+  &-number {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  &-date {
+    font-size: 14px;
+    color: #505050;
+  }
+  &-status {
+    color: white;
+    background-color: lightcoral;
+    font-size: 13px;
+    margin: 5px;
+  }
+}
+
+.order-history {
+  // padding: 10px;
+  &-row {    
+    padding: 10px;
+    margin-bottom: 20px;
+    &-label {
+      margin-left: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
 }

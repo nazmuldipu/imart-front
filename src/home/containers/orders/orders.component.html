@@ -1,0 +1,152 @@
+<!-- <div class="container-fluid component-head">
+    <h3>My orders</h3>
+</div> -->
+<navbar></navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-auto">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                    <div> <i class="fa fa-list"></i> <b> Order list</b></div>
+                    <select id="inputState" class="form-control">
+                        <option selected="">All</option>
+                        <option>Created</option>
+                        <option>Pending</option>
+                        <option>Confirmed</option>
+                        <option>Processing</option>
+                        <option>Picked</option>
+                        <option>Shipped</option>
+                        <option>Delivered</option>
+                        <option>Cancel</option>
+                    </select>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                    *ngFor="let ord of orderPage?.docs" [class.active]="ord._id==order?._id"
+                    (click)="onSelectOrder(ord._id)">
+                    <div class="mr-3">
+                        <span class="text-muted">{{ord._id}}</span><br>
+                        {{ord.createdAt | date:'MMM d, y, h:mm a'}}
+                    </div>
+                    <div class="order-status bg-info text-white">{{ord.status[ord.status.length - 1].label}}</div>
+                    <!-- <span class="badge badge-primary badge-pill">14</span> -->
+                </li>
+            </ul>
+        </div>
+        <div class="col" *ngIf="order">
+            <div class="d-flex justify-content-between">
+                <div class="order-number"> Order # {{order._id}} </div>
+                <div class="order-status">{{order.status[order.status.length -1].label}} </div>
+            </div>
+            <div class="order-date"> Date: {{order?.createdAt | date:'MMM d, y, h:mm a'}} </div>
+            <div class="row">
+                <div class="col-md-6 col-12"></div>
+                <div class="col-md-6 col-12">
+                    <div class="bg-white p-3">
+                        <div> <strong> Bills To </strong></div>
+                        <div class="row">
+                            <div class="col-auto"></div>
+                            <div class="col">
+                                <div><strong>{{order.customer.name}}</strong></div>
+                                <div>Contact: {{order.customer.phone}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Product List</h3>
+            <table class="table bg-white">
+                <thead>
+                    <tr>
+                        <td>Description</td>
+                        <td class="text-center">Quantity</td>
+                        <td class="text-center">Rate</td>
+                        <td class="text-right pr-3">Amount</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pList of order.product_list">
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img class="product_image" [src]="thumbUrl + pList.product._id" alt="">
+                                <div class="ml-2">
+                                    {{pList.product.name}} <br>
+                                    <span class="text-muted">Size: {{pList.product.size}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="pt-4 text-center">{{pList.quantity}}</td>
+                        <td class="pt-4 text-center">{{pList.rate}}</td>
+                        <td class="pt-4 text-right pr-3"> <strong> {{pList.amount}} </strong></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">Subtotal</td>
+                        <td class="text-right pr-3"><strong>{{order.sub_total}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="text-right">Shipping</td>
+                        <td class="text-right pr-3"><strong>{{order.shipping_charge}}</strong></td>
+                    </tr>
+                    <tr *ngIf="order.promo_discount > 0">
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="text-right">Promo Discount</td>
+                        <td class="text-right pr-3"><strong>{{order.promo_discount}}</strong></td>
+                    </tr>
+                    <tr *ngIf="order.total_discount > 0">
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="text-right">Total Discount</td>
+                        <td class="text-right pr-3"><strong>{{order.total_discount}}</strong></td>
+                    </tr>
+                    <tr *ngIf="order.total_tax > 0">
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="text-right">Tax</td>
+                        <td class="text-right pr-3"><strong>{{order.total_tax}}</strong></td>
+                    </tr>
+                    <tr *ngIf="order.vat_and_service > 0">
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="text-right">Vat &amp; Service</td>
+                        <td class="text-right pr-3"><strong>{{order.vat_and_service}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="text-right">Payable</td>
+                        <td class="text-right pr-3"><strong>{{order.payable}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="text-right">Advance</td>
+                        <td class="text-right pr-3"><strong>{{order.advance}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="border-0"></td>
+                        <td class="border-0"></td>
+                        <td class="text-right">Due</td>
+                        <td class="text-right pr-3"><strong>{{order.due}}</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="order-history">
+                <h3>Order history</h3>
+                <div class="order-history-row  bg-white" *ngFor="let stat of order.status">
+                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                    <span class="order-history-row-label">{{stat.label}}</span> at 
+                    <span class="order-history-row-date"> {{stat.date | date:'MMM d, y, h:mm a'}}</span>
+                </div>
+            </div>
+            <!-- {{order| json}} -->
+        </div>
+    </div>
+</div>

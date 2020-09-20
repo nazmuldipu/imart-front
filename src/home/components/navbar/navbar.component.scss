@@ -27,6 +27,12 @@
   color: $primary-color;
 }
 
+.dropdown-content a:hover {
+  & .fa{
+    color: white;
+  }
+}
+
 .search {
   margin: 15px 35px;
   border-color: $primary-color;

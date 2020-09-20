@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/services/cart.service';
 import { Cart } from 'src/shared/models/cart.model';
 import { ProductService } from 'src/services/product.service';
+import { OrderService } from 'src/services/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +17,8 @@ export class CartComponent implements OnInit {
   errorMessage = '';
   thumbUrl;
 
-  constructor(private cartService: CartService, private productService: ProductService) {
+  constructor(private cartService: CartService, private productService: ProductService,
+    private orderService: OrderService) {
     this.thumbUrl = this.productService.productLink + '/thumb/';
   }
 
@@ -54,6 +56,18 @@ export class CartComponent implements OnInit {
       const value = { "productId": product_id, "quantity": - count };
       this.onAddToCart(value);
     }
+  }
+
+  async onOrder() {
+    this.loading = true;
+    try {
+      const resp = await this.orderService.confirmOrder().toPromise();
+      this.cartService.getMyCart();
+      console.log(resp);
+    } catch (err) {
+      this.errorMessage = err;
+    }
+    this.loading = false;
   }
 
 }

@@ -102,11 +102,15 @@ a:focus {
   padding: 4px 12px;
   text-decoration: none;
   display: block;
+  & .fa{
+    color: white;
+  }
 }
 
 .dropdown-content a:hover {
   background-color: #f40;
   color: white;
+  
 }
 
 .dropdown:hover .dropdown-content {

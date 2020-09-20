@@ -1,4 +1,5 @@
 export interface Order {
+    _id:string;
     product_list: Product_list_cart[];
     poll: number;
     sub_total: number;
@@ -23,6 +24,19 @@ export interface Order {
     cancelled: boolean;
     status: Stat[];
 }
+
+export interface OrderPage {
+    docs: Order[];
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    limit: number;
+    nextPage: number;
+    page: number;
+    pagingCounter: number;
+    prevPage: number;
+    totalDocs: number;
+    totalPages: number;
+  }
 
 export interface Product_list_cart {
     product: Product;

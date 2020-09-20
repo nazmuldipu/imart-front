@@ -4,11 +4,11 @@ import { ProductService } from 'src/services/product.service';
 import { Order, OrderPage } from 'src/shared/models/order.model';
 
 @Component({
-  selector: 'app-my-orders',
-  templateUrl: './my-orders.component.html',
-  styleUrls: ['./my-orders.component.scss']
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss']
 })
-export class MyOrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit {
   order: Order;
   orderPage: OrderPage;
 
@@ -38,5 +38,4 @@ export class MyOrdersComponent implements OnInit {
   onSelectOrder(id) {
     this.order = this.orderPage.docs.find(o => o._id == id);
   }
-
 }
