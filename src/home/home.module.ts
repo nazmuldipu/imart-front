@@ -17,16 +17,18 @@ import { RegisterComponent } from './containers/register/register.component';
 import { HomeComponent } from './home.component';
 import { DetailModalComponent } from './components/detail-modal/detail-modal.component';
 import { OrdersComponent } from './containers/orders/orders.component';
+import { CartComponent } from './containers/cart/cart.component';
 // import { DetailsCollapseComponent } from '../shared/components/details-collapse/details-collapse.component';
 
 export const ROUTES: Routes = [
+  { path: 'cart', component: CartComponent },
+  { path: 'orders', component: OrdersComponent },
   {
     path: '',
     component: HomeComponent,
     children: [
       { path: 'category/:slug', component: CategoryComponent },
       { path: 'details/:id', component: DetailsComponent },
-      { path: 'orders', component: OrdersComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: '', component: IndexComponent },
@@ -50,6 +52,7 @@ export const ROUTES: Routes = [
     CategoryComponent,
     DetailModalComponent,
     OrdersComponent,
+    CartComponent,
   ],
   imports: [
     CommonModule,

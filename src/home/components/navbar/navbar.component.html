@@ -1,74 +1,111 @@
 <div class="imart-navbar">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-auto col-auto px-0 px-md-2 pt-md-0">
-                <a routerLink="/">
-                    <img class="logo" src="assets/images/logo.png" alt="">
-                    <span class="logo-dialog"> All in one store</span>
-                </a>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-auto col-auto px-0 px-md-2 pt-md-0">
+        <a routerLink="/">
+          <img class="logo" src="assets/images/logo.png" alt="" />
+          <span class="logo-dialog"> All in one store</span>
+        </a>
+      </div>
+      <div class="col-md col">
+        <div class="search">
+          <form>
+            <div class="nav-form form-row">
+              <div
+                class="form-group col-auto border-right pr-2 d-none d-sm-block"
+              >
+                <select id="inputState" class="form-control">
+                  <option selected="">All Categories</option>
+                  <option>Computer &amp; Office</option>
+                  <option>Elextronics</option>
+                  <option>Jewelry &amp; Watches</option>
+                  <option>Home &amp; Garden</option>
+                  <option>Bags &amp; Shoes</option>
+                  <option>Kids &amp; Baby</option>
+                </select>
+              </div>
+              <div class="col p-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search ..."
+                />
+              </div>
+              <div class="col-auto p-0">
+                <button type="submit" class="btn search-button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
             </div>
-            <div class="col-md col ">
-                <div class="search">
-                    <form>
-                        <div class="nav-form form-row">
-                            <div class="form-group col-auto border-right pr-2 d-none d-sm-block">
-                                <select id="inputState" class="form-control">
-                                    <option selected="">All Categories</option>
-                                    <option>Computer &amp; Office</option>
-                                    <option>Elextronics</option>
-                                    <option>Jewelry &amp; Watches</option>
-                                    <option>Home &amp; Garden</option>
-                                    <option>Bags &amp; Shoes</option>
-                                    <option>Kids &amp; Baby</option>
-                                </select>
-                            </div>
-                            <div class="col p-0">
-                                <input type="text" class="form-control" placeholder="Search ...">
-                            </div>
-                            <div class="col-auto p-0">
-                                <button type="submit" class="btn search-button"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <nav class="navbar navbar-expand-lg navbar-light px-0 pb-0 nav-icons">
-                    <a class="navbar-brand d-block d-sm-none" href="#">
-                        <i class="fa fa-shopping-cart fa-2x"></i>
-                        <span class="float-right cart-sm-value pr-2">21</span>
-                    </a>
-                    <a class="navbar-brand d-block d-sm-none" href="#">
-                        <i class="fa fa-heart-o fa-2x"></i>
-                    </a>
-                    <div class="navbar-brand dropdown d-block d-sm-none">
-                        <button class="dropbtn"><span><i class="fa fa-user fa-2x"></i></span></button>
-                        <div class="dropdown-content right-s " style="width: 200px;">
-                            <a routerLink="/accountInfo"> <i class="fa fa-info"></i> &nbsp; &nbsp;Account Info</a>
-                            <a routerLink="/login"> <i class="fa fa-sign-in"></i> &nbsp; Sign in</a>
-                            <a routerLink="/orders"> <i class="fa fa-list"></i> &nbsp; My Orders</a>
-                            <a routerLink="/changePassword"> <i class="fa fa-unlock"></i> &nbsp; Change Password</a>
-                        </div>
-                    </div>
-                    <button class="navbar-toggler" type="button" (click)="toggleCollapse()" data-toggle="collapse"
-                        data-target="#imartnavbar" aria-controls="imartnavbar" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+          </form>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light px-0 pb-0 nav-icons">
+          <a class="navbar-brand d-block d-sm-none" href="#">
+            <i class="fa fa-shopping-cart fa-2x"></i>
+            <span class="float-right cart-sm-value pr-2">21</span>
+          </a>
+          <a class="navbar-brand d-block d-sm-none" href="#">
+            <i class="fa fa-heart-o fa-2x"></i>
+          </a>
+          <div class="navbar-brand dropdown d-block d-sm-none">
+            <button class="dropbtn">
+              <span><i class="fa fa-user fa-2x"></i></span>
+            </button>
+            <div class="dropdown-content right-s" style="width: 200px">
+              <a routerLink="/accountInfo">
+                <i class="fa fa-info"></i> &nbsp; &nbsp;Account Info</a
+              >
+              <a routerLink="/login">
+                <i class="fa fa-sign-in"></i> &nbsp; Sign in</a
+              >
+              <a routerLink="/orders">
+                <i class="fa fa-list"></i> &nbsp; My Orders</a
+              >
+              <a routerLink="/changePassword">
+                <i class="fa fa-unlock"></i> &nbsp; Change Password</a
+              >
+            </div>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            (click)="toggleCollapse()"
+            data-toggle="collapse"
+            data-target="#imartnavbar"
+            aria-controls="imartnavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-                    <div class="collapse navbar-collapse" id="imartnavbar" [class.show]="show">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()">Offers</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()">Points</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()">Product Request</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" routerLink="/" (click)="toggleCollapse()">Recipes</a>
-                            </li>
-                            <!-- <li class="nav-item">
+          <div
+            class="collapse navbar-collapse"
+            id="imartnavbar"
+            [class.show]="show"
+          >
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/" (click)="toggleCollapse()"
+                  >Offers</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/" (click)="toggleCollapse()"
+                  >Points</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/" (click)="toggleCollapse()"
+                  >Product Request</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/" (click)="toggleCollapse()"
+                  >Recipes</a
+                >
+              </li>
+              <!-- <li class="nav-item">
                                 <a class="nav-link" href="#" (click)="toggleCollapse()" >Link</a>
                             </li>
                             <li class="nav-item">
@@ -80,47 +117,63 @@
                                     </div>
                                 </div>
                             </li> -->
-                        </ul>
-                    </div>
-                </nav>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div
+        class="col-md-auto col-auto px-0 px-md-2 pt-2 pt-md-0 d-none d-sm-block"
+      >
+        <div class="row nav-icons py-3">
+          <div class="col-auto px-3">
+            <a routerLink="/cart"
+              ><i class="fa fa-shopping-cart fa-2x"></i>
+              <span class="cart-value">{{
+                cart?.product_list?.length > 0 ? cart.product_list.length : 0
+              }}</span></a
+            >
+          </div>
+          <div class="col-auto px-3">
+            <a href=""><i class="fa fa-heart-o fa-2x"></i></a>
+          </div>
+          <div class="col-auto pl-3 pr-0">
+            <div class="dropdown">
+              <button class="dropbtn p-0">
+                <span><i class="fa fa-user fa-2x"></i></span>
+              </button>
+              <div class="dropdown-content right-s" style="width: 200px">
+                <a routerLink="/accountInfo">
+                  <i class="fa fa-info"></i> &nbsp; &nbsp;Account Info</a
+                >
+                <a routerLink="/login">
+                  <i class="fa fa-sign-in"></i> &nbsp; Sign in</a
+                >
+                <a routerLink="/login">
+                  <i class="fa fa-sign-out"></i> &nbsp; Sign out</a
+                >
+                <a routerLink="/orders">
+                  <i class="fa fa-list"></i> &nbsp; My Orders</a
+                >
+                <a routerLink="/changePassword">
+                  <i class="fa fa-unlock"></i> &nbsp; Change Password</a
+                >
+              </div>
             </div>
-            <div class="col-md-auto col-auto px-0 px-md-2 pt-2 pt-md-0 d-none d-sm-block">
-                <div class="row nav-icons py-3">
-                    <div class="col-auto px-3">
-                        <a routerLink="/dashboard/orders/cart"><i class="fa fa-shopping-cart fa-2x"></i>
-                            <span
-                                class="cart-value">{{cart?.product_list?.length > 0 ? cart.product_list.length : 0}}</span></a>
-                    </div>
-                    <div class="col-auto px-3">
-                        <a href=""><i class="fa fa-heart-o fa-2x"></i></a>
-                    </div>
-                    <div class="col-auto pl-3 pr-0">
-                        <div class="dropdown">
-                            <button class="dropbtn p-0"><span><i class="fa fa-user fa-2x"></i></span></button>
-                            <div class="dropdown-content right-s " style="width: 200px;">
-                                <a routerLink="/accountInfo"> <i class="fa fa-info"></i> &nbsp; &nbsp;Account Info</a>
-                                <a routerLink="/login"> <i class="fa fa-sign-in"></i> &nbsp; Sign in</a>
-                                <a routerLink="/login"> <i class="fa fa-sign-out"></i> &nbsp; Sign out</a>
-                                <a routerLink="/orders"> <i class="fa fa-list"></i> &nbsp; My Orders</a>
-                                <a routerLink="/changePassword"> <i class="fa fa-unlock"></i> &nbsp; Change Password</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="col "></div>
-                    <div class="col-auto social px-2 pt-3">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                    </div>
-                    <div class="col-auto social px-2 pt-3">
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                    </div>
-                    <div class="col-auto social px-2 pt-3">
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
-                    </div>
-                </div>
-
-            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-auto social px-2 pt-3">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+          </div>
+          <div class="col-auto social px-2 pt-3">
+            <a href="#"><i class="fa fa-twitter"></i></a>
+          </div>
+          <div class="col-auto social px-2 pt-3">
+            <a href="#"><i class="fa fa-youtube-play"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
