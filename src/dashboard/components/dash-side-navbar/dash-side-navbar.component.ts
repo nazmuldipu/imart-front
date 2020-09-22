@@ -19,9 +19,24 @@ export class DashSideNavbarComponent implements OnInit {
       icon: 'fa-tachometer',
       roles: ['ADMIN', 'SHOP', 'USER'],
       subnav: [
-        { name: 'Analytics', icon: 'fa-pie-chart', roles: ['USER'], link: '/dashboard' },
-        { name: 'Visits', icon: 'fa-line-chart', roles: ['SHOP'], link: '/dashboard' },
-        { name: 'Widgets', icon: 'fa-windows', roles: ['ADMIN'], link: '/dashboard' },
+        {
+          name: 'Analytics',
+          icon: 'fa-pie-chart',
+          roles: ['USER'],
+          link: '/dashboard',
+        },
+        {
+          name: 'Visits',
+          icon: 'fa-line-chart',
+          roles: ['SHOP'],
+          link: '/dashboard',
+        },
+        {
+          name: 'Widgets',
+          icon: 'fa-windows',
+          roles: ['ADMIN'],
+          link: '/dashboard',
+        },
       ],
     },
     // {
@@ -49,16 +64,20 @@ export class DashSideNavbarComponent implements OnInit {
         //   roles: ['ADMIN'], link: '/dashboard/products/brands'
         // },
         {
-          name: 'Storehouse', icon: 'fa-shield',
-          roles: ['ADMIN'], link: '/dashboard/products/storehouse'
+          name: 'Storehouse',
+          icon: 'fa-shield',
+          roles: ['ADMIN'],
+          link: '/dashboard/products/storehouse',
         },
         // {
         //   name: 'Shops', icon: 'fa-shopping-bag',
         //   roles: ['ADMIN'], link: '/dashboard/products/shops',
         // },
         {
-          name: 'Products', icon: 'fa-shopping-bag',
-          roles: ['SHOP', 'ADMIN'], link: '/dashboard/products/',
+          name: 'Products',
+          icon: 'fa-shopping-bag',
+          roles: ['SHOP', 'ADMIN'],
+          link: '/dashboard/products/',
         },
       ],
     },
@@ -68,8 +87,22 @@ export class DashSideNavbarComponent implements OnInit {
       roles: ['ADMIN', 'SHOP'],
       subnav: [
         { name: 'Add', icon: 'fa-plus', link: '/dashboard/inventory/add' },
+        {
+          name: 'Transfer',
+          icon: 'fa-exchange',
+          link: '/dashboard/inventory/transfer',
+        },
+        {
+          name: 'Convert',
+          icon: 'fa-chrome',
+          link: '/dashboard/inventory/convert',
+        },
         { name: 'List', icon: 'fa-list', link: '/dashboard/inventory' },
-        { name: 'Stocks', icon: 'fa-bar-chart', link: '/dashboard/inventory/stocks' },
+        {
+          name: 'Stocks',
+          icon: 'fa-bar-chart',
+          link: '/dashboard/inventory/stocks',
+        },
       ],
     },
     {
@@ -90,8 +123,16 @@ export class DashSideNavbarComponent implements OnInit {
       icon: 'fa-clone',
       roles: [],
       subnav: [
-        { name: 'Cart', icon: 'fa-shopping-cart', link: '/dashboard/orders/cart' },
-        { name: 'Orders', icon: 'fa-archive', link: '/dashboard/orders/my-orders' },
+        {
+          name: 'Cart',
+          icon: 'fa-shopping-cart',
+          link: '/dashboard/orders/cart',
+        },
+        {
+          name: 'Orders',
+          icon: 'fa-archive',
+          link: '/dashboard/orders/my-orders',
+        },
       ],
     },
     {
@@ -102,9 +143,9 @@ export class DashSideNavbarComponent implements OnInit {
       subCagegories: [],
     },
   ];
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onNavLink(link) {
     if (this.navlink === link) {
