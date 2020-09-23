@@ -93,6 +93,11 @@ export class DashSideNavbarComponent implements OnInit {
           link: '/dashboard/inventory/transfer',
         },
         {
+          name: 'Recieve',
+          icon: 'fa-check',
+          link: '/dashboard/inventory/receive',
+        },
+        {
           name: 'Convert',
           icon: 'fa-chrome',
           link: '/dashboard/inventory/convert',
@@ -143,9 +148,9 @@ export class DashSideNavbarComponent implements OnInit {
       subCagegories: [],
     },
   ];
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onNavLink(link) {
     if (this.navlink === link) {

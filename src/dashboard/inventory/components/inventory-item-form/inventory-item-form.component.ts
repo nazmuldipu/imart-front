@@ -42,7 +42,15 @@ export class InventoryItemFormComponent implements OnInit {
       tap(() => this.searching = false)
     )
 
-  productFormatter = (x) => x.name;
+  productFormatter = (x) => {
+    if (x)
+      return `${x.name} [${x.size}]`;
+  }
+
+  getProductName(x) {
+    if (x)
+      return `${x.name} [${x.size}]`;
+  }
 
   onRemoveItem(i) {
     this.removeItem.emit(i);
@@ -50,11 +58,8 @@ export class InventoryItemFormComponent implements OnInit {
 
   updateTotal() {
     const control = <FormArray>this.parent.get('items');
-    console.log('updateTotal size = ', control.length);
-    console.log(control);
     let t = 0;
     for (let i = 0; i < control.length; i++) {
-      console.log(control.value[i])
       t += control.value[i].quantity * control.value[i].purchase_price;
     }
     this.total = t;

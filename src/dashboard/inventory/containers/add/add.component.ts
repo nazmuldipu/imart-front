@@ -6,20 +6,18 @@ import { Shop } from 'src/shared/models/shop.model';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  styleUrls: ['./add.component.scss'],
 })
 export class AddComponent implements OnInit {
-  shopList: Shop[] = [];
+  // shopList: Shop[] = [];
 
   loading = false;
   message = '';
   errorMessage = '';
 
+  constructor(private inventoryService: InventoryService) {}
 
-  constructor(private inventoryService: InventoryService) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   async onCreateInventory(event: Inventory) {
     this.loading = true;
@@ -39,5 +37,4 @@ export class AddComponent implements OnInit {
     this.errorMessage = '';
     this.message = '';
   }
-
 }

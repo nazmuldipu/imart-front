@@ -10,13 +10,14 @@ export interface InventoryPage {
     prevPage: number;
     totalDocs: number;
     totalPages: number;
-  }
+}
 
 export interface Inventory {
     _id: string;
     reference: string;
     inventoryType: string;
     storehouse: Storehouse;
+    from: Storehouse;
     supplier: User;
     createdAt: Date;
     createdBy: User;
@@ -31,7 +32,7 @@ interface ProductItem {
     purchase_price: number;
 }
 
-interface User{
+interface User {
     _id: string,
     name: string;
     phone: string;

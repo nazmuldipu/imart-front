@@ -12,6 +12,8 @@ import { StocksComponent } from './containers/stocks/stocks.component';
 import { ProductStockListComponent } from './components/product-stock-list/product-stock-list.component';
 import { TransferComponent } from './containers/transfer/transfer.component';
 import { ConvertComponent } from './containers/convert/convert.component';
+import { InventoryTransferFormComponent } from './components/inventory-transfer-form/inventory-transfer-form.component';
+import { ReceiveComponent } from './containers/receive/receive.component';
 
 export const ROUTES: Routes = [
   { path: '', component: IndexComponent },
@@ -19,6 +21,7 @@ export const ROUTES: Routes = [
   { path: 'add/:id', component: AddComponent },
   { path: 'stocks', component: StocksComponent },
   { path: 'transfer', component: TransferComponent },
+  { path: 'receive', component: ReceiveComponent },
   { path: 'convert', component: ConvertComponent },
 ];
 
@@ -34,7 +37,9 @@ export const ROUTES: Routes = [
     ProductStockListComponent,
     TransferComponent,
     ConvertComponent,
+    InventoryTransferFormComponent,
+    ReceiveComponent,
   ],
   imports: [SharedModule, RouterModule.forChild(ROUTES)],
 })
-export class InventoryModule {}
+export class InventoryModule { }

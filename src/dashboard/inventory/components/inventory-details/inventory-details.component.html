@@ -34,9 +34,13 @@
         <label for="shop" class="col-auto col-form-label">Storehouse: </label>
         <label id="shop" class="col-form-label">{{inventory?.storehouse?.name}}</label>
     </div>
-    <div class="col-sm-6 p-0">
+    <div class="col-sm-6 p-0" *ngIf="inventory?.supplier">
         <label for="shop" class="col-auto col-form-label">Supplier: </label>
         <label id="shop" class="col-form-label">{{inventory?.supplier?.name}}[{{inventory?.supplier?.phone}}]</label>
+    </div>
+    <div class="col-sm-6 p-0" *ngIf="inventory?.from">
+        <label for="shop" class="col-auto col-form-label">From Storehouse: </label>
+        <label id="shop" class="col-form-label">{{inventory?.from?.name}}</label>
     </div>
 </div>
 

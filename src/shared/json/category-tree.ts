@@ -162,6 +162,12 @@ export const CategoryTree = {
             image_urls: ['assets/images/category/chira.jpg'],
             sub_category: [],
         },
+        {
+            name: 'Rice',
+            slug: 'rice',
+            image_urls: ['assets/images/category/rice.jpg'],
+            sub_category: [],
+        },
 
     ],
 };

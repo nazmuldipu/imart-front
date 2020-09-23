@@ -13,7 +13,6 @@ export class InventoryService {
   constructor(private dataSource: RestDataService) { }
 
   create(event: Inventory): Observable<Inventory> {
-    console.log(event);
     const items = [];
     for (let i = 0; i < event.items.length; i++) {
       const ev = event.items[i];
@@ -21,9 +20,25 @@ export class InventoryService {
       items.push(item);
     }
     const value = { inventoryType: event.inventoryType, reference: event.reference, storehouseId: event.storehouse._id, supplierId: event.supplier._id, items }
-    console.log(value);
 
     return this.dataSource.sendRequest('POST', this.inventoryUrl, value, true, null);
+  }
+
+  transfer(event: Inventory): Observable<Inventory> {
+    const items = [];
+    for (let i = 0; i < event.items.length; i++) {
+      const ev = event.items[i];
+      const item = { productId: ev.product._id, quantity: ev.quantity, purchase_price: ev.purchase_price }
+      items.push(item);
+    }
+    const value = { inventoryType: event.inventoryType, reference: event.reference, storehouseId: event.storehouse._id, fromId: event.from._id, items }
+
+    return this.dataSource.sendRequest('POST', this.inventoryUrl + '/transfer', value, true, null);
+  }
+
+  getUnapprovedInventories(storehouseId: string, page: number, limit: number, sort: string, order: string): Observable<InventoryPage> {
+    const params = this.generateParam(page, limit, sort, order);
+    return this.dataSource.sendRequest('GET', this.inventoryUrl + `/transfer/storehouse/${storehouseId}`, null, true, params);
   }
 
   getInventory(id: string): Observable<Inventory> {
