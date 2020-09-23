@@ -28,22 +28,22 @@ import { scaleIn, scaleOut, slideIn, slideOut } from './carousel.animations';
 export class CarouselComponent implements OnInit {
   public slides = [
     {
-      src: 'assets/dummy/home4/slide1.jpg',
-      title: 'cute sale',
-      subtitle: 'Dress womens',
-      text: '$485.0',
+      src: 'assets/images/banners/banner1.jpg',
+      title: 'Honey ',
+      subtitle: 'Khalisha - 100% Fresh',
+      text: '৳1000.00/KG',
     },
     {
-      src: 'assets/dummy/home4/slide2.jpg',
-      title: 'model',
-      subtitle: 'Collection',
-      text: 'watches',
+      src: 'assets/images/banners/banner2.jpg',
+      title: 'Mustard oil',
+      subtitle: 'Cold pressed',
+      text: '৳300.00/KG',
     },
     {
-      src: 'assets/dummy/home4/slide3.jpg',
-      title: 'FASHON',
-      subtitle: '100 New item',
-      text: 'upto 50% off',
+      src: 'assets/images/banners/banner3.jpg',
+      title: 'Binni rice',
+      subtitle: 'Live healty',
+      text: 'upto 20% off',
     },
   ];
   currentSlide = 0;
