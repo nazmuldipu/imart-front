@@ -44,12 +44,12 @@ export class InventoryItemFormComponent implements OnInit {
 
   productFormatter = (x) => {
     if (x)
-      return `${x.name} [${x.size}]`;
+      return `${x.name} [S: ${x.size}] [P: ${x.price}]`;
   }
 
   getProductName(x) {
     if (x)
-      return `${x.name} [${x.size}]`;
+    return `${x.name} [S: ${x.size}] [P: ${x.price}]`;
   }
 
   onRemoveItem(i) {

@@ -7,7 +7,7 @@
     <thead>
         <tr>
             <th>Product</th>
-            <!-- <th>Storehouse</th> -->
+            <th>Size</th>
             <th>Quantity</th>
             <th>Purchase price</th>
             <!-- <th>Actions</th> -->
@@ -16,7 +16,7 @@
     <tbody>
         <tr *ngFor="let pst of productStockPage.docs">
             <td>{{pst.product.name}}</td>
-            <!-- <td>{{pst.storehouse.name}}</td> -->
+            <td>{{pst.product.size}}</td>
             <td>{{pst.quantity}}</td>
             <td>{{pst.purchase_price}}</td>
             <!-- <td class="text-right">

@@ -41,6 +41,10 @@ export class InventoryService {
     return this.dataSource.sendRequest('GET', this.inventoryUrl + `/transfer/storehouse/${storehouseId}`, null, true, params);
   }
 
+  approveTransferedInventories(inventoryId: string){
+    return this.dataSource.sendRequest('PUT', this.inventoryUrl + `/transfer/approve/${inventoryId}`, null, true, null);
+  }
+
   getInventory(id: string): Observable<Inventory> {
     return this.dataSource.sendRequest('GET', this.inventoryUrl + `/${id}`, null, true, null);
   }

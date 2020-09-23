@@ -34,9 +34,11 @@ export class ReceiveComponent implements OnInit {
     }
     this.loading = false;
   }
+
   onChangeStorehousePage(page) {
     this.getAllStorehouse(page.pageNumber, page.limit, page.sort, page.order)
   }
+
   onSelectStorehouse(id) {
     const value = this.storehousePage.docs.find((s) => s._id == id);
     this.storehouse = Object.assign({}, value);
@@ -71,6 +73,18 @@ export class ReceiveComponent implements OnInit {
         this.storehouse = null;
         break;
     }
+  }
+
+  async onApprove(id) {
+    this.loading = true;
+    try {
+      const resp = await this.inventoryService.approveTransferedInventories(id).toPromise();
+      this.onClose('details');
+      this.getAllUnapprovedInventories(this.storehouse._id);
+    } catch (err) {
+      this.errorMessage = err;
+    }
+    this.loading = false;
   }
 
 }
