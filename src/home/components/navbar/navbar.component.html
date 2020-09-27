@@ -53,17 +53,15 @@
             </button>
             <div class="dropdown-content right-s" style="width: 200px">
               <a routerLink="/accountInfo">
-                <i class="fa fa-info"></i> &nbsp; &nbsp;Account Info</a
-              >
-              <a routerLink="/login">
-                <i class="fa fa-sign-in"></i> &nbsp; Sign in</a
-              >
+                <i class="fa fa-info"></i> &nbsp; &nbsp;Account Info</a>
+              <a routerLink="/login" *ngIf="!auth.isAuthenticated()">
+                <i class="fa fa-sign-in" ></i> &nbsp; Sign in</a>
+              <a routerLink="/login" *ngIf="auth.isAuthenticated()">
+                <i class="fa fa-sign-out"></i> &nbsp; Sign out</a>
               <a routerLink="/orders">
-                <i class="fa fa-list"></i> &nbsp; My Orders</a
-              >
+                <i class="fa fa-list"></i> &nbsp; My Orders</a>
               <a routerLink="/changePassword">
-                <i class="fa fa-unlock"></i> &nbsp; Change Password</a
-              >
+                <i class="fa fa-unlock"></i> &nbsp; Change Password</a>
             </div>
           </div>
           <button
@@ -143,20 +141,15 @@
               </button>
               <div class="dropdown-content right-s" style="width: 200px">
                 <a routerLink="/accountInfo">
-                  <i class="fa fa-info"></i> &nbsp; &nbsp;Account Info</a
-                >
-                <a routerLink="/login">
-                  <i class="fa fa-sign-in"></i> &nbsp; Sign in</a
-                >
-                <a routerLink="/login">
-                  <i class="fa fa-sign-out"></i> &nbsp; Sign out</a
-                >
+                  <i class="fa fa-info"></i> &nbsp; &nbsp;Account Info</a>
+                <a routerLink="/login" *ngIf="!auth.isAuthenticated()">
+                  <i class="fa fa-sign-in" ></i> &nbsp; Sign in</a>
+                <a routerLink="/login" *ngIf="auth.isAuthenticated()">
+                  <i class="fa fa-sign-out"></i> &nbsp; Sign out</a>
                 <a routerLink="/orders">
-                  <i class="fa fa-list"></i> &nbsp; My Orders</a
-                >
+                  <i class="fa fa-list"></i> &nbsp; My Orders</a>
                 <a routerLink="/changePassword">
-                  <i class="fa fa-unlock"></i> &nbsp; Change Password</a
-                >
+                  <i class="fa fa-unlock"></i> &nbsp; Change Password</a>
               </div>
             </div>
           </div>

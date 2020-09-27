@@ -12,11 +12,8 @@ import { TestComponent } from './test/test.component';
 
 export const ROUTES: Routes = [
   { path: 'test', component: TestComponent },
-  {
-    path: 'dashboard',
-    loadChildren: () =>
-      import('../dashboard/dashboard.module').then((m) => m.DashboardModule), canActivate: [AuthGuardService]
-  },
+  { path: 'dashboard',
+    loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule), canActivate: [AuthGuardService] },
   {
     path: '',
     loadChildren: () => import('../home/home.module').then((m) => m.HomeModule),

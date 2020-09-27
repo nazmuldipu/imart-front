@@ -6,16 +6,16 @@ export const environment = {
   production: false,
   
   // PROTOCOL: 'https',
-  // PORT: '',
+  // PORT: ':3000',
   // SERVER: 'api.hotelswave.com',
   
-  PROTOCOL: 'http',
-  PORT: ':80',
-  SERVER: 'localhost',
-
   // PROTOCOL: 'http',
-  // PORT: ':3000',
-  // SERVER: '172.104.46.200',
+  // PORT: ':80',
+  // SERVER: 'localhost',
+
+  PROTOCOL: 'http',
+  PORT: ':3000',
+  SERVER: '172.104.46.200',
 };
 
 /* https://imartltd.herokuapp.com/ */ 

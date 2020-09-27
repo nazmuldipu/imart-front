@@ -18,11 +18,12 @@ import { HomeComponent } from './home.component';
 import { DetailModalComponent } from './components/detail-modal/detail-modal.component';
 import { OrdersComponent } from './containers/orders/orders.component';
 import { CartComponent } from './containers/cart/cart.component';
+import { AuthGuardService } from 'src/services/auth-guard.service';
 // import { DetailsCollapseComponent } from '../shared/components/details-collapse/details-collapse.component';
 
 export const ROUTES: Routes = [
-  { path: 'cart', component: CartComponent },
-  { path: 'orders', component: OrdersComponent },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuardService] },
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuardService] },
   {
     path: '',
     component: HomeComponent,

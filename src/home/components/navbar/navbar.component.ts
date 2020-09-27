@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   show = false;
   cart: Cart;
 
-  constructor(private cartService: CartService, private auth: AuthService) { }
+  constructor(private cartService: CartService, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe(data => {
@@ -22,5 +22,10 @@ export class NavbarComponent implements OnInit {
 
   toggleCollapse() {
     this.show = !this.show;
+  }
+
+  onLogout() {
+    this.cartService._cartSource.next(null);
+    this.auth.logout();
   }
 }

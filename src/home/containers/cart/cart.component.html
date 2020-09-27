@@ -1,16 +1,14 @@
 <navbar></navbar>
-
-<div class="container mt-3">
+<div class="container text-center my-4" *ngIf="!cart?.product_list.length">
+  <h3><i class="fa fa-frown-o" aria-hidden="true"></i> Your cart is empty.</h3>
+</div>
+<div class="container mt-3" *ngIf="cart?.product_list.length">
   <div class="row">
     <div class="col-md-8">
       <h5>Cart</h5>
       <div class="row product" *ngFor="let item of cart?.product_list">
         <div class="col-auto">
-          <img
-            class="product-image"
-            [src]="thumbUrl + item.product._id"
-            [alt]="item.product.name + ' image'"
-          />
+          <img class="product-image" [src]="thumbUrl + item.product._id" [alt]="item.product.name + ' image'" />
         </div>
         <div class="col">
           <div class="product-name">{{ item.product.name }}</div>
@@ -18,15 +16,9 @@
           <div class="product-price">Price : {{ item.rate }}</div>
           <div class="product-quantity">
             Quantity :
-            <i
-              class="fa fa-minus"
-              (click)="setQuantity(item.product._id, -1)"
-            ></i>
+            <i class="fa fa-minus" (click)="setQuantity(item.product._id, -1)"></i>
             &nbsp; {{ item.quantity }} &nbsp;
-            <i
-              class="fa fa-plus"
-              (click)="setQuantity(item.product._id, 1)"
-            ></i>
+            <i class="fa fa-plus" (click)="setQuantity(item.product._id, 1)"></i>
           </div>
         </div>
         <div class="col-auto product-amount">৳{{ item.amount }}</div>
@@ -34,9 +26,7 @@
 
       <h5>Shipping</h5>
       Add/Edit
-      <a routerLocation="/shippingAddess"
-        ><strong> Shipping location </strong></a
-      >
+      <a routerLocation="/shippingAddess"><strong> Shipping location </strong></a>
     </div>
 
     <!-- Cart Summary -->
@@ -44,9 +34,7 @@
       <h5>Summary</h5>
       <div class="promo-text">
         Do you have any
-        <span class="promo-text-link" (click)="onTogglePromoForm()"
-          >Promo coder ?</span
-        >
+        <span class="promo-text-link" (click)="onTogglePromoForm()">Promo coder ?</span>
       </div>
       <div class="promo-form my-2" [class.show]="showPromoForm">
         <form class="form-inline">
@@ -61,10 +49,7 @@
       <div class="d-flex justify-content-between">
         <span>Subtotal</span> <span>৳{{ cart?.sub_total }}</span>
       </div>
-      <div
-        class="d-flex justify-content-between"
-        *ngIf="cart?.total_discount > 0"
-      >
+      <div class="d-flex justify-content-between" *ngIf="cart?.total_discount > 0">
         <span>Discount</span> <span>৳{{ cart?.total_discount }}</span>
       </div>
       <div class="d-flex justify-content-between">
@@ -74,9 +59,7 @@
       <div class="d-flex justify-content-between">
         <span>Estimated Tax</span> <span>৳{{ cart?.total_tax }}</span>
       </div>
-      <div
-        class="d-flex justify-content-between border-top border-bottom py-2 my-2"
-      >
+      <div class="d-flex justify-content-between border-top border-bottom py-2 my-2">
         <strong>Total</strong> <strong>৳{{ cart?.total }}</strong>
       </div>
       <button class="btn btn-block btn-outline-success">Order now</button>
