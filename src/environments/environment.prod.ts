@@ -5,8 +5,7 @@ export const environment = {
   // SERVER: 'api.hotelswave.com',
 
   PROTOCOL: 'https',
-  PORT: ':3000',
-  SERVER: '172.104.46.200',
-
-  // SERVER: 'api.imartltd.com',
+  PORT: ':8443',
+  // SERVER: '172.104.46.200',
+  SERVER: 'api.imartltd.com',
 };

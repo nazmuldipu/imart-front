@@ -13,9 +13,10 @@ export const environment = {
   // PORT: ':80',
   // SERVER: 'localhost',
 
-  PROTOCOL: 'http',
-  PORT: ':3000',
-  SERVER: '172.104.46.200',
+  PROTOCOL: 'https',
+  PORT: ':8443',
+  // SERVER: '172.104.46.200',
+  SERVER: 'api.imartltd.com',
 };
 
 /* https://imartltd.herokuapp.com/ */ 
