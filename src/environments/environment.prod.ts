@@ -6,6 +6,5 @@ export const environment = {
 
   PROTOCOL: 'https',
   PORT: ':8443',
-  // SERVER: '172.104.46.200',
   SERVER: 'api.imartltd.com',
 };
